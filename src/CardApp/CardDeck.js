@@ -10,23 +10,27 @@ const CardDeckWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2rem;
 `
 
 const CardStackWrapper = styled.div`
   position: relative;
   width: calc(100vw - 2rem);
   height: calc((100vw - 2rem) * 1.4);
-  max-width: 35rem;
-  max-height: 49rem;
-  margin-bottom: 10rem;
+  max-width: 30rem;
+  max-height: 42rem;
+  margin: 4rem 0;
 `
 
 const CardProgress = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-self: stretch;
   max-width: 50rem;
-  height: 4rem;
+  font-weight: 600;
+  font-size: 1.8rem;
+  height: 5rem;
+  align-items: center;
 `
 
 const CardDeck = () => {
@@ -49,7 +53,7 @@ const CardDeck = () => {
   console.log(current)
   return (
     <CardDeckWrapper>
-      <CardProgress>{`${currentIndex}/${totalCount}`}</CardProgress>
+      <CardProgress>{`${currentIndex} of ${totalCount}`}</CardProgress>
       {/* <h3>My Card Deck</h3> */}
 
       <CardStackWrapper>

@@ -30,7 +30,9 @@ const StyledButton = styled(Box)`
 const Button = ({ type = 'button', onClick, ...rest }) => {
   const handleOnClick = e => {
     e.preventDefault()
-    if (onClick) onClick()
+    if (onClick) {
+      onClick()
+    }
   }
 
   return <StyledButton type={type} onClick={handleOnClick} {...rest} />
