@@ -1,33 +1,39 @@
 import React, { useState } from 'react'
 import Image from './image'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 30rem;
-  height: 40rem;
+  align-items: center;
+  justify-content: center;
+
   border-radius: 5px;
-  background: rgb(96, 183, 208);
+  width: calc(100vw - 2rem);
+  height: calc((100vw - 2rem) * 1.4);
+  max-width: 35rem;
+  max-height: 49rem;
 `
 
 const Title = styled.div`
   text-transform: uppercase;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   color: white;
   display: flex;
   justify-content: center;
-  height: 33%;
+
   line-height: 1.6;
   margin-top: 3rem;
+  background: rgba(0, 0, 0, 0.6);
 `
 
 const ImageWrapper = styled.div`
-  padding: 100px 50px 0 50px;
+  /* padding: 100px 50px 0 50px; */
 `
 
 const Img = styled(Image)`
-  max-width: 90%;
+  max-width: 25rem;
+  max-height: 25rem;
 `
 
 const Front = ({ imagePath = '', en = {} }) => {

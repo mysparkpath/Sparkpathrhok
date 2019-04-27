@@ -478,7 +478,7 @@ export default {
       image_path: 'static/card_images/card_21.png',
       alt: '',
       en: {
-        title: '',
+        title: 'Increase Sustainable Energy',
         blurb_1:
           'Our economies have become dependent on oil to power the world. Unfortunately, using oil causes carbon emissions that are contributing to changes in the climate. This is destructive to our way of life. In addition, oil sources are limited and will eventually be exhausted.',
         careers: [
