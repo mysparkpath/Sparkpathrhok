@@ -1,6 +1,7 @@
 import React from 'react'
 import './App.css'
 import Card from './components/card'
+import sparkPaths from './static/spark_paths'
 
 function App() {
   return (
@@ -8,7 +9,9 @@ function App() {
       <header className="App-header">
         <h1>SparkPath</h1>
       </header>
-      <Card en={{ title: 'Protect society from crime', variant: 'pink' }} />
+      {sparkPaths.paths.map(data => (
+        <Card {...data} />
+      ))}
     </div>
   )
 }
