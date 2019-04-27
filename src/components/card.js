@@ -8,13 +8,11 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 5rem;
-
   border-radius: 5px;
   width: calc(100vw - 2rem);
   height: calc((100vw - 2rem) * 1.4);
-  max-width: 35rem;
-  max-height: 49rem;
+  max-width: 30rem;
+  max-height: 42rem;
   border: 1px solid #fff;
 
   ${({ rotation }) => {
@@ -39,8 +37,8 @@ const ImageWrapper = styled.div`
 `
 
 const Img = styled(Image)`
-  max-width: 25rem;
-  max-height: 25rem;
+  max-width: 20rem;
+  max-height: 20rem;
 `
 
 const Front = ({ imagePath = '', en = {}, rotate }) => {

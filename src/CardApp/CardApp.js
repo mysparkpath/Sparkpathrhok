@@ -71,7 +71,7 @@ const CardApp = () => {
       }}
     >
       <div className="CardApp">
-        <ResetButton />
+        {/* <ResetButton /> */}
         <CardDeck />
       </div>
     </DeckContext.Provider>
