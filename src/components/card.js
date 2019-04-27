@@ -7,12 +7,19 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  top: 5rem;
 
   border-radius: 5px;
   width: calc(100vw - 2rem);
   height: calc((100vw - 2rem) * 1.4);
   max-width: 35rem;
   max-height: 49rem;
+  border: 1px solid #fff;
+
+  ${({ rotation }) => {
+    return rotation && `transform: rotate(${rotation}deg)`
+  }}
 `
 
 const Title = styled.div`
@@ -36,13 +43,13 @@ const Img = styled(Image)`
   max-height: 25rem;
 `
 
-const Front = ({ imagePath = '', en = {} }) => {
+const Front = ({ imagePath = '', en = {}, rotate }) => {
   const { title, variant } = en
 
   const path = require(`../${imagePath}`)
-
+  const randomRotation = rotate ? Math.random() * 5 : 0
   return (
-    <Wrapper style={{ background: variant }}>
+    <Wrapper rotation={randomRotation} style={{ background: variant }}>
       <ImageWrapper>
         <Img src={path} />
       </ImageWrapper>
@@ -124,11 +131,11 @@ const Back = ({ en }) => {
   )
 }
 
-const Card = ({ image_path, en }) => {
+const Card = ({ image_path, en, rotate }) => {
   const [front, toggleView] = useState(true)
 
   if (front) {
-    return <Front imagePath={image_path} en={en} />
+    return <Front rotate={rotate} imagePath={image_path} en={en} />
   }
 
   return <Back />
