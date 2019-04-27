@@ -7,8 +7,8 @@ import { ReactComponent as VeryInt } from './static/icons/very-interested.svg'
 import styled, { css } from 'styled-components'
 
 const iconStyles = css`
-  height: 3rem;
-  margin-right: 1.5rem;
+  height: 4rem;
+  margin-right: 2rem;
 `
 const IntIcon = styled(Int)`
   ${iconStyles}
@@ -23,17 +23,26 @@ const VeryIntIcon = styled(VeryInt)`
 `
 
 const paraProps = {
-  mt: '2rem',
-  fontSize: '1.4rem',
+  mt: '2.2rem',
+  fontSize: '2.2rem',
   fontWeight: '300',
+}
+
+const choiceProps = {
+  display: 'flex',
+  mt: '1.5rem',
+  alignitems: 'center',
+  fontSize: '2.6rem',
+  fontWeight: '600',
 }
 
 const StyledLink = styled(Link)`
   background: white;
   border-radius: 50px;
   align-self: center;
-  padding: 1.2rem 2.6rem;
-  margin-top: 3rem;
+  padding: 2.4rem 4.6rem;
+  margin-top: 4rem;
+  box-shadow: 0px 7px 12px -8px rgba(0, 0, 0, 0.75);
 `
 
 const Main = () => {
@@ -48,8 +57,8 @@ const Main = () => {
     >
       <h1>SparkPath</h1>
 
-      <Box maxWidth="650px" flexDirection="column" px="3rem">
-        <Text fontSize="1.6rem" fontWeight="600">
+      <Box mt="3rem" maxWidth="650px" flexDirection="column" px="3rem">
+        <Text lineHeight="1.2" mb="2rem" fontSize="2.6rem" fontWeight="600">
           What do you want to do after high school?
         </Text>
 
@@ -73,33 +82,15 @@ const Main = () => {
           alignItems="flex-start"
           m="0 auto"
         >
-          <Text
-            display="flex"
-            mt="1.5rem"
-            alignItems="center"
-            fontSize="1.6rem"
-            fontWeight="600"
-          >
+          <Text {...choiceProps}>
             <VeryIntIcon />
-            Very interested
+            Very Interested
           </Text>
-          <Text
-            display="flex"
-            mt="1.5rem"
-            alignItems="center"
-            fontSize="1.6rem"
-            fontWeight="600"
-          >
+          <Text {...choiceProps}>
             <IntIcon />
             Interested
           </Text>
-          <Text
-            display="flex"
-            mt="1.5rem"
-            alignItems="center"
-            fontSize="1.6rem"
-            fontWeight="600"
-          >
+          <Text {...choiceProps}>
             <NotIntIcon />
             Not Interested
           </Text>
@@ -107,7 +98,7 @@ const Main = () => {
       </Box>
 
       <StyledLink to="/cards">
-        <Text fontSize="1.4rem" fontWeight="600" textTransform="uppercase">
+        <Text fontSize="2rem" fontWeight="600" textTransform="uppercase">
           Get started!
         </Text>
       </StyledLink>
