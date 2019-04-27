@@ -1,23 +1,23 @@
-import React, { useContext } from "react";
-import { DeckContext } from "./App";
+import React, { useContext } from 'react'
+import { DeckContext } from './CardApp'
 
-import CardButton from "./CardButton";
-import UndoButton from "./UndoButton";
+import CardButton from './CardButton'
+import UndoButton from './UndoButton'
 
 const CardDeck = () => {
   const {
     deckState: { initial: deck },
     sendToNo,
     sendToMaybe,
-    sendToYes
-  } = useContext(DeckContext);
-  const current = deck && deck.length > 0 ? deck[0] : null;
+    sendToYes,
+  } = useContext(DeckContext)
+  const current = deck && deck.length > 0 ? deck[0] : null
 
   const handleCardButtonClick = (e, { callback }) => {
-    e.preventDefault();
-    callback(current);
-  };
-  console.log(current);
+    e.preventDefault()
+    callback(current)
+  }
+  console.log(current)
   return (
     <div>
       <h3>My Card Deck</h3>
@@ -26,7 +26,7 @@ const CardDeck = () => {
         <CardButton
           onClick={e =>
             handleCardButtonClick(e, {
-              callback: sendToNo
+              callback: sendToNo,
             })
           }
           id="no-card"
@@ -37,7 +37,7 @@ const CardDeck = () => {
         <CardButton
           onClick={e =>
             handleCardButtonClick(e, {
-              callback: sendToMaybe
+              callback: sendToMaybe,
             })
           }
           id="maybe-card"
@@ -48,7 +48,7 @@ const CardDeck = () => {
         <CardButton
           onClick={e =>
             handleCardButtonClick(e, {
-              callback: sendToYes
+              callback: sendToYes,
             })
           }
           id="yes-card"
@@ -61,7 +61,7 @@ const CardDeck = () => {
         <UndoButton />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CardDeck;
+export default CardDeck
