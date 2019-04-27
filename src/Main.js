@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from '@reach/router'
-import { Button, Box, Text } from './components'
+import { Box, Text } from './components'
 import { ReactComponent as Int } from './static/icons/interested.svg'
 import { ReactComponent as NotInt } from './static/icons/not-interested.svg'
 import { ReactComponent as VeryInt } from './static/icons/very-interested.svg'
@@ -28,13 +28,13 @@ const paraProps = {
   fontWeight: '300',
 }
 
-const buttonProps = {
-  bg: 'white',
-  borderRadius: '50px',
-  alignSelf: 'center',
-  p: '1.2rem 2.6rem',
-  mt: '3rem',
-}
+const StyledLink = styled(Link)`
+  background: white;
+  border-radius: 50px;
+  align-self: center;
+  padding: 1.2rem 2.6rem;
+  margin-top: 3rem;
+`
 
 const Main = () => {
   return (
@@ -42,7 +42,9 @@ const Main = () => {
       alignItems="center"
       bg="rgb(113, 69, 154)"
       flexDirection="column"
+      color="white"
       py="4rem"
+      height="100vh"
     >
       <h1>SparkPath</h1>
 
@@ -104,16 +106,11 @@ const Main = () => {
         </Box>
       </Box>
 
-      <Button
-        boxShadow="0px 7px 12px -8px rgba(0,0,0,0.75)"
-        as={Link}
-        to="/cards"
-        {...buttonProps}
-      >
+      <StyledLink to="/cards">
         <Text fontSize="1.4rem" fontWeight="600" textTransform="uppercase">
           Get started!
         </Text>
-      </Button>
+      </StyledLink>
     </Box>
   )
 }
