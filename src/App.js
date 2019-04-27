@@ -1,18 +1,18 @@
 import React from 'react'
 import './App.css'
-import Card from './components/card'
-import sparkPaths from './static/spark_paths'
+import { Router } from '@reach/router'
+import Layout from './Layout'
+import Main from './Main'
+import CardApp from './CardApp'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>SparkPath</h1>
-      </header>
-      {sparkPaths.paths.map(data => (
-        <Card {...data} />
-      ))}
-    </div>
+    <Layout>
+      <Router>
+        <Main path="/" />
+        <CardApp path="/cards" />
+      </Router>
+    </Layout>
   )
 }
 
