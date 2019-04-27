@@ -1,19 +1,8 @@
+import initialDeck from '../static/spark_paths'
+
 export const initialDeckState = {
-  initial: [
-    {
-      key: "health-1",
-      name: "redesign the health care system"
-    },
-    {
-      key: "protect-1",
-      name: "protect society from crime"
-    },
-    {
-      key: "food-1",
-      name: "create new food and food systems"
-    }
-  ],
+  initial: initialDeck.paths,
   no: [],
   maybe: [],
-  yes: []
-};
+  yes: [],
+}

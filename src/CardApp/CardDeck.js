@@ -1,8 +1,33 @@
 import React, { useContext } from 'react'
+import styled from 'styled-components/macro'
 import { DeckContext } from './CardApp'
-
+import Card from '../components/card'
 import CardButton from './CardButton'
 import UndoButton from './UndoButton'
+import initialDeck from '../static/spark_paths'
+
+const CardDeckWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const CardStackWrapper = styled.div`
+  position: relative;
+  width: calc(100vw - 2rem);
+  height: calc((100vw - 2rem) * 1.4);
+  max-width: 35rem;
+  max-height: 49rem;
+  margin-bottom: 10rem;
+`
+
+const CardProgress = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-self: stretch;
+  max-width: 50rem;
+  height: 4rem;
+`
 
 const CardDeck = () => {
   const {
@@ -11,6 +36,10 @@ const CardDeck = () => {
     sendToMaybe,
     sendToYes,
   } = useContext(DeckContext)
+
+  const totalCount = initialDeck.paths.length
+  const currentIndex = totalCount - deck.length + 1
+
   const current = deck && deck.length > 0 ? deck[0] : null
 
   const handleCardButtonClick = (e, { callback }) => {
@@ -19,9 +48,18 @@ const CardDeck = () => {
   }
   console.log(current)
   return (
-    <div>
-      <h3>My Card Deck</h3>
-      <div>{current && <div>{current.name}</div>}</div>
+    <CardDeckWrapper>
+      <CardProgress>{`${currentIndex}/${totalCount}`}</CardProgress>
+      {/* <h3>My Card Deck</h3> */}
+
+      <CardStackWrapper>
+        {deck
+          .sort(() => -1)
+          .map((card, index) => (
+            <Card rotate={index !== deck.length - 1} {...card} />
+          ))}
+      </CardStackWrapper>
+
       <div>
         <CardButton
           onClick={e =>
@@ -60,7 +98,7 @@ const CardDeck = () => {
       <div>
         <UndoButton />
       </div>
-    </div>
+    </CardDeckWrapper>
   )
 }
 

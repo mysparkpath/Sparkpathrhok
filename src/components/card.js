@@ -1,42 +1,55 @@
 import React, { useState } from 'react'
 import Image from './image'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 30rem;
-  height: 40rem;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 5rem;
+
   border-radius: 5px;
-  background: rgb(96, 183, 208);
+  width: calc(100vw - 2rem);
+  height: calc((100vw - 2rem) * 1.4);
+  max-width: 35rem;
+  max-height: 49rem;
+  border: 1px solid #fff;
+
+  ${({ rotation }) => {
+    return rotation && `transform: rotate(${rotation}deg)`
+  }}
 `
 
 const Title = styled.div`
   text-transform: uppercase;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   color: white;
   display: flex;
   justify-content: center;
-  height: 33%;
+
   line-height: 1.6;
   margin-top: 3rem;
+  background: rgba(0, 0, 0, 0.6);
 `
 
 const ImageWrapper = styled.div`
-  padding: 100px 50px 0 50px;
+  /* padding: 100px 50px 0 50px; */
 `
 
 const Img = styled(Image)`
-  max-width: 90%;
+  max-width: 25rem;
+  max-height: 25rem;
 `
 
-const Front = ({ imagePath = '', en = {} }) => {
+const Front = ({ imagePath = '', en = {}, rotate }) => {
   const { title, variant } = en
 
   const path = require(`../${imagePath}`)
-
+  const randomRotation = rotate ? Math.random() * 5 : 0
   return (
-    <Wrapper style={{ background: variant }}>
+    <Wrapper rotation={randomRotation} style={{ background: variant }}>
       <ImageWrapper>
         <Img src={path} />
       </ImageWrapper>
@@ -118,11 +131,11 @@ const Back = ({ en }) => {
   )
 }
 
-const Card = ({ image_path, en }) => {
+const Card = ({ image_path, en, rotate }) => {
   const [front, toggleView] = useState(true)
 
   if (front) {
-    return <Front imagePath={image_path} en={en} />
+    return <Front rotate={rotate} imagePath={image_path} en={en} />
   }
 
   return <Back />
