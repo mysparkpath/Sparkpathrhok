@@ -23,7 +23,7 @@ export default {
         ],
         blurb_2:
           'The health care system is an essential part of society, yet it is very costly to run. We need to find new and innovative ways to offer better services to more people, but at lower costs. We also need to prevent health problems instead of just fixing them, for example by promoting healthy behaviors. As the population ages and technology improves, big changes are needed to offer more services outside of hospitals and online.',
-        variant: '',
+        variant: '#64CCEB',
       },
     },
     {
@@ -47,7 +47,7 @@ export default {
         ],
         blurb_2:
           "Heart attack, stroke and cancer are responsible for most of the deaths world-wide, and can be prevented through healthy lifestyle and behavior. Children who are obese are especially vulnerable to suffer long-lasting health consequences. There are opportunities to help change people's behaviors (e.g. encourage better foods choices, increase exercise, etc.), the food industry and government policy.",
-        variant: '',
+        variant: '#64CCEB',
       },
     },
     {
@@ -71,7 +71,7 @@ export default {
         ],
         blurb_2:
           'Innovation in data analytics will shape the future of health care. For example, people will use wearable devices, such as sensors embedded in clothing or the body, that can collect new health data. This biodata will help people better understand their health habits and issues. Better health information systems improve everyday medical visits, and are also essential in fighting the spread of new diseases.',
-        variant: '',
+        variant: '#50BAEA',
       },
     },
     {
@@ -95,7 +95,7 @@ export default {
         ],
         blurb_2:
           'Doctors have long known that people differ in how they respond to medicines. However, without understanding and adjusting to individual differences, treatments developed have generally been created for the many, rather than the few. There are opportunities to develop new systems to use genetic information, detect small changes in the body, create and assess new drugs, and produce specific vaccines.',
-        variant: '',
+        variant: '#558BC8',
       },
     },
     {
@@ -121,7 +121,7 @@ export default {
         ],
         blurb_2:
           'There are opportunities to educate, de-stigmatize, prevent, heal and rehabilitate those affected by mental health issues. Many factors contribute to the prevalence of mental health problems, and some are projected to increase in the future: ageing of the population, increased isolation and loneliness, pressure to perform, etc. There are also opportunities to educate the public on the science of happiness.',
-        variant: '',
+        variant: '#4B6DB5',
       },
     },
     {
@@ -145,7 +145,7 @@ export default {
         ],
         blurb_2:
           "There are opportunities to: Improve social programs to help individuals come out of poverty; - Write laws and policy that protect the poor; - Offer financial services to the 2 billion people who don't have access to them - Create better taxation systems Research and develop innovative models to distribute wealth more equally",
-        variant: '',
+        variant: '#FDD10D',
       },
     },
     {
@@ -168,7 +168,7 @@ export default {
           'Foreign Service Officer',
         ],
         blurb_2: '',
-        variant: '',
+        variant: '#FDBE12',
       },
     },
     {
@@ -193,7 +193,7 @@ export default {
         ],
         blurb_2:
           'There are opportunities to update or create new international agreements for fair trade. Governments can build these agreements between two or more countries, and make sure that all participants benefit from them. There are concerns that trade agreements could give too much power to companies, leading to job losses in some countries. Because of this, trade deals need to be designed properly to benefit all involved.',
-        variant: '',
+        variant: '#F8961D',
       },
     },
     {
@@ -209,7 +209,7 @@ export default {
         ],
         blurb_2:
           'There are opportunities to solve unmet needs or new challenges by creating new products and services. Great entrepreneurs work hard, take risks, have a vision and execute on it. You can start by thinking: what needs to be changed in your world? Social entrepreneurs use business techniques to solve social, cultural or environmental problems in order to make the world a better place.',
-        variant: '',
+        variant: '#F58021',
       },
     },
     {
@@ -230,7 +230,7 @@ export default {
         ],
         blurb_2:
           'Being in charge is a great challenge, as many people look up to leaders for guidance and support. There are opportunities to equip future leaders with the skills required to solve big problems. Leadership skills can be taught in schools, through companies and online. Leadership learning is most effective when it combines formal learning through books or classes, learning from other great leaders and learning through practice.',
-        variant: '',
+        variant: '#F36421',
       },
     },
     {
@@ -251,7 +251,7 @@ export default {
         ],
         blurb_2:
           "Currently, you can find A1 in medical diagnosis, search engines, game simulations, image recognition, online assistants, data-mining, etc. In fact, there are opportunities to create and use new A1 to tackle the world's greatest problems. A1 has the potential to improve quality of life, education, transportation and health care. It could also pose risks from accidents or misuse, and these risks need to be studied.",
-        variant: '',
+        variant: '#8963AA',
       },
     },
     {
@@ -278,7 +278,7 @@ export default {
         ],
         blurb_2:
           'There are opportunities for biotechnology to provide breakthrough products to combat debilitating and rare diseases, reduce our environmental footprint, fight poverty and use cleaner energy. Along with benefits, there are also risks with new biotechnology that need to be researched and addressed, such as preventing man- made pathogens that could cause large-scale harm.',
-        variant: '',
+        variant: '#6A3584',
       },
     },
     {
@@ -300,7 +300,7 @@ export default {
         ],
         blurb_2:
           'From what we buy online, to what we say on social media, we will know more about our behaviors than ever. Because there will be so much available information, making sense of it will be difficult. Understanding and using data from the past to make predictions about the future is one of the greatest opportunity of the 21 st century. There are also opportunities to collect, store, analyze, interpret and present info from big data.',
-        variant: '',
+        variant: '#5F3771',
       },
     },
     {
@@ -322,7 +322,7 @@ export default {
         ],
         blurb_2:
           'VR systems need to be perfected to more closely mimic the human experience. There are opportunities to improve VR tech and software, for example by adding more senses to the experience (touch, smell, etc.). Once the technology is improved, organisations will want to create their own virtual reality games and experiences, in the fields of medicine, education, sports, entertainment, architecture, etc.',
-        variant: '',
+        variant: '#2D1650',
       },
     },
     {
@@ -343,7 +343,7 @@ export default {
         ],
         blurb_2:
           "Scientists have begun to design computer chips that mimic the brain's own communication skills. Tools such as ear implants, artificial retinas and limbs are improving people's lives. One day, perhaps we'll be able to upload knowledge directly unto a brain. The brain researchers of the future will have the power to radically change the medical, scientific and social landscape for the benefit of humanity.",
-        variant: '',
+        variant: '#38073A',
       },
     },
     {
@@ -368,7 +368,7 @@ export default {
         ],
         blurb_2:
           'The school of the future will be builgt for agility to quickly respond to learning needs and changes in the marketplace. Which teacher skills will be most useful in the future? How can we find new ways to promote collaboration in education (between students, teachers, partners and the world of work)? What resources will we need to help our students grow and develop?',
-        variant: '',
+        variant: '#E26DAB',
       },
     },
     {
@@ -394,7 +394,7 @@ export default {
         ],
         blurb_2:
           'Terrorism, organized crime, credit card theft and counterfeit products all pose risks to society. How can police strengthen their relationships with communities? There are opportunities to use data for predictive policing, to change our rehabilitation practices and to create or update laws that will balance safety and privacy concerns.',
-        variant: '',
+        variant: '#F06BA8',
       },
     },
     {
@@ -421,7 +421,7 @@ export default {
         ],
         blurb_2:
           'There are opportunities to research human potential, learn what works best and then help individuals and groups improve. Vulnerable or marginalized groups could benefit from increased help to contribute to society at their highest potential and lead meaningful lives. The better we understand people, their strengths and different types of intelligence, the better we can find unique opportunities for everyone to shine.',
-        variant: '',
+        variant: '#F06993',
       },
     },
     {
@@ -445,7 +445,7 @@ export default {
         ],
         blurb_2:
           'There is an opportunity to create the conditions necessary for people to thrive. Countries need to address issues that contribute to poverty, such as natural disaster response, the role of women and children, chronic and infectious diseases, water and sanitation, access to education, etc. To do so, we must improve partnerships between local actors, donors, governments and the private sector to find the best approaches to end poverty.',
-        variant: '',
+        variant: '#F16A81',
       },
     },
     {
@@ -470,7 +470,7 @@ export default {
         ],
         blurb_2:
           'There are many opportunities to create better understanding, respect and collaboration between different groups of people. Through increased understanding and respect, we can shift power imbalances, help the most vulnerable members of society and heal wounds to move forward. If we make the world a more empathic place, how would it improve? Which groups do you think deserve to be better understood?',
-        variant: '',
+        variant: '#F16A75',
       },
     },
     {
@@ -492,7 +492,7 @@ export default {
         ],
         blurb_2:
           'To combat our dependency on oil, we need to find and increase the use of cleaner sources of power, such as energy derived from the sun, wind and biofuels. There are opportunities to improve energy through research, creating new technology and tools, promoting the use of sustainable energies, changing laws and policies and educating the public.',
-        variant: '',
+        variant: '#2BA749',
       },
     },
     {
@@ -518,7 +518,7 @@ export default {
         ],
         blurb_2:
           'Environmental efforts need to be more proactive in their protection work, rather than crisis-oriented. There are opportunities to research the best approaches for conserving the planet, for taking care of animals, for the development of nature reserves, for educating the public and for explaining the positive economic impact of effective environmental work.',
-        variant: '',
+        variant: '#29A750',
       },
     },
     {
@@ -542,7 +542,7 @@ export default {
         ],
         blurb_2:
           "There are also opportunities to change the way we transport materials, travel long distances and utilize airways for travel (drones, flying cars, large aircrafts, etc.). In addition, several companies are working on a 'hyperloop' system, where pod-like vehicles travel through a tube at more than airline speed. In their pods, travellers could access services, like WIFI, to make their commute more comfortable and productive.",
-        variant: '',
+        variant: '#26A67E',
       },
     },
     {
@@ -565,7 +565,7 @@ export default {
         ],
         blurb_2:
           "There are opportunities to recover wasted resources and develop a 'reprocessing' industry, where the central role is not to dump stuff but to transform valuable resources to be used by the world. Improved technologies could sort recycled materials more efficiently, while better policies would guide organizations towards making better use of resources, as well as encourage consumers to properly dispose of waste.",
-        variant: '',
+        variant: '#28A597',
       },
     },
     {
@@ -589,7 +589,7 @@ export default {
         ],
         blurb_2:
           'We need to encourage people to eat the right foods, minimize the environmental impact of agriculture, and reduce food waste around the world. Vertical farms and rooftop gardens could change how we grow food. In addition, there are opportunities to produce and promote new types of superfoods (moringa, chinga, spirulina, etc.) and alternative protein sources (insects, petri dish produced meat, etc.).',
-        variant: '',
+        variant: '#28A1A5',
       },
     },
     {
@@ -616,7 +616,7 @@ export default {
         ],
         blurb_2:
           'Everyday, we come across an overwhelming amount of information. So many people are competing for our precious attention. Would you like to help others cut through the clutter to deliver a clear, inspiring, human message? There are many opportunities to use creativity and imagination to tell stories, capture attention and inspire action.',
-        variant: '',
+        variant: '#CD3B27',
       },
     },
     {
@@ -644,7 +644,7 @@ export default {
         ],
         blurb_2:
           'There is a high demand for practical problem-solvers that can work with tools and machines. Demands could involve hands-on work, reading technical plans or solving interesting math problems. There are also opportunities for precision work, troubleshooting issues and using creativity. When working with tools and machines, you can expect to learn while you work through programs like an apprenticeship, as well as throughout your life as technology evolves.',
-        variant: '',
+        variant: '#CA2744',
       },
     },
     {
@@ -667,7 +667,7 @@ export default {
         ],
         blurb_2:
           'During interactions that are online and in-person, there are opportunities to help others feel heard, understood, supported in their goals, and connected to a community. You can make real human connections by asking questions, listening and finding solutions. This is helpful because people have high expectations of the services with which they engage. Do you like helping others? What difference could you make if you provided a meaningful experience for someone?',
-        variant: '',
+        variant: '#CA2635',
       },
     },
     {
@@ -694,7 +694,7 @@ export default {
         ],
         blurb_2:
           'Artists are antennas to their environments. They have an opportunity to give a voice to the voiceless, reflect the human experience, and help us think critically about ourselves and our surroundings. Some artists want to make the world more visually appealing, while others want to create meaningful entertainment. They can also find ways to transport their fans to new worlds. What can you create that no one has imagined before? What can you re-invent into something brand new?',
-        variant: '',
+        variant: '#DB2727',
       },
     },
   ],
