@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 // import logo from "./logo.svg";
-import "./App.css";
+import './App.css'
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
         <h1>SparkPath</h1>
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
