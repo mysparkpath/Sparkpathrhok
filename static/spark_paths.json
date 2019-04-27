@@ -1,16 +1,16 @@
 {
-	"version": "1.0",
-	"paths": [
-		{
-			"key": "",
-			"image_path": "",
-			"en": {
-				"title": "",
-				"blurb_1": "",
-				"careers": ["", ""],
-				"blurb_2": "",
-				"variant": ""
-			},
-		}
-	]
+  "version": "1.0",
+  "paths": [
+    {
+      "key": "",
+      "image_path": "",
+      "en": {
+        "title": "",
+        "blurb_1": "",
+        "careers": ["", ""],
+        "blurb_2": "",
+        "variant": ""
+      }
+    }
+  ]
 }
