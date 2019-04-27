@@ -68,14 +68,13 @@ const Blurb = styled.div`
   overflow-y: scroll;
   border: 1px solid orange;
 `
-const Careers = styled.ul`
+const Careers = styled.div`
   margin-top: 25px;
-  font-size: 15px;
+  font-size: 10px;
   background: white;
   color: black;
   display: flex;
 `
-
 const DataCornerLowLeft = styled.div`
   font-size: 15px;
   margin-left: 1px;
@@ -106,6 +105,30 @@ const Front = ({ imagePath = '', en = {} }) => {
     </Wrapper>
   )
 }
+const CareerIcon = styled.div`
+  background-color: white;
+`
+const ListCareer = styled.div`
+  text-align: left;
+`
+const careersDisplay = (careers, listNum) => {
+  var answer = []
+  var i
+  if (listNum === 1) {
+    //displays first half of the carrer list
+    for (i = 0; i < careers.length / 2; i++) {
+      answer[i] = careers[i]
+    }
+  } else {
+    //displays second half of the carrer list
+    for (i = careers.length / 2; i < careers.length; i++) {
+      //display first half
+      answer[i] = careers[i]
+    }
+  }
+
+  return answer.map(item => <li>{item}</li>)
+}
 
 const Back = ({ en }) => {
   const { title, blurb_1, blurb_2, careers, variant } = en
@@ -116,9 +139,11 @@ const Back = ({ en }) => {
       <Blurb>{blurb_1}</Blurb>
 
       <Careers>
-        {careers.map(career => (
-          <li>{career}</li>
-        ))}
+        <div>
+          <CareerIcon>CareerIcon</CareerIcon>
+        </div>
+        <ListCareer>{careersDisplay(careers, 1)}</ListCareer>
+        <ListCareer>{careersDisplay(careers, 2)}</ListCareer>
       </Careers>
 
       <Blurb>{blurb_2}</Blurb>
@@ -142,21 +167,3 @@ const Card = ({ image_path, en }) => {
 }
 
 export default Card
-
-/*
-const Title = styled.div`
-  margin-top: 25px;
-  text-align: left;
-  font-size: 1.4rem;
-`
-*/
-
-/*
-const Wrapper = styled.div`
-  padding: 25px;
-  display: flex;
-  background: rgb(96, 183, 208);
-  align: center;
-  flex-direction: column;
-`
-*/
