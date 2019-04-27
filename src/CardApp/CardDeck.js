@@ -1,10 +1,30 @@
 import React, { useContext } from 'react'
-import styled from 'styled-components/macro'
+import styled, { css } from 'styled-components/macro'
 import { DeckContext } from './CardApp'
 import Card from '../components/card'
 import CardButton from './CardButton'
 import UndoButton from './UndoButton'
 import initialDeck from '../static/spark_paths'
+
+import { ReactComponent as Int } from '../static/icons/interested.svg'
+import { ReactComponent as NotInt } from '../static/icons/not-interested.svg'
+import { ReactComponent as VeryInt } from '../static/icons/very-interested.svg'
+
+const iconStyles = css`
+  height: 3rem;
+  margin-right: 1.5rem;
+`
+const IntIcon = styled(Int)`
+  ${iconStyles}
+`
+
+const NotIntIcon = styled(NotInt)`
+  ${iconStyles}
+`
+
+const VeryIntIcon = styled(VeryInt)`
+  ${iconStyles}
+`
 
 const CardDeckWrapper = styled.div`
   display: flex;
@@ -44,24 +64,22 @@ const CardDeck = () => {
   const totalCount = initialDeck.paths.length
   const currentIndex = totalCount - deck.length + 1
 
-  const current = deck && deck.length > 0 ? deck[0] : null
+  const current = deck && deck.length > 0 ? deck[deck.length - 1] : null
 
   const handleCardButtonClick = (e, { callback }) => {
     e.preventDefault()
+    console.log(deck)
     callback(current)
   }
-  console.log(current)
   return (
     <CardDeckWrapper>
       <CardProgress>{`${currentIndex} of ${totalCount}`}</CardProgress>
       {/* <h3>My Card Deck</h3> */}
 
       <CardStackWrapper>
-        {deck
-          .sort(() => -1)
-          .map((card, index) => (
-            <Card rotate={index !== deck.length - 1} {...card} />
-          ))}
+        {deck.map((card, index) => (
+          <Card rotate={index !== deck.length - 1} {...card} />
+        ))}
       </CardStackWrapper>
 
       <div>
@@ -74,7 +92,7 @@ const CardDeck = () => {
           id="no-card"
           title="No"
         >
-          No
+          <NotIntIcon />
         </CardButton>
         <CardButton
           onClick={e =>
@@ -85,7 +103,7 @@ const CardDeck = () => {
           id="maybe-card"
           title="Maybe"
         >
-          Maybe
+          <IntIcon />
         </CardButton>
         <CardButton
           onClick={e =>
@@ -96,7 +114,7 @@ const CardDeck = () => {
           id="yes-card"
           title="Yes"
         >
-          Yes
+          <VeryIntIcon />
         </CardButton>
       </div>
       <div>
