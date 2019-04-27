@@ -7,7 +7,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   border-radius: 5px;
   width: calc(100vw - 2rem);
   height: calc((100vw - 2rem) * 1.4);
@@ -15,16 +14,39 @@ const Wrapper = styled.div`
   max-height: 49rem;
 `
 
-const Title = styled.div`
+const FrontTitle = styled.div`
   text-transform: uppercase;
   font-size: 1.8rem;
   color: white;
   display: flex;
   justify-content: center;
-
   line-height: 1.6;
   margin-top: 3rem;
   background: rgba(0, 0, 0, 0.6);
+`
+
+const BackWrapper = styled.div`
+  padding: 5px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  border-radius: 5px;
+  width: calc(100vw - 2rem);
+  height: calc((100vw - 2rem) * 1.4);
+  max-width: 35rem;
+  max-height: 49rem;
+`
+const BackTitle = styled.div`
+  border: 1px solid red;
+  text-transform: capitalize;
+  font-size: 2.4rem;
+  color: white;
+  display: flex;
+  justify-content: left;
+  max-height: 3em;
+  text-align: left;
+  line-height: 1.6;
 `
 
 const ImageWrapper = styled.div`
@@ -36,37 +58,15 @@ const Img = styled(Image)`
   max-height: 25rem;
 `
 
-const Front = ({ imagePath = '', en = {} }) => {
-  const { title, variant } = en
-
-  const path = require(`../${imagePath}`)
-
-  return (
-    <Wrapper style={{ background: variant }}>
-      <ImageWrapper>
-        <Img src={path} />
-      </ImageWrapper>
-      <Title>
-        <div style={{ maxWidth: '50%' }}>{title}</div>
-      </Title>
-    </Wrapper>
-  )
-}
-/*
-const Wrapper = styled.div`
-  padding: 25px;
-  display: flex;
-  background: rgb(96, 183, 208);
-  align: center;
-  flex-direction: column;
-`
-*/
-
 const Blurb = styled.div`
   margin-top: 25px;
   display: flex;
   text-align: left;
-  font-size: 10px;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  max-height: 20vh;
+  overflow-y: scroll;
+  border: 1px solid orange;
 `
 const Careers = styled.ul`
   margin-top: 25px;
@@ -75,13 +75,6 @@ const Careers = styled.ul`
   color: black;
   display: flex;
 `
-/*
-const Title = styled.div`
-  margin-top: 25px;
-  text-align: left;
-  font-size: 1.4rem;
-`
-*/
 
 const DataCornerLowLeft = styled.div`
   font-size: 15px;
@@ -93,18 +86,32 @@ const DataCornerLowRight = styled.div`
   margin-right: 1px;
 `
 
-const Footer = styled.div`
+const Footer = styled.footer`
   background-color: black;
-  justify-content: space-between;
-  margin-bottom: 1px;
-  display: flex;
+  align-items: flex-end;
 `
+const Front = ({ imagePath = '', en = {} }) => {
+  const { title, variant } = en
+
+  const path = require(`../${imagePath}`)
+
+  return (
+    <Wrapper style={{ background: variant }}>
+      <ImageWrapper>
+        <Img src={path} />
+      </ImageWrapper>
+      <FrontTitle>
+        <div style={{ maxWidth: '50%' }}>{title}</div>
+      </FrontTitle>
+    </Wrapper>
+  )
+}
 
 const Back = ({ en }) => {
   const { title, blurb_1, blurb_2, careers, variant } = en
   return (
-    <Wrapper style={{ background: variant }}>
-      <Title>{title}</Title>
+    <BackWrapper style={{ background: variant }}>
+      <BackTitle>{title}</BackTitle>
 
       <Blurb>{blurb_1}</Blurb>
 
@@ -120,18 +127,36 @@ const Back = ({ en }) => {
         <DataCornerLowLeft> mysparkpath.com </DataCornerLowLeft>
         <DataCornerLowRight> LOADLOGOHERE</DataCornerLowRight>
       </Footer>
-    </Wrapper>
+    </BackWrapper>
   )
 }
 
 const Card = ({ image_path, en }) => {
-  const [front, toggleView] = useState(true)
+  const [front, toggleView] = useState(false)
 
   if (front) {
     return <Front imagePath={image_path} en={en} />
   }
 
-  return <Back />
+  return <Back en={en} />
 }
 
 export default Card
+
+/*
+const Title = styled.div`
+  margin-top: 25px;
+  text-align: left;
+  font-size: 1.4rem;
+`
+*/
+
+/*
+const Wrapper = styled.div`
+  padding: 25px;
+  display: flex;
+  background: rgb(96, 183, 208);
+  align: center;
+  flex-direction: column;
+`
+*/
