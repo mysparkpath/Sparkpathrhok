@@ -12,6 +12,15 @@ const CardDeckWrapper = styled.div`
   align-items: center;
 `
 
+const CardStackWrapper = styled.div`
+  position: relative;
+  width: calc(100vw - 2rem);
+  height: calc((100vw - 2rem) * 1.4);
+  max-width: 35rem;
+  max-height: 49rem;
+  margin-bottom: 10rem;
+`
+
 const CardProgress = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -43,7 +52,14 @@ const CardDeck = () => {
       <CardProgress>{`${currentIndex}/${totalCount}`}</CardProgress>
       {/* <h3>My Card Deck</h3> */}
 
-      <Card {...current} />
+      <CardStackWrapper>
+        {deck
+          .sort(() => -1)
+          .map((card, index) => (
+            <Card rotate={index !== deck.length - 1} {...card} />
+          ))}
+      </CardStackWrapper>
+
       <div>
         <CardButton
           onClick={e =>
