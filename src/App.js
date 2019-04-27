@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import logo from "./logo.svg";
-import "./App.css";
+import './App.css'
 
 import { initialDeckState } from "./state";
 import CardDeck from "./CardDeck";
@@ -75,7 +75,6 @@ const App = () => {
         </div>
       </div>
     </DeckContext.Provider>
-  );
 };
 
-export default App;
+export default App
