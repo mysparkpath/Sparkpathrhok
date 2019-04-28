@@ -1,11 +1,16 @@
-import React from "react";
+import React from 'react'
+import styled from 'styled-components/macro'
 
+const StyledCardButton = styled.button`
+  border: none;
+  background: none;
+`
 const CardButton = ({ id, children, onClick, title }) => {
   return (
-    <button id={id} onClick={onClick} type="button">
+    <StyledCardButton id={id} onClick={onClick} type="button">
       {children}
-    </button>
-  );
-};
+    </StyledCardButton>
+  )
+}
 
-export default CardButton;
+export default CardButton

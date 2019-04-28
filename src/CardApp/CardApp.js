@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { initialDeckState } from './state'
 import CardDeck from './CardDeck'
-import ResetButton from './ResetButton'
+// import ResetButton from './ResetButton'
 
 export const DeckContext = React.createContext({})
 
@@ -14,6 +14,7 @@ const CardApp = () => {
     console.log('UNDO!', deckHistory)
     if (deckHistory) {
       setDeckState(deckHistory)
+      setDeckHistory()
       console.log(deckState)
     }
   }
@@ -68,6 +69,7 @@ const CardApp = () => {
         sendToYes,
         goToPreviousDeckState,
         reset,
+        deckHistory,
       }}
     >
       <div className="CardApp">

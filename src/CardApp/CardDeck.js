@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import styled, { css } from 'styled-components/macro'
+import { darken } from 'polished'
 import { DeckContext } from './CardApp'
 import Card from '../components/card'
 import CardButton from './CardButton'
@@ -11,15 +12,22 @@ import { ReactComponent as NotInt } from '../static/icons/not-interested.svg'
 import { ReactComponent as VeryInt } from '../static/icons/very-interested.svg'
 
 const iconStyles = css`
-  height: 3rem;
-  margin-right: 1.5rem;
+  height: 6rem;
 `
 const IntIcon = styled(Int)`
   ${iconStyles}
+
+  .st0 {
+    fill: ${darken(0.15, '#9d70c7')};
+  }
 `
 
 const NotIntIcon = styled(NotInt)`
   ${iconStyles}
+
+  .st0 {
+    fill: #9d70c7;
+  }
 `
 
 const VeryIntIcon = styled(VeryInt)`
@@ -30,7 +38,6 @@ const CardDeckWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
 `
 
 const CardStackWrapper = styled.div`
@@ -39,18 +46,36 @@ const CardStackWrapper = styled.div`
   height: calc((100vw - 2rem) * 1.4);
   max-width: 30rem;
   max-height: 42rem;
-  margin: 4rem 0;
+  margin: 2rem 0 3rem 0;
+`
+
+const DeckHeader = styled.div`
+  padding: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  align-self: stretch;
+  position: relative;
+  height: 10rem;
 `
 
 const CardProgress = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-self: stretch;
   max-width: 50rem;
   font-weight: 600;
-  font-size: 1.8rem;
+  font-size: 2rem;
   height: 5rem;
-  align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 3.5rem;
+  transform: translateX(-50%);
+`
+
+const CardButtonList = styled.div`
+  & > *:not(:last-child) {
+    margin-right: 2rem;
+  }
 `
 
 const CardDeck = () => {
@@ -73,8 +98,10 @@ const CardDeck = () => {
   }
   return (
     <CardDeckWrapper>
-      <CardProgress>{`${currentIndex} of ${totalCount}`}</CardProgress>
-      {/* <h3>My Card Deck</h3> */}
+      <DeckHeader>
+        <CardProgress>{`${currentIndex} of ${totalCount}`}</CardProgress>
+        <UndoButton />
+      </DeckHeader>
 
       <CardStackWrapper>
         {deck.map((card, index) => (
@@ -82,7 +109,7 @@ const CardDeck = () => {
         ))}
       </CardStackWrapper>
 
-      <div>
+      <CardButtonList>
         <CardButton
           onClick={e =>
             handleCardButtonClick(e, {
@@ -116,10 +143,7 @@ const CardDeck = () => {
         >
           <VeryIntIcon />
         </CardButton>
-      </div>
-      <div>
-        <UndoButton />
-      </div>
+      </CardButtonList>
     </CardDeckWrapper>
   )
 }
