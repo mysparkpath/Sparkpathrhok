@@ -53,9 +53,9 @@ const CardStackWrapper = styled.div`
       ? ''
       : `
     width: calc(100vw - 2rem);
-  height: calc((100vw - 2rem) * 1.4);
-  max-width: 20rem;
-  max-height: 28rem;
+    height: calc((100vw - 2rem) * 1.4);
+    max-width: 20rem;
+    max-height: 28rem;
     `
   }}
 `
@@ -98,22 +98,12 @@ const CardDeck = ({ showTop3 }) => {
     totalCount,
   } = useContext(DeckContext)
 
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  // const getTotalCount = () => {
-  //   const isNotFirstTry = initialDeck.paths.length !== deck.length
-
-  //   return showTop3 || isNotFirstTry ? deck.length : initialDeck.paths.length
-  // }
-
   const getCurrentIndex = () => {
-    return showTop3 ? currentIndex : totalCount - deck.length + 1
+    return showTop3 ? 0 : totalCount - deck.length + 1
   }
 
   const getProgressCount = () => {
-    // if (showTop3) {
-    //   return `${getCurrentIndex()} of ${deck.length}`
-    // }
+    if (showTop3) return 'Select up to 3'
     return `${getCurrentIndex()} of ${totalCount}`
   }
 

@@ -1,6 +1,16 @@
 import React, { useState } from 'react'
 import Image from './image'
 import styled from 'styled-components/macro'
+import { Button, Text } from '../components'
+
+const buttonProps = {
+  bg: 'rgba(0,0,0,0.5)',
+  borderRadius: '5rem',
+  alignSelf: 'center',
+  p: '0.6rem 1.5rem',
+  mt: '4rem',
+  border: 'none',
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,15 +34,14 @@ const Wrapper = styled.div`
       ? ''
       : `
     width: calc(100vw - 2rem);
-  height: calc((100vw - 2rem) * 1.4);
-  max-width: 20rem;
-  max-height: 28rem;
+    height: calc((100vw - 2rem) * 1.4);
+    max-width: 20rem;
+    max-height: 28rem;
     `
   }}
 `
 
 const Title = styled.div`
-  text-transform: uppercase;
   font-size: 1.8rem;
   color: white;
   display: flex;
@@ -43,7 +52,7 @@ const Title = styled.div`
   background: rgba(0, 0, 0, 0.6);
 
   ${({ istop3 }) => {
-    return !istop3 ? '' : `font-size: 1.4rem`
+    return !istop3 ? '' : `font-size: 1.2rem`
   }}
 `
 
@@ -69,6 +78,11 @@ const Front = ({ imagePath = '', en = {}, rotate, isTop3 }) => {
 
   const path = require(`../${imagePath}`)
   const randomRotation = rotate ? Math.random() * 5 : 0
+
+  const handleSelectClick = () => {
+    console.log('SELECT!')
+  }
+
   return (
     <Wrapper
       istop3={isTop3}
@@ -81,6 +95,18 @@ const Front = ({ imagePath = '', en = {}, rotate, isTop3 }) => {
       <Title istop3={isTop3.toString()}>
         <div style={{ maxWidth: '50%' }}>{title}</div>
       </Title>
+      {isTop3 && (
+        <Button {...buttonProps} onClick={handleSelectClick}>
+          <Text
+            color="#fff"
+            fontSize="1.4rem"
+            fontWeight="600"
+            textTransform="uppercase"
+          >
+            SELECT
+          </Text>
+        </Button>
+      )}
     </Wrapper>
   )
 }
