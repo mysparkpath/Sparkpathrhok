@@ -9,6 +9,7 @@ import { Box, Button, Card, Text } from '../components'
 import { ReactComponent as Int } from '../static/icons/interested.svg'
 import { ReactComponent as NotInt } from '../static/icons/not-interested.svg'
 import { ReactComponent as VeryInt } from '../static/icons/very-interested.svg'
+import { navigate } from '@reach/router'
 
 const iconStyles = css`
   height: 6rem;
@@ -321,7 +322,7 @@ const CardDeck = () => {
           <Button
             disabled={myTop3.length === 0}
             {...confirmButtonProps}
-            onClick={() => console.log('confirm')}
+            onClick={() => navigate('/welldone')}
           >
             <Text
               color="#fff"

@@ -21,6 +21,11 @@ const textTransform = style({
   cssProperty: 'textTransform',
 })
 
+const textDecoration = style({
+  prop: 'textDecoration',
+  cssProperty: 'textDecoration',
+})
+
 const Text = styled.div`
   ${color}
   ${borders}
@@ -36,6 +41,7 @@ const Text = styled.div`
   ${textAlign}
   ${textStyle}
   ${textTransform}
+  ${textDecoration}
 `
 
 Text.defaultProps = {
