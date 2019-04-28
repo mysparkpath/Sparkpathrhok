@@ -6,7 +6,7 @@ import Card from '../components/card'
 import CardButton from './CardButton'
 import UndoButton from './UndoButton'
 import Congrats from './Congrats'
-
+import { Box, Button, Text } from '../components'
 import { ReactComponent as Int } from '../static/icons/interested.svg'
 import { ReactComponent as NotInt } from '../static/icons/not-interested.svg'
 import { ReactComponent as VeryInt } from '../static/icons/very-interested.svg'
@@ -89,6 +89,29 @@ const CardButtonList = styled.div`
   }
 `
 
+const arrowProps = {
+  p: '15px',
+  bg: 'rgb(0,0,0,0.6)',
+  borderRadius: '50%',
+  width: '50px',
+  height: '50px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: 'white',
+  fontSize: '2rem',
+
+  '&:disabled': {
+    bg: 'red',
+  },
+}
+
+const ArrowContainer = styled(Box)`
+  transform: translateY(-190px);
+  width: 30rem;
+  justify-content: space-between;
+`
+
 const CardDeck = ({ showTop3 }) => {
   const {
     deckState: { initial: deck, yes },
@@ -96,6 +119,7 @@ const CardDeck = ({ showTop3 }) => {
     sendToMaybe,
     sendToYes,
     totalCount,
+    rotateDeck,
   } = useContext(DeckContext)
 
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -147,6 +171,18 @@ const CardDeck = ({ showTop3 }) => {
           />
         ))}
       </CardStackWrapper>
+
+      {showTop3 && (
+        <ArrowContainer>
+          <Button mr="3rem" {...arrowProps} onClick={() => rotateDeck('left')}>
+            <Text lineHeight="1" as="span" fontWeight="800">{`<`}</Text>
+          </Button>
+
+          <Button ml="3rem" {...arrowProps} onClick={() => rotateDeck('right')}>
+            <Text lineHeight="1" as="span" fontWeight="800">{`>`}</Text>
+          </Button>
+        </ArrowContainer>
+      )}
 
       {!showTop3 && (
         <CardButtonList>
