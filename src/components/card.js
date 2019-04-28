@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Image from './image'
 import styled from 'styled-components/macro'
+import { ReactComponent as Arrow } from '../static/icons/backButton.svg'
+import { ReactComponent as Binoculars } from '../static/icons/BNKL.svg'
 
 const Wrapper = styled.div`
   display: flex;
@@ -85,80 +87,132 @@ const Front = ({ imagePath = '', en = {}, rotate, variant, isTop3 }) => {
   )
 }
 
-/*
-const Wrapper = styled.div`
-  padding: 25px;
+const BackWrapper = styled.div`
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    border-radius: 5px;
+    width: calc(100vw - 2rem);
+    height: calc((100vw - 2rem) * 1.4);
+  max-width: 32rem;
+  max-height: 62rem;
+`
+
+const BtnWrapper = styled.div`
+    display: flex;
+    align-self: flex-start;
+`
+
+const ArrowIcon = styled(Arrow)`
+    height: 1.3rem;
+    margin-right: 5px;
+`
+const BinocularsIconContainer = styled.div`
+  transform: translateY(-60%);
+`
+const BinocularsIcon = styled(Binoculars)`
   display: flex;
-  background: rgb(96, 183, 208);
-  align: center;
+  align-items: center;
+  height: 5rem;
+`
+
+const BackBtn = styled.a`
+  margin-bottom: 15px;
+  font-size: 0.8em;
+  display: flex;
+  text-decoration: none;
+  color: #fff;
+  &:hover {
+    cursor: pointer;
+    color: #444;
+  }
+`
+const TopContainer = styled.div`
+  min-width: inherit;
+  min-height: 20vh;
+  padding: 10px 20px
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px 10px 0 0;
+  overflow-y: scroll;
+`
+
+const BottomContainer = styled.div`
+  min-width: inherit;
+  min-height: 20vh;
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 0 0 10px 10px;
+  overflow: visible;
 `
-*/
 
-const Blurb = styled.div`
-  margin-top: 25px;
+const TitleTop = styled.header`
+  font-size: 1.7rem;
+  color: #fff;
   display: flex;
-  text-align: left;
-  font-size: 10px;
-`
-const Careers = styled.ul`
-  margin-top: 25px;
-  font-size: 15px;
-  background: white;
-  color: black;
-  display: flex;
-`
-/*
-const Title = styled.div`
-  margin-top: 25px;
-  text-align: left;
-  font-size: 1.4rem;
-`
-*/
-
-const DataCornerLowLeft = styled.div`
-  font-size: 15px;
-  margin-left: 1px;
+  justify-content: center;
+  line-height: 1.6;
+  margin-bottom: 10px;
 `
 
-const DataCornerLowRight = styled.div`
-  font-size: 15px;
-  margin-right: 1px;
+const TitleBottom = styled.header`
+    font-size: 1.7rem;
+    display: flex;
+    justify-content: center;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    color: #444;
 `
 
-const Footer = styled.div`
-  background-color: black;
-  justify-content: space-between;
-  margin-bottom: 1px;
-  display: flex;
+const TextTop = styled.p`
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    text-transform: none;
+    line-height: 1.25;
+    text-align: center;
+    color: #fff;
 `
 
-const Back = ({ en }) => {
-  const { title, blurb_1, blurb_2, careers, variant } = en
+const TextBottom = styled.p`
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    text-transform: none;
+    line-height: 1.25;
+    color: rgba(0, 0, 0, 0.75);
+`
+
+const Back = ({ en = {}, variant }) => {
+  const { title, blurb_1, blurb_2 } = en
   return (
-    <Wrapper style={{ background: variant }}>
-      <Title>{title}</Title>
-
-      <Blurb>{blurb_1}</Blurb>
-
-      <Careers>
-        {careers.map(career => (
-          <li>{career}</li>
-        ))}
-      </Careers>
-
-      <Blurb>{blurb_2}</Blurb>
-
-      <Footer>
-        <DataCornerLowLeft> mysparkpath.com </DataCornerLowLeft>
-        <DataCornerLowRight> LOADLOGOHERE</DataCornerLowRight>
-      </Footer>
-    </Wrapper>
+    <BackWrapper style={{ background: variant }}>
+      <BtnWrapper>
+        <ArrowIcon /> <BackBtn>Back</BackBtn>
+      </BtnWrapper>
+      <TopContainer>
+         <TitleTop>{title}</TitleTop>
+            <TextTop>{blurb_1}</TextTop>
+      </TopContainer>
+      <BottomContainer>
+        <BinocularsIconContainer>
+          <BinocularsIcon />
+        </BinocularsIconContainer>
+          <TitleBottom>Opportunities</TitleBottom>
+        <TextBottom>{blurb_2}</TextBottom>
+      </BottomContainer>
+    </BackWrapper>
   )
 }
 
 const Card = ({ image_path, en, rotate, variant, isTop3 }) => {
-  const [front, toggleView] = useState(true)
+  const [front, toggleView] = useState(false)
   if (front) {
     return (
       <Front
@@ -170,7 +224,7 @@ const Card = ({ image_path, en, rotate, variant, isTop3 }) => {
       />
     )
   }
-  return <Back en={en} />
+  return <Back en={en} variant={variant} />
 }
 
 export default Card
