@@ -6,6 +6,7 @@ import Card from '../components/card'
 import CardButton from './CardButton'
 import UndoButton from './UndoButton'
 import initialDeck from '../static/spark_paths'
+import Congrats from './Congrats'
 
 import { ReactComponent as Int } from '../static/icons/interested.svg'
 import { ReactComponent as NotInt } from '../static/icons/not-interested.svg'
@@ -96,6 +97,11 @@ const CardDeck = () => {
     console.log(deck)
     callback(current)
   }
+
+  if (!current) {
+    return <Congrats />
+  }
+
   return (
     <CardDeckWrapper>
       <DeckHeader>
