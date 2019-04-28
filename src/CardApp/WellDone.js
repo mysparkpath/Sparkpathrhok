@@ -64,6 +64,7 @@ const WellDone = () => {
           flexDirection="column"
           alignItems="flex-start"
           color="black"
+          px="3rem"
         >
           {myTop3.map(({ image_path, altText, variant, en, fr, key }) => {
             const path = require(`../${image_path}`)
@@ -85,6 +86,7 @@ const WellDone = () => {
                   justifyContent="center"
                   borderRadius="4px"
                   alignItems="center"
+                  flex="1 0 auto"
                 >
                   <img
                     style={{ height: '5rem', width: '5rem' }}
@@ -97,6 +99,7 @@ const WellDone = () => {
                   color="rgb(114, 114, 114)"
                   textTransform="capitalize"
                   fontSize="1.8rem"
+                  textAlign="left"
                 >
                   {title}
                 </Text>
