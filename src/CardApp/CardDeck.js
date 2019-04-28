@@ -89,6 +89,27 @@ const CardButtonList = styled.div`
   }
 `
 
+const Top3List = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+
+  & > *:not(:last-child) {
+    margin-right: 1rem;
+  }
+`
+
+const Top3Card = styled.div`
+  width: 8rem;
+  height: 11.2rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+
+  ${({ bg }) => {
+    return bg ? `background: ${bg}` : ''
+  }}
+`
+
 const CardDeck = ({ showTop3 }) => {
   const {
     deckState: { initial: deck, yes },
@@ -96,6 +117,8 @@ const CardDeck = ({ showTop3 }) => {
     sendToMaybe,
     sendToYes,
     totalCount,
+    myTop3,
+    setMyTop3,
   } = useContext(DeckContext)
 
   const getCurrentIndex = () => {
@@ -119,7 +142,14 @@ const CardDeck = ({ showTop3 }) => {
     return <Congrats yesGroup={yes} />
   }
 
-  console.log('current', deck)
+  const getTopCard = i => {
+    const currentCard = myTop3[i]
+    if (currentCard) {
+      console.log(currentCard.variant)
+      return <Top3Card bg={currentCard.variant} />
+    }
+    return <Top3Card />
+  }
 
   return (
     <CardDeckWrapper>
@@ -131,9 +161,10 @@ const CardDeck = ({ showTop3 }) => {
       <CardStackWrapper istop3={showTop3}>
         {deck.map((card, index) => (
           <Card
+            key={card.key}
             isTop3={showTop3}
             rotate={index !== deck.length - 1}
-            {...card}
+            card={card}
           />
         ))}
       </CardStackWrapper>
@@ -174,6 +205,13 @@ const CardDeck = ({ showTop3 }) => {
             <VeryIntIcon />
           </CardButton>
         </CardButtonList>
+      )}
+      {showTop3 && (
+        <Top3List>
+          {getTopCard(0)}
+          {getTopCard(1)}
+          {getTopCard(2)}
+        </Top3List>
       )}
     </CardDeckWrapper>
   )

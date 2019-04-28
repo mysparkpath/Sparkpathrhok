@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Image from './image'
 import styled from 'styled-components/macro'
 import { Button, Text } from '../components'
+import { DeckContext } from '../CardApp/CardApp'
 
 const buttonProps = {
   bg: 'rgba(0,0,0,0.5)',
@@ -73,14 +74,22 @@ const Img = styled(Image)`
   }}
 `
 
-const Front = ({ imagePath = '', en = {}, rotate, variant, isTop3 }) => {
+const Front = ({ imagePath = '', en = {}, rotate, variant, isTop3, card }) => {
+  const { myTop3, setMyTop3, deckState, setDeckState } = useContext(DeckContext)
   const { title } = en
 
   const path = require(`../${imagePath}`)
   const randomRotation = rotate ? Math.random() * 5 : 0
 
   const handleSelectClick = () => {
-    console.log('SELECT!')
+    console.log('SELECT!', card)
+    if (myTop3.length < 3) {
+      setMyTop3([...myTop3, card])
+      setDeckState({
+        ...deckState,
+        initial: deckState.initial.filter(c => c.key !== card.key),
+      })
+    }
   }
 
   return (
@@ -183,7 +192,8 @@ const Back = ({ en }) => {
   )
 }
 
-const Card = ({ image_path, en, rotate, variant, isTop3 }) => {
+const Card = ({ card, isTop3, rotate }) => {
+  const { image_path, en, variant } = card
   const [front, toggleView] = useState(true)
   if (front) {
     return (
@@ -193,6 +203,7 @@ const Card = ({ image_path, en, rotate, variant, isTop3 }) => {
         en={en}
         variant={variant}
         isTop3={isTop3}
+        card={card}
       />
     )
   }
