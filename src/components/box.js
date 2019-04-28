@@ -3,6 +3,7 @@ import {
   alignSelf,
   borders,
   boxShadow,
+  borderRadius,
   color,
   display,
   flex,
@@ -25,6 +26,7 @@ import styled from 'styled-components'
 const Box = styled.div`
   ${alignItems}
   ${alignSelf}
+  ${borderRadius}
   ${borders}
   ${boxShadow}
   ${color}
