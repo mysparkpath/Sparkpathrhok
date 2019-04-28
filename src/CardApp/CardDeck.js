@@ -64,9 +64,11 @@ const DeckHeader = styled.div`
   padding: 2rem;
   display: flex;
   justify-content: flex-end;
-  align-self: stretch;
+  align-self: center;
   position: relative;
   height: 10rem;
+  max-width: 65rem;
+  width: 100%;
 `
 
 const CardProgress = styled.div`
@@ -124,6 +126,13 @@ const removeButtonProps = {
   alignSelf: 'center',
 }
 
+const languageButtonProps = {
+  border: 'none',
+  background: 'none',
+  mr: '1rem',
+  fontWeight: '600',
+}
+
 const Top3Card = styled.div`
   width: 8rem;
   height: 11.2rem;
@@ -132,7 +141,7 @@ const Top3Card = styled.div`
   color: #fff;
 
   button {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0);
     border-radius: 12px;
     height: 100%;
     width: 100%;
@@ -141,12 +150,16 @@ const Top3Card = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    color: #fff;
+    color: ${({ contrast }) => {
+      return contrast ? 'rgba(0,0,0,0.85)' : '#fff'
+    }};
     border: none;
 
     span {
       align-self: flex-end;
-      color: #fff;
+      color: ${({ contrast }) => {
+        return contrast ? 'rgba(0,0,0,0.85)' : '#fff'
+      }};
       border: none;
       background: none;
     }
@@ -189,6 +202,8 @@ const CardDeck = () => {
     myTop3,
     setMyTop3,
     showTop3,
+    language,
+    setLanguage,
   } = useContext(DeckContext)
 
   const { initial: deck, yes } = deckState
@@ -228,7 +243,7 @@ const CardDeck = () => {
     if (currentCard) {
       console.log(currentCard)
       return (
-        <Top3Card bg={currentCard.variant}>
+        <Top3Card bg={currentCard.variant} contrast={currentCard.contrast}>
           <Button
             {...removeButtonProps}
             onClick={e => handleRemoveTop3(e, currentCard)}
@@ -250,6 +265,22 @@ const CardDeck = () => {
       <DeckHeader>
         <CardProgress>{getProgressCount()}</CardProgress>
         <UndoButton />
+        <Button {...languageButtonProps} onClick={() => setLanguage('en')}>
+          <Text
+            color={language === 'en' ? '#3c0d68' : ''}
+            textDecoration={language === 'en' ? 'underline' : 'none'}
+          >
+            En
+          </Text>
+        </Button>
+        <Button {...languageButtonProps} onClick={() => setLanguage('fr')}>
+          <Text
+            color={language === 'fr' ? '#3c0d68' : ''}
+            textDecoration={language === 'fr' ? 'underline' : 'none'}
+          >
+            Fr
+          </Text>
+        </Button>
       </DeckHeader>
 
       <CardStackWrapper istop3={showTop3}>

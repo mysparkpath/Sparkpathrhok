@@ -6,6 +6,7 @@ export default {
       image_path: 'static/card_images/card_1.png',
       alt: '',
       variant: '#64CCEB',
+      contrast: true,
       en: {
         title: 'Redesign the Health Care System',
         blurb_1:
@@ -51,6 +52,7 @@ export default {
       image_path: 'static/card_images/card_2.png',
       alt: '',
       variant: '#64CCEB',
+      contrast: true,
       en: {
         title: 'Promote Healthy Living',
         blurb_1:
@@ -94,6 +96,7 @@ export default {
       image_path: 'static/card_images/card_3.png',
       alt: '',
       variant: '#50BAEA',
+      contrast: true,
       en: {
         title: 'Advance Health Informatics',
         blurb_1:
@@ -154,7 +157,7 @@ export default {
           'Doctors have long known that people differ in how they respond to medicines. However, without understanding and adjusting to individual differences, treatments developed have generally been created for the many, rather than the few. There are opportunities to develop new systems to use genetic information, detect small changes in the body, create and assess new drugs, and produce specific vaccines.',
       },
       fr: {
-        titre: 'Créer de meilleurs médicaments',
+        title: 'Créer de meilleurs médicaments',
         blurb_1:
           'Les médicaments nous ont permis d’allonger et d’améliorer la vie humaine à un niveau que nos ancêtres n’auraient jamais pu imaginer. En raison des avancées en recherche génétique, il y a des opportunités sans précédent pour créer des médicaments personnalisés, basés sur la génétique.',
         careers: [
@@ -221,6 +224,7 @@ export default {
       image_path: 'static/card_images/card_6.png',
       alt: '',
       variant: '#FDD10D',
+      contrast: true,
       en: {
         title: 'Distribute The Wealth',
         blurb_1:
@@ -264,6 +268,7 @@ export default {
       image_path: 'static/card_images/card_7.png',
       alt: '',
       variant: '#FDBE12',
+      contrast: true,
       en: {
         title: 'Foster Sustainable Development',
         blurb_1:
@@ -304,6 +309,7 @@ export default {
       image_path: 'static/card_images/card_8.png',
       alt: '',
       variant: '#F8961D',
+      contrast: true,
       en: {
         title: 'Establish Fair Trade',
         blurb_1:
@@ -609,6 +615,7 @@ export default {
       image_path: 'static/card_images/card_16.png',
       alt: '',
       variant: '#E26DAB',
+      contrast: true,
       en: {
         title: 'Build the school of the future',
         blurb_1:
@@ -653,6 +660,7 @@ export default {
       image_path: 'static/card_images/card_17.png',
       alt: '',
       variant: '#F06BA8',
+      contrast: true,
       en: {
         title: 'Protect society from crime',
         blurb_1:
