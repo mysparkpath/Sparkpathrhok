@@ -14,16 +14,25 @@ const buttonProps = {
 const Congrats = ({ yesGroup }) => {
   const { redoChallenge } = useContext(DeckContext)
 
+  const needsRedo = yesGroup.length > 10
+
   let handleClick = () => {
+    if (needsRedo) {
+      redoChallenge()
+    } else {
+      redoChallenge()
+      setShowTop3(true)
+    }
     console.log('handle me on success!')
   }
 
   let info = `Now let’s narrow down to find out the ones that interest you most.`
 
-  if (yesGroup.length > 10) {
-    handleClick = () => redoChallenge(yesGroup)
+  if (needsRedo) {
     info = 'Please redo'
   }
+
+  const { setShowTop3 } = useContext(DeckContext)
 
   return (
     <Box
@@ -35,12 +44,14 @@ const Congrats = ({ yesGroup }) => {
       px="4rem"
       height="100vh"
     >
-      <Text as="h2" fontWeight="600" fontSize="4rem">
-        Nice job!{' '}
-        <span role="img" aria-label="star emoji">
-          ⭐️
-        </span>
-      </Text>
+      {!needsRedo && (
+        <Text as="h2" fontWeight="600" fontSize="4rem">
+          Nice job!{' '}
+          <span role="img" aria-label="star emoji">
+            ⭐️
+          </span>
+        </Text>
+      )}
       <Text maxWidth="32rem" mt="4rem" fontSize="2.6rem" lineHeight="1.2">
         {info}
       </Text>
