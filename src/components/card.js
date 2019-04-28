@@ -7,7 +7,6 @@ import { DeckContext } from '../CardApp/CardApp'
 import { ReactComponent as Arrow } from '../static/icons/backButton.svg'
 import { ReactComponent as Binoculars } from '../static/icons/BNKL.svg'
 
-
 const buttonProps = {
   bg: 'rgba(0,0,0,0.5)',
   borderRadius: '5rem',
@@ -16,7 +15,6 @@ const buttonProps = {
   mt: '4rem',
   border: 'none',
 }
-
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,7 +34,7 @@ const Wrapper = styled.div`
   }}
 
   ${({ istop3 }) => {
-    return !istop3
+    return istop3 !== 'true'
       ? ''
       : `
     width: calc(100vw - 2rem);
@@ -58,7 +56,7 @@ const Title = styled.div`
   background: rgba(0, 0, 0, 0.6);
 
   ${({ istop3 }) => {
-    return !istop3 ? '' : `font-size: 1.2rem`
+    return istop3 === 'true' ? `font-size: 1.2rem` : ''
   }}
 `
 
@@ -71,11 +69,11 @@ const Img = styled(Image)`
   max-height: 20rem;
 
   ${({ istop3 }) => {
-    return !istop3
-      ? ''
-      : `
+    return istop3 === 'true'
+      ? `
     max-width: 10rem;
   max-height: 10rem;`
+      : ''
   }}
 `
 
@@ -97,9 +95,11 @@ const Front = ({ imagePath = '', en = {}, rotate, variant, isTop3, card }) => {
     }
   }
 
+  console.log(`${isTop3.toString()}`)
+
   return (
     <Wrapper
-      istop3={isTop3}
+      istop3={isTop3.toString()}
       rotation={randomRotation}
       style={{ background: variant }}
     >

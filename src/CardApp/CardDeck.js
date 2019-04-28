@@ -110,7 +110,7 @@ const ArrowContainer = styled(Box)`
 const Top3List = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 3rem;
+  margin-top: -4rem;
 
   & > *:not(:last-child) {
     margin-right: 1rem;
