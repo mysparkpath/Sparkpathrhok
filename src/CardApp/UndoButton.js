@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/macro'
-import { DeckContext } from './CardApp'
+import { DeckContext } from '../App'
 
 import { ReactComponent as Undo } from '../static/icons/undo.svg'
 

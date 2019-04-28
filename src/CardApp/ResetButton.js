@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { DeckContext } from './CardApp'
+import { DeckContext } from '../App'
 const ResetButton = () => {
   const { reset } = useContext(DeckContext)
   const handleResetClick = e => {

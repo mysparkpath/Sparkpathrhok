@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import styled, { css } from 'styled-components/macro'
 import { darken } from 'polished'
-import { DeckContext } from './CardApp'
+import { DeckContext } from '../App'
 import CardButton from './CardButton'
 import UndoButton from './UndoButton'
 import Congrats from './Congrats'
@@ -176,7 +176,7 @@ const confirmButtonProps = {
   },
 }
 
-const CardDeck = ({ showTop3 }) => {
+const CardDeck = () => {
   const {
     deckState,
     setDeckState,
@@ -187,6 +187,7 @@ const CardDeck = ({ showTop3 }) => {
     rotateDeck,
     myTop3,
     setMyTop3,
+    showTop3,
   } = useContext(DeckContext)
 
   const { initial: deck, yes } = deckState
