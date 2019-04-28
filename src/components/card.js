@@ -7,7 +7,6 @@ import { DeckContext } from '../CardApp/CardApp'
 import { ReactComponent as Arrow } from '../static/icons/backButton.svg'
 import { ReactComponent as Binoculars } from '../static/icons/BNKL.svg'
 
-
 const buttonProps = {
   bg: 'rgba(0,0,0,0.5)',
   borderRadius: '5rem',
@@ -16,7 +15,6 @@ const buttonProps = {
   mt: '4rem',
   border: 'none',
 }
-
 
 const Wrapper = styled.div`
   display: flex;
@@ -171,10 +169,12 @@ const BackBtn = styled.a`
 const TopContainer = styled.div`
   min-width: inherit;
   min-height: 20vh;
-  padding: 10px 20px
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 20px;
   background: rgba(0, 0, 0, 0.6);
   border-radius: 10px 10px 0 0;
-  overflow-y: scroll;
 `
 
 const BottomContainer = styled.div`
@@ -186,7 +186,7 @@ const BottomContainer = styled.div`
   padding: 10px 20px;
   background: #fff;
   border-radius: 0 0 10px 10px;
-  overflow: visible;
+  overflow-y: visible;
 `
 
 const TitleTop = styled.header`
@@ -205,6 +205,7 @@ const TitleBottom = styled.header`
     line-height: 1.6;
     margin-bottom: 10px;
     color: #444;
+  overflow-y: scroll;
 `
 
 const TextTop = styled.p`
