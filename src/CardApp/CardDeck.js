@@ -240,6 +240,9 @@ const CardDeck = ({ showTop3 }) => {
     return <Top3Card />
   }
   console.log(myTop3.length)
+
+  const showArrowButtons = Boolean(showTop3 && deck.length)
+
   return (
     <CardDeckWrapper>
       <DeckHeader>
@@ -258,7 +261,7 @@ const CardDeck = ({ showTop3 }) => {
         ))}
       </CardStackWrapper>
 
-      {showTop3 && (
+      {showArrowButtons && (
         <ArrowContainer>
           <Button mr="3rem" {...arrowProps} onClick={() => rotateDeck('left')}>
             <Text lineHeight="1" as="span" fontWeight="800">{`<`}</Text>
