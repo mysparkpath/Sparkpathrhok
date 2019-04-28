@@ -59,7 +59,7 @@ const BackWrapper = styled.div`
 `
 const BackTopTitle = styled.div`
   font-size: 1.8rem;
-  color: white;
+  color: black;
   display: flex;
   justify-content: center;
   line-height: 1.6;
@@ -85,7 +85,6 @@ const Front = ({ imagePath = '', en = {}, rotate }) => {
 
 const Back = ({ en = {} }) => {
   const { title } = en
-  console.log('jose', en)
   return (
     <BackWrapper>
       <BackTopTitle>{title}</BackTopTitle>
@@ -98,7 +97,7 @@ const Card = ({ image_path, en, rotate }) => {
   if (front) {
     return <Front rotate={rotate} imagePath={image_path} en={en} />
   }
-  return <Back />
+  return <Back en={en} />
 }
 
 export default Card
