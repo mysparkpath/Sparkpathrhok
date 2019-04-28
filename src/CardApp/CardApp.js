@@ -11,6 +11,7 @@ const CardApp = () => {
   const [deckHistory, setDeckHistory] = useState()
   const [showTop3, setShowTop3] = useState(false)
   const [totalCount, setTotalCount] = useState(deckState.initial.length)
+  const [myTop3, setMyTop3] = useState([])
 
   const goToPreviousDeckState = () => {
     console.log('UNDO!', deckHistory)
@@ -99,6 +100,7 @@ const CardApp = () => {
       value={{
         deckHistory,
         deckState,
+        setDeckState,
         goToPreviousDeckState,
         redoChallenge,
         reset,
@@ -110,11 +112,13 @@ const CardApp = () => {
         setTotalCount,
         showTop3,
         totalCount,
+        myTop3,
+        setMyTop3,
       }}
     >
       <div className="CardApp">
         {/* <ResetButton /> */}
-        <CardDeck showTop3 />
+        <CardDeck showTop3={showTop3} />
       </div>
     </DeckContext.Provider>
   )
