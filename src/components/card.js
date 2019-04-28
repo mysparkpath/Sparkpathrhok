@@ -222,7 +222,7 @@ const TitleBottom = styled.header`
     display: flex;
     justify-content: center;
     line-height: 1.6;
-    margin-bottom: 10px;
+    margin: -20% 0 10px 0;
     color: #444;
   overflow-y: scroll;
 `
