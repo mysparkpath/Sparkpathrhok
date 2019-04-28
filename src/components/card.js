@@ -77,7 +77,16 @@ const Img = styled(Image)`
   }}
 `
 
-const Front = ({ imagePath = '', en = {}, rotate, variant, isTop3, card }) => {
+const Front = ({
+  imagePath = '',
+  en = {},
+  rotate,
+  variant,
+  isTop3,
+  card,
+  toggleView,
+  front,
+}) => {
   const { myTop3, setMyTop3, deckState, setDeckState } = useContext(DeckContext)
   const { title } = en
 
@@ -103,6 +112,14 @@ const Front = ({ imagePath = '', en = {}, rotate, variant, isTop3, card }) => {
       rotation={randomRotation}
       style={{ background: variant }}
     >
+      <BackBtn
+        onClick={e => {
+          console.log('Jose ToBackOfTheCard presed')
+          toggleView(!front)
+        }}
+      >
+        ShowBackCard
+      </BackBtn>
       <ImageWrapper>
         <Img istop3={isTop3.toString()} src={path} />
       </ImageWrapper>
@@ -235,8 +252,7 @@ const Back = ({ en = {}, variant }) => {
   return (
     <BackWrapper style={{ background: variant }}>
       <BtnWrapper>
-        <ArrowIcon />
-         <BackBtn>Back</BackBtn>
+        <ArrowIcon /> <BackBtn>Back</BackBtn>
       </BtnWrapper>
       <TopContainer>
          <TitleTop>{title}</TitleTop>
@@ -265,6 +281,8 @@ const Card = ({ card, isTop3, rotate }) => {
         variant={variant}
         isTop3={isTop3}
         card={card}
+        front={front}
+        toggleView={toggleView}
       />
     )
   }
