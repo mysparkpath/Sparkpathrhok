@@ -58,7 +58,7 @@ const Main = () => {
       flexDirection="column"
       color="white"
       py="4rem"
-      height="100vh"
+      minHeight="100vh"
     >
       <MainLogo src={Logo} />
 

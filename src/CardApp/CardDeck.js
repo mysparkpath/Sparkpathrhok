@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styled, { css } from 'styled-components/macro'
 import { darken } from 'polished'
 import { DeckContext } from './CardApp'
@@ -48,6 +48,17 @@ const CardStackWrapper = styled.div`
   max-width: 30rem;
   max-height: 42rem;
   margin: 2rem 0 3rem 0;
+
+  ${({ istop3 }) => {
+    return !istop3
+      ? ''
+      : `
+    width: calc(100vw - 2rem);
+  height: calc((100vw - 2rem) * 1.4);
+  max-width: 20rem;
+  max-height: 28rem;
+    `
+  }}
 `
 
 const DeckHeader = styled.div`
@@ -79,16 +90,39 @@ const CardButtonList = styled.div`
   }
 `
 
-const CardDeck = () => {
+const CardDeck = ({ showTop3 }) => {
   const {
-    deckState: { initial: deck },
+    deckState: { initial, yes },
     sendToNo,
     sendToMaybe,
     sendToYes,
   } = useContext(DeckContext)
 
-  const totalCount = initialDeck.paths.length
-  const currentIndex = totalCount - deck.length + 1
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const getDeck = () => {
+    if (showTop3) {
+      return yes
+    }
+    return initial
+  }
+
+  const deck = getDeck()
+
+  const getTotalCount = () => {
+    return showTop3 ? deck.length : initialDeck.paths.length
+  }
+
+  const getCurrentIndex = () => {
+    return showTop3 ? currentIndex : getTotalCount() - deck.length + 1
+  }
+
+  const getProgressCount = () => {
+    if (showTop3) {
+      return `${getCurrentIndex()} of ${deck.length}`
+    }
+    return `${getCurrentIndex()} of ${getTotalCount()}`
+  }
 
   const current = deck && deck.length > 0 ? deck[deck.length - 1] : null
 
@@ -98,58 +132,66 @@ const CardDeck = () => {
     callback(current)
   }
 
-  if (!current) {
+  if (!current && !showTop3) {
     return <Congrats />
   }
+
+  console.log('current', deck)
 
   return (
     <CardDeckWrapper>
       <DeckHeader>
-        <CardProgress>{`${currentIndex} of ${totalCount}`}</CardProgress>
+        <CardProgress>{getProgressCount()}</CardProgress>
         <UndoButton />
       </DeckHeader>
 
-      <CardStackWrapper>
+      <CardStackWrapper istop3={showTop3}>
         {deck.map((card, index) => (
-          <Card rotate={index !== deck.length - 1} {...card} />
+          <Card
+            isTop3={showTop3}
+            rotate={index !== deck.length - 1}
+            {...card}
+          />
         ))}
       </CardStackWrapper>
 
-      <CardButtonList>
-        <CardButton
-          onClick={e =>
-            handleCardButtonClick(e, {
-              callback: sendToNo,
-            })
-          }
-          id="no-card"
-          title="No"
-        >
-          <NotIntIcon />
-        </CardButton>
-        <CardButton
-          onClick={e =>
-            handleCardButtonClick(e, {
-              callback: sendToMaybe,
-            })
-          }
-          id="maybe-card"
-          title="Maybe"
-        >
-          <IntIcon />
-        </CardButton>
-        <CardButton
-          onClick={e =>
-            handleCardButtonClick(e, {
-              callback: sendToYes,
-            })
-          }
-          id="yes-card"
-          title="Yes"
-        >
-          <VeryIntIcon />
-        </CardButton>
-      </CardButtonList>
+      {!showTop3 && (
+        <CardButtonList>
+          <CardButton
+            onClick={e =>
+              handleCardButtonClick(e, {
+                callback: sendToNo,
+              })
+            }
+            id="no-card"
+            title="No"
+          >
+            <NotIntIcon />
+          </CardButton>
+          <CardButton
+            onClick={e =>
+              handleCardButtonClick(e, {
+                callback: sendToMaybe,
+              })
+            }
+            id="maybe-card"
+            title="Maybe"
+          >
+            <IntIcon />
+          </CardButton>
+          <CardButton
+            onClick={e =>
+              handleCardButtonClick(e, {
+                callback: sendToYes,
+              })
+            }
+            id="yes-card"
+            title="Yes"
+          >
+            <VeryIntIcon />
+          </CardButton>
+        </CardButtonList>
+      )}
     </CardDeckWrapper>
   )
 }

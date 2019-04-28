@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Box, Text } from '../components'
 import { Link } from '@reach/router'
 import styled from 'styled-components'
+import { DeckContext } from './CardApp'
+import Button from '../components/button'
 
 const StyledLink = styled(Link)`
   background: white;
@@ -12,7 +14,18 @@ const StyledLink = styled(Link)`
   box-shadow: 0px 7px 12px -8px rgba(0, 0, 0, 0.75);
 `
 
+const StyledButton = styled(Button)`
+  background: white;
+  border-radius: 50px;
+  align-self: center;
+  padding: 2.4rem 5.5rem;
+  margin-top: 6rem;
+  box-shadow: 0px 7px 12px -8px rgba(0, 0, 0, 0.75);
+`
+
 const Congrats = () => {
+  const { setShowTop3 } = useContext(DeckContext)
+
   return (
     <Box
       alignItems="center"
@@ -43,6 +56,16 @@ const Congrats = () => {
           Let's do it!
         </Text>
       </StyledLink>
+      <StyledButton type="button" onClick={() => setShowTop3(true)}>
+        <Text
+          color="rgb(113, 69, 154)"
+          fontSize="2rem"
+          fontWeight="600"
+          textTransform="uppercase"
+        >
+          Let's do it!
+        </Text>
+      </StyledButton>
     </Box>
   )
 }
