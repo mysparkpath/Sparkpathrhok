@@ -11,10 +11,10 @@ import WellDone from './CardApp/WellDone'
 export const DeckContext = React.createContext({})
 
 const App = () => {
-  const [language, setLanguage] = useState('fr')
+  const [language, setLanguage] = useState('en')
   const [deckState, setDeckState] = useState(initialDeckState)
   const [deckHistory, setDeckHistory] = useState()
-  const [showTop3, setShowTop3] = useState(true)
+  const [showTop3, setShowTop3] = useState(false)
   const [totalCount, setTotalCount] = useState(deckState.initial.length)
   const [myTop3, setMyTop3] = useState([])
 
