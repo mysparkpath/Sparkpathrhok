@@ -101,7 +101,7 @@ const CardApp = () => {
     >
       <div className="CardApp">
         {/* <ResetButton /> */}
-        <CardDeck showTop3 />
+        <CardDeck showTop3={showTop3} />
       </div>
     </DeckContext.Provider>
   )
