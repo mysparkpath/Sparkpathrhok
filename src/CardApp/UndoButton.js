@@ -15,6 +15,7 @@ const ButtonWrapper = styled.button`
   align-items: center;
   border: none;
   background: none;
+  margin-right: 2rem;
 `
 
 const UndoButton = () => {

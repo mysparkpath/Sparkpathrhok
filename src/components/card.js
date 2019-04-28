@@ -53,7 +53,11 @@ const Title = styled.div`
 
   line-height: 1.6;
   margin-top: 3rem;
-  background: rgba(0, 0, 0, 0.6);
+
+  ${({ contrast }) => {
+    return contrast ? 'color: rgba(0,0,0,0.85);' : 'color: white;'
+  }}
+  /* background: rgba(0, 0, 0, 0.6); */
 
   ${({ istop3 }) => {
     return istop3 === 'true' ? `font-size: 1.2rem` : ''
@@ -77,9 +81,11 @@ const Img = styled(Image)`
   }}
 `
 
-const Front = ({ imagePath = '', en = {}, rotate, variant, isTop3, card }) => {
-  const { myTop3, setMyTop3, deckState, setDeckState } = useContext(DeckContext)
-  const { title } = en
+const Front = ({ imagePath = '', rotate, variant, isTop3, card, contrast }) => {
+  const { myTop3, setMyTop3, deckState, setDeckState, language } = useContext(
+    DeckContext
+  )
+  const { title } = card[language]
 
   const path = require(`../${imagePath}`)
   const randomRotation = rotate ? Math.random() * 5 : 0
@@ -95,8 +101,6 @@ const Front = ({ imagePath = '', en = {}, rotate, variant, isTop3, card }) => {
     }
   }
 
-  console.log(`${isTop3.toString()}`)
-
   return (
     <Wrapper
       istop3={isTop3.toString()}
@@ -106,7 +110,7 @@ const Front = ({ imagePath = '', en = {}, rotate, variant, isTop3, card }) => {
       <ImageWrapper>
         <Img istop3={isTop3.toString()} src={path} />
       </ImageWrapper>
-      <Title istop3={isTop3.toString()}>
+      <Title istop3={isTop3.toString()} contrast={contrast}>
         <div style={{ maxWidth: '50%' }}>{title}</div>
       </Title>
       {isTop3 && (
@@ -230,8 +234,9 @@ const TextBottom = styled.p`
     color: rgba(0, 0, 0, 0.75);
 `
 
-const Back = ({ en = {}, variant }) => {
-  const { title, blurb_1, blurb_2 } = en
+const Back = ({ card, variant }) => {
+  const { language } = useContext(DeckContext)
+  const { title, blurb_1, blurb_2 } = card[language]
   return (
     <BackWrapper style={{ background: variant }}>
       <BtnWrapper>
@@ -253,21 +258,21 @@ const Back = ({ en = {}, variant }) => {
 }
 
 const Card = ({ card, isTop3, rotate }) => {
-  const { image_path, en, variant } = card
+  const { image_path, variant, contrast } = card
   const [front, toggleView] = useState(true)
   if (front) {
     return (
       <Front
         rotate={rotate}
         imagePath={image_path}
-        en={en}
         variant={variant}
         isTop3={isTop3}
         card={card}
+        contrast={contrast}
       />
     )
   }
-  return <Back en={en} variant={variant} />
+  return <Back card={card} variant={variant} />
 }
 
 export default Card
