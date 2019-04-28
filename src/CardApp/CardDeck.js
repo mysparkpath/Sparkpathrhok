@@ -2,12 +2,10 @@ import React, { useContext, useState } from 'react'
 import styled, { css } from 'styled-components/macro'
 import { darken } from 'polished'
 import { DeckContext } from './CardApp'
-
 import CardButton from './CardButton'
 import UndoButton from './UndoButton'
 import Congrats from './Congrats'
-import { Button, Card, Text } from '../components'
-
+import { Box, Button, Card, Text } from '../components'
 import { ReactComponent as Int } from '../static/icons/interested.svg'
 import { ReactComponent as NotInt } from '../static/icons/not-interested.svg'
 import { ReactComponent as VeryInt } from '../static/icons/very-interested.svg'
@@ -90,6 +88,25 @@ const CardButtonList = styled.div`
   }
 `
 
+const arrowProps = {
+  p: '15px',
+  bg: 'rgb(0,0,0,0.6)',
+  borderRadius: '50%',
+  width: '50px',
+  height: '50px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: 'white',
+  fontSize: '2rem',
+}
+
+const ArrowContainer = styled(Box)`
+  transform: translateY(-190px);
+  width: 30rem;
+  justify-content: space-between;
+`
+
 const Top3List = styled.div`
   display: flex;
   justify-content: space-between;
@@ -167,6 +184,7 @@ const CardDeck = ({ showTop3 }) => {
     sendToMaybe,
     sendToYes,
     totalCount,
+    rotateDeck,
     myTop3,
     setMyTop3,
   } = useContext(DeckContext)
@@ -239,6 +257,18 @@ const CardDeck = ({ showTop3 }) => {
           />
         ))}
       </CardStackWrapper>
+
+      {showTop3 && (
+        <ArrowContainer>
+          <Button mr="3rem" {...arrowProps} onClick={() => rotateDeck('left')}>
+            <Text lineHeight="1" as="span" fontWeight="800">{`<`}</Text>
+          </Button>
+
+          <Button ml="3rem" {...arrowProps} onClick={() => rotateDeck('right')}>
+            <Text lineHeight="1" as="span" fontWeight="800">{`>`}</Text>
+          </Button>
+        </ArrowContainer>
+      )}
 
       {!showTop3 && (
         <CardButtonList>

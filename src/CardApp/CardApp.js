@@ -55,6 +55,22 @@ const CardApp = () => {
     setDeckState(newDeckState)
   }
 
+  const rotateDeck = direction => {
+    const deck = deckState.initial
+
+    let initial
+
+    if (direction === 'left') {
+      const popped = deck.pop()
+      initial = [popped, ...deck]
+    } else if (direction === 'right') {
+      const shifted = deck.shift()
+      initial = [...deck, shifted]
+    }
+
+    setDeckState({ ...deckState, initial })
+  }
+
   const sendToMaybe = card => {
     const { initial, maybe } = deckState
     console.log('send to maybe', card.key)
@@ -88,13 +104,14 @@ const CardApp = () => {
         goToPreviousDeckState,
         redoChallenge,
         reset,
+        rotateDeck,
         sendToMaybe,
-        showTop3,
-        setShowTop3,
         sendToNo,
         sendToYes,
-        totalCount,
+        setShowTop3,
         setTotalCount,
+        showTop3,
+        totalCount,
         myTop3,
         setMyTop3,
       }}
