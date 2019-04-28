@@ -1,14 +1,15 @@
 import React from 'react'
 import { Link } from '@reach/router'
 import { Box, Text } from './components'
-import { ReactComponent as Int } from './static/icons/interested.svg'
-import { ReactComponent as NotInt } from './static/icons/not-interested.svg'
-import { ReactComponent as VeryInt } from './static/icons/very-interested.svg'
+import { ReactComponent as Int } from './static/icons/interested-outline.svg'
+import { ReactComponent as NotInt } from './static/icons/not-interested-outline.svg'
+import { ReactComponent as VeryInt } from './static/icons/very-interested-outline.svg'
 import Logo from './static/icons/logo-white.png'
 import styled, { css } from 'styled-components'
 
 const iconStyles = css`
   height: 4rem;
+  width: 4rem;
   margin-right: 2rem;
 `
 const IntIcon = styled(Int)`
