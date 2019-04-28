@@ -116,13 +116,15 @@ const Front = ({
       rotation={randomRotation}
       style={{ background: variant }}
     >
-      <ToBackOfCardBtn
-        onClick={e => {
-          toggleView(!front)
-        }}
-      >
-        i
-      </ToBackOfCardBtn>
+      {isTop3 && (
+        <ToBackOfCardBtn
+          onClick={e => {
+            toggleView(!front)
+          }}
+        >
+          i
+        </ToBackOfCardBtn>
+      )}
       <ImageWrapper>
         <Img istop3={isTop3.toString()} src={path} />
       </ImageWrapper>
@@ -157,6 +159,9 @@ const BackWrapper = styled.div`
     height: calc((100vw - 2rem) * 1.4);
   max-width: 32rem;
   max-height: 62rem;
+  margin-top: -10rem;
+  margin-left: -6rem;
+  z-index: 999;
 `
 
 const BtnWrapper = styled.div`
@@ -274,8 +279,8 @@ const Back = ({ card, variant, toggleView, front }) => {
     <BackWrapper style={{ background: variant }}>
       <TopContainer>
         <BtnWrapper>
-          <ArrowIcon /> 
-          <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
+          <ArrowIcon />
+           <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
         </BtnWrapper>
          <TitleTop>{title}</TitleTop>
             <TextTop>{blurb_1}</TextTop>
