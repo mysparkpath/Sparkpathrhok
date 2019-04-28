@@ -81,11 +81,21 @@ const Img = styled(Image)`
   }}
 `
 
-const Front = ({ imagePath = '', rotate, variant, isTop3, card, contrast }) => {
-  const { myTop3, setMyTop3, deckState, setDeckState, language } = useContext(
-    DeckContext
-  )
+
+const Front = ({
+  imagePath = '',
+  en = {},
+  rotate,
+  variant,
+  isTop3,
+  card,
+  toggleView,
+  front,
+  contrast
+}) => {
+  const { myTop3, setMyTop3, deckState, setDeckState, language } = useContext(DeckContext)
   const { title } = card[language]
+
 
   const path = require(`../${imagePath}`)
   const randomRotation = rotate ? Math.random() * 5 : 0
@@ -107,6 +117,13 @@ const Front = ({ imagePath = '', rotate, variant, isTop3, card, contrast }) => {
       rotation={randomRotation}
       style={{ background: variant }}
     >
+      <BackBtn
+        onClick={e => {
+          toggleView(!front)
+        }}
+      >
+        ShowBackCard
+      </BackBtn>
       <ImageWrapper>
         <Img istop3={isTop3.toString()} src={path} />
       </ImageWrapper>
@@ -144,8 +161,9 @@ const BackWrapper = styled.div`
 `
 
 const BtnWrapper = styled.div`
-    display: flex;
-    align-self: flex-start;
+   display: flex;
+   align-self: flex-start;
+  padding-top: 10px;
 `
 
 const ArrowIcon = styled(Arrow)`
@@ -162,7 +180,6 @@ const BinocularsIcon = styled(Binoculars)`
 `
 
 const BackBtn = styled.a`
-  margin-bottom: 15px;
   font-size: 0.8em;
   display: flex;
   text-decoration: none;
@@ -172,6 +189,7 @@ const BackBtn = styled.a`
     color: #444;
   }
 `
+
 const TopContainer = styled.div`
   min-width: inherit;
   min-height: 20vh;
@@ -209,7 +227,7 @@ const TitleBottom = styled.header`
     display: flex;
     justify-content: center;
     line-height: 1.6;
-    margin-bottom: 10px;
+    margin: -20% 0 10px 0;
     color: #444;
   overflow-y: scroll;
 `
@@ -234,15 +252,18 @@ const TextBottom = styled.p`
     color: rgba(0, 0, 0, 0.75);
 `
 
-const Back = ({ card, variant }) => {
+
+const Back = ({ card, variant, toggleView }) => {
   const { language } = useContext(DeckContext)
   const { title, blurb_1, blurb_2 } = card[language]
+
   return (
     <BackWrapper style={{ background: variant }}>
-      <BtnWrapper>
-        <ArrowIcon /> <BackBtn>Back</BackBtn>
-      </BtnWrapper>
       <TopContainer>
+        <BtnWrapper>
+          <ArrowIcon />
+           <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
+        </BtnWrapper>
          <TitleTop>{title}</TitleTop>
             <TextTop>{blurb_1}</TextTop>
       </TopContainer>
@@ -269,10 +290,15 @@ const Card = ({ card, isTop3, rotate }) => {
         isTop3={isTop3}
         card={card}
         contrast={contrast}
+        front={front}
+        toggleView={toggleView}
       />
     )
   }
-  return <Back card={card} variant={variant} />
+  return (
+    <Back card={card} variant={variant} front={front} toggleView={toggleView} />
+  )
+
 }
 
 export default Card
