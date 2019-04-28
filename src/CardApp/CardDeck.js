@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react'
 import styled, { css } from 'styled-components/macro'
 import { darken } from 'polished'
 import { DeckContext } from './CardApp'
-import Card from '../components/card'
+
 import CardButton from './CardButton'
 import UndoButton from './UndoButton'
 import Congrats from './Congrats'
+import { Button, Card, Text } from '../components'
 
 import { ReactComponent as Int } from '../static/icons/interested.svg'
 import { ReactComponent as NotInt } from '../static/icons/not-interested.svg'
@@ -53,9 +54,9 @@ const CardStackWrapper = styled.div`
       ? ''
       : `
     width: calc(100vw - 2rem);
-  height: calc((100vw - 2rem) * 1.4);
-  max-width: 20rem;
-  max-height: 28rem;
+    height: calc((100vw - 2rem) * 1.4);
+    max-width: 20rem;
+    max-height: 28rem;
     `
   }}
 `
@@ -89,31 +90,95 @@ const CardButtonList = styled.div`
   }
 `
 
+const Top3List = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+
+  & > *:not(:last-child) {
+    margin-right: 1rem;
+  }
+`
+
+const removeButtonProps = {
+  bg: 'white',
+  borderRadius: '50%',
+  alignSelf: 'center',
+}
+
+const Top3Card = styled.div`
+  width: 8rem;
+  height: 11.2rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  color: #fff;
+
+  button {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: #fff;
+    border: none;
+
+    span {
+      align-self: flex-end;
+      color: #fff;
+      border: none;
+      background: none;
+    }
+  }
+
+  ${({ bg }) => {
+    return bg ? `background: ${bg}` : ''
+  }}
+`
+
+const confirmButtonProps = {
+  bg: '#3c0d68',
+
+  borderRadius: '5rem',
+  alignSelf: 'center',
+
+  m: '4rem 0',
+  border: 'none',
+
+  color: '#fff',
+  fontSize: '1.4rem',
+  fontWeight: '600',
+  p: '1.4rem 7rem',
+  textTransform: 'uppercase',
+
+  '&:disabled': {
+    backgroundColor: 'red',
+  },
+}
+
 const CardDeck = ({ showTop3 }) => {
   const {
-    deckState: { initial: deck, yes },
+    deckState,
+    setDeckState,
     sendToNo,
     sendToMaybe,
     sendToYes,
     totalCount,
+    myTop3,
+    setMyTop3,
   } = useContext(DeckContext)
 
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  // const getTotalCount = () => {
-  //   const isNotFirstTry = initialDeck.paths.length !== deck.length
-
-  //   return showTop3 || isNotFirstTry ? deck.length : initialDeck.paths.length
-  // }
+  const { initial: deck, yes } = deckState
 
   const getCurrentIndex = () => {
-    return showTop3 ? currentIndex : totalCount - deck.length + 1
+    return showTop3 ? 0 : totalCount - deck.length + 1
   }
 
   const getProgressCount = () => {
-    // if (showTop3) {
-    //   return `${getCurrentIndex()} of ${deck.length}`
-    // }
+    if (showTop3) return 'Select up to 3'
     return `${getCurrentIndex()} of ${totalCount}`
   }
 
@@ -129,8 +194,34 @@ const CardDeck = ({ showTop3 }) => {
     return <Congrats yesGroup={yes} />
   }
 
-  console.log('current', deck)
+  const handleRemoveTop3 = (e, card) => {
+    setDeckState({
+      ...deckState,
+      initial: [...deckState.initial, card],
+    })
 
+    setMyTop3(myTop3.filter(c => c.key !== card.key))
+  }
+
+  const getTopCard = i => {
+    const currentCard = myTop3[i]
+    if (currentCard) {
+      console.log(currentCard)
+      return (
+        <Top3Card bg={currentCard.variant}>
+          <Button
+            {...removeButtonProps}
+            onClick={e => handleRemoveTop3(e, currentCard)}
+          >
+            <span>x</span>
+            {currentCard.en.title}
+          </Button>
+        </Top3Card>
+      )
+    }
+    return <Top3Card />
+  }
+  console.log(myTop3.length)
   return (
     <CardDeckWrapper>
       <DeckHeader>
@@ -141,9 +232,10 @@ const CardDeck = ({ showTop3 }) => {
       <CardStackWrapper istop3={showTop3}>
         {deck.map((card, index) => (
           <Card
+            key={card.key}
             isTop3={showTop3}
             rotate={index !== deck.length - 1}
-            {...card}
+            card={card}
           />
         ))}
       </CardStackWrapper>
@@ -184,6 +276,29 @@ const CardDeck = ({ showTop3 }) => {
             <VeryIntIcon />
           </CardButton>
         </CardButtonList>
+      )}
+      {showTop3 && (
+        <React.Fragment>
+          <Top3List>
+            {getTopCard(0)}
+            {getTopCard(1)}
+            {getTopCard(2)}
+          </Top3List>
+          <Button
+            disabled={myTop3.length === 0}
+            {...confirmButtonProps}
+            onClick={() => console.log('confirm')}
+          >
+            <Text
+              color="#fff"
+              fontSize="1.4rem"
+              fontWeight="600"
+              textTransform="uppercase"
+            >
+              CONFIRM
+            </Text>
+          </Button>
+        </React.Fragment>
       )}
     </CardDeckWrapper>
   )
