@@ -4,6 +4,7 @@ import { Box, Text } from './components'
 import { ReactComponent as Int } from './static/icons/interested.svg'
 import { ReactComponent as NotInt } from './static/icons/not-interested.svg'
 import { ReactComponent as VeryInt } from './static/icons/very-interested.svg'
+import Logo from './static/icons/logo-white.png'
 import styled, { css } from 'styled-components'
 
 const iconStyles = css`
@@ -20,6 +21,10 @@ const NotIntIcon = styled(NotInt)`
 
 const VeryIntIcon = styled(VeryInt)`
   ${iconStyles}
+`
+
+const MainLogo = styled.img`
+  height: 6rem;
 `
 
 const paraProps = {
@@ -55,7 +60,7 @@ const Main = () => {
       py="4rem"
       height="100vh"
     >
-      <h1>SparkPath</h1>
+      <MainLogo src={Logo} />
 
       <Box mt="3rem" maxWidth="650px" flexDirection="column" px="3rem">
         <Text lineHeight="1.2" mb="2rem" fontSize="2.6rem" fontWeight="600">
