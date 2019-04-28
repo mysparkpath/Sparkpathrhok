@@ -1,18 +1,30 @@
-import React from 'react'
-import { Box, Text } from '../components'
-import { Link } from '@reach/router'
-import styled from 'styled-components'
+import React, { useContext } from 'react'
+import { Button, Box, Text } from '../components'
+import { DeckContext } from './CardApp'
 
-const StyledLink = styled(Link)`
-  background: white;
-  border-radius: 50px;
-  align-self: center;
-  padding: 2.4rem 5.5rem;
-  margin-top: 6rem;
-  box-shadow: 0px 7px 12px -8px rgba(0, 0, 0, 0.75);
-`
+const buttonProps = {
+  bg: 'white',
+  borderRadius: '5rem',
+  alignSelf: 'center',
+  p: '2.4rem 5.5rem',
+  mt: '4rem',
+  boxShadow: '0px 7px 12px -8px rgba(0, 0, 0, 0.75)',
+}
 
-const Congrats = () => {
+const Congrats = ({ yesGroup }) => {
+  const { redoChallenge } = useContext(DeckContext)
+
+  let handleClick = () => {
+    console.log('handle me on success!')
+  }
+
+  let info = `Now let’s narrow down to find out the ones that interest you most.`
+
+  if (yesGroup.length > 10) {
+    handleClick = () => redoChallenge(yesGroup)
+    info = 'Please redo'
+  }
+
   return (
     <Box
       alignItems="center"
@@ -30,10 +42,10 @@ const Congrats = () => {
         </span>
       </Text>
       <Text maxWidth="32rem" mt="4rem" fontSize="2.6rem" lineHeight="1.2">
-        Now let’s narrow down to find out the ones that interest you most.
+        {info}
       </Text>
 
-      <StyledLink mt="2rem" to="/implement-me">
+      <Button {...buttonProps} onClick={handleClick}>
         <Text
           color="rgb(113, 69, 154)"
           fontSize="2rem"
@@ -42,7 +54,7 @@ const Congrats = () => {
         >
           Let's do it!
         </Text>
-      </StyledLink>
+      </Button>
     </Box>
   )
 }

@@ -5,4 +5,5 @@ export const initialDeckState = {
   no: [],
   maybe: [],
   yes: [],
+  totalCount: initialDeck.paths.length,
 }

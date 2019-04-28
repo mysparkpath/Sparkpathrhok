@@ -5,7 +5,6 @@ import { DeckContext } from './CardApp'
 import Card from '../components/card'
 import CardButton from './CardButton'
 import UndoButton from './UndoButton'
-import initialDeck from '../static/spark_paths'
 import Congrats from './Congrats'
 
 import { ReactComponent as Int } from '../static/icons/interested.svg'
@@ -81,13 +80,12 @@ const CardButtonList = styled.div`
 
 const CardDeck = () => {
   const {
-    deckState: { initial: deck },
+    deckState: { initial: deck, yes, totalCount },
     sendToNo,
     sendToMaybe,
     sendToYes,
   } = useContext(DeckContext)
 
-  const totalCount = initialDeck.paths.length
   const currentIndex = totalCount - deck.length + 1
 
   const current = deck && deck.length > 0 ? deck[deck.length - 1] : null
@@ -99,7 +97,7 @@ const CardDeck = () => {
   }
 
   if (!current) {
-    return <Congrats />
+    return <Congrats yesGroup={yes} />
   }
 
   return (

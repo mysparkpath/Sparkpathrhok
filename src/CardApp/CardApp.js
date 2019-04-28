@@ -23,6 +23,23 @@ const CardApp = () => {
     setDeckState(initialDeckState)
   }
 
+  const redoChallenge = yesIds => {
+    const redoCards = yesIds.map(id =>
+      initialDeckState.initial.find(c => c.key === id)
+    )
+
+    const newState = {
+      initial: redoCards,
+      no: [],
+      maybe: [],
+      yes: [],
+      totalCount: redoCards.length,
+    }
+
+    setDeckState(newState)
+    setDeckHistory()
+  }
+
   const sendToNo = ({ key }) => {
     const { initial, no } = deckState
     console.log('send to no', key)
@@ -63,13 +80,14 @@ const CardApp = () => {
   return (
     <DeckContext.Provider
       value={{
-        deckState,
-        sendToNo,
-        sendToMaybe,
-        sendToYes,
-        goToPreviousDeckState,
-        reset,
         deckHistory,
+        deckState,
+        goToPreviousDeckState,
+        redoChallenge,
+        reset,
+        sendToMaybe,
+        sendToNo,
+        sendToYes,
       }}
     >
       <div className="CardApp">
