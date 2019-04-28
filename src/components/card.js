@@ -194,7 +194,8 @@ const Back = ({ en = {}, variant }) => {
   return (
     <BackWrapper style={{ background: variant }}>
       <BtnWrapper>
-        <ArrowIcon /> <BackBtn>Back</BackBtn>
+        <ArrowIcon />
+         <BackBtn>Back</BackBtn>
       </BtnWrapper>
       <TopContainer>
          <TitleTop>{title}</TitleTop>
@@ -212,7 +213,7 @@ const Back = ({ en = {}, variant }) => {
 }
 
 const Card = ({ image_path, en, rotate, variant, isTop3 }) => {
-  const [front, toggleView] = useState(false)
+  const [front, toggleView] = useState(true)
   if (front) {
     return (
       <Front
