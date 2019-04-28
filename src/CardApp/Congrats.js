@@ -29,7 +29,7 @@ const Congrats = ({ yesGroup }) => {
   let info = `Now let’s narrow down to find out the ones that interest you most.`
 
   if (needsRedo) {
-    info = 'Please redo'
+    info = `Let's narrow this down a bit further!`
   }
 
   const { setShowTop3 } = useContext(DeckContext)
