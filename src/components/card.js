@@ -16,7 +16,18 @@ const Wrapper = styled.div`
   border: 1px solid #fff;
 
   ${({ rotation }) => {
-    return rotation && `transform: rotate(${rotation}deg)`
+    return rotation ? `transform: rotate(${rotation}deg);` : ''
+  }}
+
+  ${({ istop3 }) => {
+    return !istop3
+      ? ''
+      : `
+    width: calc(100vw - 2rem);
+  height: calc((100vw - 2rem) * 1.4);
+  max-width: 20rem;
+  max-height: 28rem;
+    `
   }}
 `
 
@@ -30,6 +41,10 @@ const Title = styled.div`
   line-height: 1.6;
   margin-top: 3rem;
   background: rgba(0, 0, 0, 0.6);
+
+  ${({ istop3 }) => {
+    return !istop3 ? '' : `font-size: 1.4rem`
+  }}
 `
 
 const ImageWrapper = styled.div`
@@ -39,19 +54,31 @@ const ImageWrapper = styled.div`
 const Img = styled(Image)`
   max-width: 20rem;
   max-height: 20rem;
+
+  ${({ istop3 }) => {
+    return !istop3
+      ? ''
+      : `
+    max-width: 10rem;
+  max-height: 10rem;`
+  }}
 `
 
-const Front = ({ imagePath = '', en = {}, rotate, variant }) => {
+const Front = ({ imagePath = '', en = {}, rotate, variant, isTop3 }) => {
   const { title } = en
 
   const path = require(`../${imagePath}`)
   const randomRotation = rotate ? Math.random() * 5 : 0
   return (
-    <Wrapper rotation={randomRotation} style={{ background: variant }}>
+    <Wrapper
+      istop3={isTop3}
+      rotation={randomRotation}
+      style={{ background: variant }}
+    >
       <ImageWrapper>
-        <Img src={path} />
+        <Img istop3={isTop3.toString()} src={path} />
       </ImageWrapper>
-      <Title>
+      <Title istop3={isTop3.toString()}>
         <div style={{ maxWidth: '50%' }}>{title}</div>
       </Title>
     </Wrapper>
@@ -130,11 +157,17 @@ const Back = ({ en }) => {
   )
 }
 
-const Card = ({ image_path, en, rotate, variant }) => {
+const Card = ({ image_path, en, rotate, variant, isTop3 }) => {
   const [front, toggleView] = useState(true)
   if (front) {
     return (
-      <Front rotate={rotate} imagePath={image_path} en={en} variant={variant} />
+      <Front
+        rotate={rotate}
+        imagePath={image_path}
+        en={en}
+        variant={variant}
+        isTop3={isTop3}
+      />
     )
   }
   return <Back en={en} />

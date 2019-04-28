@@ -9,6 +9,8 @@ export const DeckContext = React.createContext({})
 const CardApp = () => {
   const [deckState, setDeckState] = useState(initialDeckState)
   const [deckHistory, setDeckHistory] = useState()
+  const [showTop3, setShowTop3] = useState(false)
+  const [totalCount, setTotalCount] = useState(deckState.initial.length)
 
   const goToPreviousDeckState = () => {
     console.log('UNDO!', deckHistory)
@@ -23,55 +25,54 @@ const CardApp = () => {
     setDeckState(initialDeckState)
   }
 
-  const redoChallenge = yesIds => {
-    const redoCards = yesIds.map(id =>
-      initialDeckState.initial.find(c => c.key === id)
-    )
+  const redoChallenge = () => {
+    // const redoCards = yesIds.map(id =>
+    //   initialDeckState.initial.find(c => c.key === id)
+    // )
 
     const newState = {
-      initial: redoCards,
+      initial: deckState.yes,
       no: [],
       maybe: [],
       yes: [],
-      totalCount: redoCards.length,
     }
-
+    setTotalCount(deckState.yes.length)
     setDeckState(newState)
     setDeckHistory()
   }
 
-  const sendToNo = ({ key }) => {
+  const sendToNo = card => {
     const { initial, no } = deckState
-    console.log('send to no', key)
+    console.log('send to no', card.key)
     const newDeckState = {
       ...deckState,
-      initial: initial.filter(c => c.key !== key),
-      no: [...no, key],
+      initial: initial.filter(c => c.key !== card.key),
+      no: [...no, card],
     }
 
     setDeckHistory(deckState)
     setDeckState(newDeckState)
   }
 
-  const sendToMaybe = ({ key }) => {
+  const sendToMaybe = card => {
     const { initial, maybe } = deckState
-    console.log('send to maybe', key)
+    console.log('send to maybe', card.key)
     const newDeckState = {
       ...deckState,
-      initial: initial.filter(c => c.key !== key),
-      maybe: [...maybe, key],
+      initial: initial.filter(c => c.key !== card.key),
+      maybe: [...maybe, card],
     }
     setDeckHistory(deckState)
     setDeckState(newDeckState)
   }
 
-  const sendToYes = ({ key }) => {
+  const sendToYes = card => {
     const { initial, yes } = deckState
-    console.log('send to yes', key)
+    console.log('send to yes', card.key)
     const newDeckState = {
       ...deckState,
-      initial: initial.filter(c => c.key !== key),
-      yes: [...yes, key],
+      initial: initial.filter(c => c.key !== card.key),
+      yes: [...yes, card],
     }
     setDeckHistory(deckState)
     setDeckState(newDeckState)
@@ -86,13 +87,17 @@ const CardApp = () => {
         redoChallenge,
         reset,
         sendToMaybe,
+        showTop3,
+        setShowTop3,
         sendToNo,
         sendToYes,
+        totalCount,
+        setTotalCount,
       }}
     >
       <div className="CardApp">
         {/* <ResetButton /> */}
-        <CardDeck />
+        <CardDeck showTop3 />
       </div>
     </DeckContext.Provider>
   )
