@@ -28,7 +28,6 @@ const FrontTitle = styled.div`
   color: white;
   display: flex;
   justify-content: center;
-
   line-height: 1.6;
   margin-top: 3rem;
   background: rgba(0, 0, 0, 0.6);
@@ -49,6 +48,25 @@ const FrontImg = styled(Image)`
 
 // Card components //
 
+const BackWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  border-radius: 5px;
+  background: green;
+`
+const BackTopTitle = styled.div`
+  font-size: 1.8rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  line-height: 1.6;
+  margin-top: 3rem;
+  background: rgba(0, 0, 0, 0.6);
+`
+
 const Front = ({ imagePath = '', en = {}, rotate }) => {
   const { title, variant } = en
   const path = require(`../${imagePath}`)
@@ -65,10 +83,14 @@ const Front = ({ imagePath = '', en = {}, rotate }) => {
   )
 }
 
-const Back = ({ en }) => {
-  // const { title, blurb_1, blurb_2, careers, variant } = en
-  // return (
-  // )
+const Back = ({ en = {} }) => {
+  const { title } = en
+  console.log('jose', en)
+  return (
+    <BackWrapper>
+      <BackTopTitle>{title}</BackTopTitle>
+    </BackWrapper>
+  )
 }
 
 const Card = ({ image_path, en, rotate }) => {
