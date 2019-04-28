@@ -4,6 +4,7 @@ import { darken } from 'polished'
 import { DeckContext } from '../App'
 import CardButton from './CardButton'
 import UndoButton from './UndoButton'
+import Image from '../components/image'
 import Congrats from './Congrats'
 import { Box, Button, Card, Text } from '../components'
 import { ReactComponent as Int } from '../static/icons/interested.svg'
@@ -189,6 +190,24 @@ const confirmButtonProps = {
   },
 }
 
+const ImageWrapper = styled.div`
+  /* padding: 100px 50px 0 50px; */
+`
+
+const Img = styled(Image)`
+  margin-top: 1rem;
+  max-width: 6rem;
+  max-height: 6rem;
+
+  ${({ istop3 }) => {
+    return istop3 === 'true'
+      ? `
+    max-width: 10rem;
+  max-height: 10rem;`
+      : ''
+  }}
+`
+
 const CardDeck = () => {
   const {
     deckState,
@@ -240,7 +259,8 @@ const CardDeck = () => {
   const getTopCard = i => {
     const currentCard = myTop3[i]
     if (currentCard) {
-      console.log(currentCard)
+      console.log(currentCard.path)
+      const path = require(`../${currentCard.image_path}`)
       return (
         <Top3Card bg={currentCard.variant} contrast={currentCard.contrast}>
           <Button
@@ -248,7 +268,9 @@ const CardDeck = () => {
             onClick={e => handleRemoveTop3(e, currentCard)}
           >
             <span>x</span>
-            {currentCard.en.title}
+            <ImageWrapper>
+              <Img src={path} />
+            </ImageWrapper>
           </Button>
         </Top3Card>
       )

@@ -14,7 +14,7 @@ const App = () => {
   const [language, setLanguage] = useState('fr')
   const [deckState, setDeckState] = useState(initialDeckState)
   const [deckHistory, setDeckHistory] = useState()
-  const [showTop3, setShowTop3] = useState(false)
+  const [showTop3, setShowTop3] = useState(true)
   const [totalCount, setTotalCount] = useState(deckState.initial.length)
   const [myTop3, setMyTop3] = useState([])
 
