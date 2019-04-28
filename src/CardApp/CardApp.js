@@ -10,6 +10,7 @@ const CardApp = () => {
   const [deckState, setDeckState] = useState(initialDeckState)
   const [deckHistory, setDeckHistory] = useState()
   const [showTop3, setShowTop3] = useState(false)
+  const [totalCount, setTotalCount] = useState(deckState.initial.length)
 
   const goToPreviousDeckState = () => {
     console.log('UNDO!', deckHistory)
@@ -22,6 +23,22 @@ const CardApp = () => {
 
   const reset = () => {
     setDeckState(initialDeckState)
+  }
+
+  const redoChallenge = () => {
+    // const redoCards = yesIds.map(id =>
+    //   initialDeckState.initial.find(c => c.key === id)
+    // )
+
+    const newState = {
+      initial: deckState.yes,
+      no: [],
+      maybe: [],
+      yes: [],
+    }
+    setTotalCount(deckState.yes.length)
+    setDeckState(newState)
+    setDeckHistory()
   }
 
   const sendToNo = card => {
@@ -64,20 +81,23 @@ const CardApp = () => {
   return (
     <DeckContext.Provider
       value={{
-        deckState,
-        sendToNo,
-        sendToMaybe,
-        sendToYes,
-        goToPreviousDeckState,
-        reset,
         deckHistory,
+        deckState,
+        goToPreviousDeckState,
+        redoChallenge,
+        reset,
+        sendToMaybe,
         showTop3,
         setShowTop3,
+        sendToNo,
+        sendToYes,
+        totalCount,
+        setTotalCount,
       }}
     >
       <div className="CardApp">
         {/* <ResetButton /> */}
-        <CardDeck showTop3={showTop3} />
+        <CardDeck showTop3 />
       </div>
     </DeckContext.Provider>
   )

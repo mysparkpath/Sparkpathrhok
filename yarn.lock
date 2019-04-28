@@ -3280,6 +3280,11 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
+dom-confetti@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/dom-confetti/-/dom-confetti-0.1.0.tgz#0ed5b59878a253517907f2cf15b650219d67c4bd"
+  integrity sha512-yN8MrG3AQf/p2L0lNfqdzwsT0fiBbr3s1Ir6lr0MfaN9uKGNj83Ek7JJj+P6GALQCfrTayULQlrbXrehX9F0Rg==
+
 dom-converter@^0.2:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/dom-converter/-/dom-converter-0.2.0.tgz#6721a9daee2e293682955b6afe416771627bb768"

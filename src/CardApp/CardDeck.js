@@ -5,7 +5,6 @@ import { DeckContext } from './CardApp'
 import Card from '../components/card'
 import CardButton from './CardButton'
 import UndoButton from './UndoButton'
-import initialDeck from '../static/spark_paths'
 import Congrats from './Congrats'
 
 import { ReactComponent as Int } from '../static/icons/interested.svg'
@@ -92,36 +91,30 @@ const CardButtonList = styled.div`
 
 const CardDeck = ({ showTop3 }) => {
   const {
-    deckState: { initial, yes },
+    deckState: { initial: deck, yes },
     sendToNo,
     sendToMaybe,
     sendToYes,
+    totalCount,
   } = useContext(DeckContext)
 
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const getDeck = () => {
-    if (showTop3) {
-      return yes
-    }
-    return initial
-  }
+  // const getTotalCount = () => {
+  //   const isNotFirstTry = initialDeck.paths.length !== deck.length
 
-  const deck = getDeck()
-
-  const getTotalCount = () => {
-    return showTop3 ? deck.length : initialDeck.paths.length
-  }
+  //   return showTop3 || isNotFirstTry ? deck.length : initialDeck.paths.length
+  // }
 
   const getCurrentIndex = () => {
-    return showTop3 ? currentIndex : getTotalCount() - deck.length + 1
+    return showTop3 ? currentIndex : totalCount - deck.length + 1
   }
 
   const getProgressCount = () => {
-    if (showTop3) {
-      return `${getCurrentIndex()} of ${deck.length}`
-    }
-    return `${getCurrentIndex()} of ${getTotalCount()}`
+    // if (showTop3) {
+    //   return `${getCurrentIndex()} of ${deck.length}`
+    // }
+    return `${getCurrentIndex()} of ${totalCount}`
   }
 
   const current = deck && deck.length > 0 ? deck[deck.length - 1] : null
@@ -133,7 +126,7 @@ const CardDeck = ({ showTop3 }) => {
   }
 
   if (!current && !showTop3) {
-    return <Congrats />
+    return <Congrats yesGroup={yes} />
   }
 
   console.log('current', deck)
