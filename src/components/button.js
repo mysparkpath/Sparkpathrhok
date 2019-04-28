@@ -18,6 +18,9 @@ const StyledButton = styled(Box)`
   &:hover {
     cursor: pointer
   }
+  &:disabled {
+    background: #ccc;
+  }
 
   ${fontWeight}
   ${borderColor}

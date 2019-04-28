@@ -139,6 +139,26 @@ const Top3Card = styled.div`
   }}
 `
 
+const confirmButtonProps = {
+  bg: '#3c0d68',
+
+  borderRadius: '5rem',
+  alignSelf: 'center',
+
+  m: '4rem 0',
+  border: 'none',
+
+  color: '#fff',
+  fontSize: '1.4rem',
+  fontWeight: '600',
+  p: '1.4rem 7rem',
+  textTransform: 'uppercase',
+
+  '&:disabled': {
+    backgroundColor: 'red',
+  },
+}
+
 const CardDeck = ({ showTop3 }) => {
   const {
     deckState,
@@ -201,7 +221,7 @@ const CardDeck = ({ showTop3 }) => {
     }
     return <Top3Card />
   }
-
+  console.log(myTop3.length)
   return (
     <CardDeckWrapper>
       <DeckHeader>
@@ -258,11 +278,27 @@ const CardDeck = ({ showTop3 }) => {
         </CardButtonList>
       )}
       {showTop3 && (
-        <Top3List>
-          {getTopCard(0)}
-          {getTopCard(1)}
-          {getTopCard(2)}
-        </Top3List>
+        <React.Fragment>
+          <Top3List>
+            {getTopCard(0)}
+            {getTopCard(1)}
+            {getTopCard(2)}
+          </Top3List>
+          <Button
+            disabled={myTop3.length === 0}
+            {...confirmButtonProps}
+            onClick={() => console.log('confirm')}
+          >
+            <Text
+              color="#fff"
+              fontSize="1.4rem"
+              fontWeight="600"
+              textTransform="uppercase"
+            >
+              CONFIRM
+            </Text>
+          </Button>
+        </React.Fragment>
       )}
     </CardDeckWrapper>
   )
