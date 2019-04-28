@@ -81,7 +81,6 @@ const Img = styled(Image)`
   }}
 `
 
-
 const Front = ({
   imagePath = '',
   en = {},
@@ -91,11 +90,12 @@ const Front = ({
   card,
   toggleView,
   front,
-  contrast
+  contrast,
 }) => {
-  const { myTop3, setMyTop3, deckState, setDeckState, language } = useContext(DeckContext)
+  const { myTop3, setMyTop3, deckState, setDeckState, language } = useContext(
+    DeckContext
+  )
   const { title } = card[language]
-
 
   const path = require(`../${imagePath}`)
   const randomRotation = rotate ? Math.random() * 5 : 0
@@ -252,8 +252,7 @@ const TextBottom = styled.p`
     color: rgba(0, 0, 0, 0.75);
 `
 
-
-const Back = ({ card, variant, toggleView }) => {
+const Back = ({ card, variant, toggleView, front }) => {
   const { language } = useContext(DeckContext)
   const { title, blurb_1, blurb_2 } = card[language]
 
@@ -261,8 +260,8 @@ const Back = ({ card, variant, toggleView }) => {
     <BackWrapper style={{ background: variant }}>
       <TopContainer>
         <BtnWrapper>
-          <ArrowIcon />
-           <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
+          <ArrowIcon /> 
+          <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
         </BtnWrapper>
          <TitleTop>{title}</TitleTop>
             <TextTop>{blurb_1}</TextTop>
@@ -298,7 +297,6 @@ const Card = ({ card, isTop3, rotate }) => {
   return (
     <Back card={card} variant={variant} front={front} toggleView={toggleView} />
   )
-
 }
 
 export default Card
