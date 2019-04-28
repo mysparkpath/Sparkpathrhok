@@ -1,5 +1,11 @@
 # SparkPath
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1afa19d8-c113-469b-af0b-cceadb0a434d/deploy-status)](https://app.netlify.com/sites/mysparkpath/deploys)
+
+## Demo
+
+https://mysparkpath.netlify.com/
+
 ## Getting started
 
 - Clone this repo
