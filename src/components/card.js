@@ -73,8 +73,8 @@ const Img = styled(Image)`
   }}
 `
 
-const Front = ({ imagePath = '', en = {}, rotate, isTop3 }) => {
-  const { title, variant } = en
+const Front = ({ imagePath = '', en = {}, rotate, variant, isTop3 }) => {
+  const { title } = en
 
   const path = require(`../${imagePath}`)
   const randomRotation = rotate ? Math.random() * 5 : 0
@@ -110,6 +110,7 @@ const Front = ({ imagePath = '', en = {}, rotate, isTop3 }) => {
     </Wrapper>
   )
 }
+
 /*
 const Wrapper = styled.div`
   padding: 25px;
@@ -182,16 +183,20 @@ const Back = ({ en }) => {
   )
 }
 
-const Card = ({ image_path, en, rotate, isTop3 }) => {
+const Card = ({ image_path, en, rotate, variant, isTop3 }) => {
   const [front, toggleView] = useState(true)
-
   if (front) {
     return (
-      <Front isTop3={isTop3} rotate={rotate} imagePath={image_path} en={en} />
+      <Front
+        rotate={rotate}
+        imagePath={image_path}
+        en={en}
+        variant={variant}
+        isTop3={isTop3}
+      />
     )
   }
-
-  return <Back />
+  return <Back en={en} />
 }
 
 export default Card
