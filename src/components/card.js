@@ -114,7 +114,6 @@ const Front = ({
     >
       <BackBtn
         onClick={e => {
-          console.log('Jose ToBackOfTheCard presed')
           toggleView(!front)
         }}
       >
@@ -247,12 +246,12 @@ const TextBottom = styled.p`
     color: rgba(0, 0, 0, 0.75);
 `
 
-const Back = ({ en = {}, variant }) => {
+const Back = ({ en = {}, variant, front, toggleView }) => {
   const { title, blurb_1, blurb_2 } = en
   return (
     <BackWrapper style={{ background: variant }}>
       <BtnWrapper>
-        <ArrowIcon /> <BackBtn>Back</BackBtn>
+        <ArrowIcon /> <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
       </BtnWrapper>
       <TopContainer>
          <TitleTop>{title}</TitleTop>
@@ -286,7 +285,9 @@ const Card = ({ card, isTop3, rotate }) => {
       />
     )
   }
-  return <Back en={en} variant={variant} />
+  return (
+    <Back en={en} variant={variant} front={front} toggleView={toggleView} />
+  )
 }
 
 export default Card
