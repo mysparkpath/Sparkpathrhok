@@ -3,7 +3,7 @@ import Image from './image'
 import styled from 'styled-components/macro'
 
 import { Button, Text } from '../components'
-import { DeckContext } from '../CardApp/CardApp'
+import { DeckContext } from '../App'
 import { ReactComponent as Arrow } from '../static/icons/backButton.svg'
 import { ReactComponent as Binoculars } from '../static/icons/BNKL.svg'
 

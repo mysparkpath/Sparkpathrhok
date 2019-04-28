@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Button, Box, Text } from '../components'
-import { DeckContext } from './CardApp'
+import { DeckContext } from '../App'
 
 const buttonProps = {
   bg: 'white',
