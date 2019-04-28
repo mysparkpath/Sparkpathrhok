@@ -50,7 +50,6 @@ const Title = styled.div`
   color: white;
   display: flex;
   justify-content: center;
-
   line-height: 1.6;
   margin-top: 3rem;
   background: rgba(0, 0, 0, 0.6);
@@ -112,13 +111,13 @@ const Front = ({
       rotation={randomRotation}
       style={{ background: variant }}
     >
-      <BackBtn
+      <ToBackOfCardBtn
         onClick={e => {
           toggleView(!front)
         }}
       >
-        ShowBackCard
-      </BackBtn>
+        i
+      </ToBackOfCardBtn>
       <ImageWrapper>
         <Img istop3={isTop3.toString()} src={path} />
       </ImageWrapper>
@@ -183,6 +182,21 @@ const BackBtn = styled.a`
     cursor: pointer;
     color: #444;
   }
+`
+const ToBackOfCardBtn = styled.a`
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  font-size: 0.9em;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 30px;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.6);
 `
 
 const TopContainer = styled.div`
@@ -253,8 +267,8 @@ const Back = ({ en = {}, variant, front, toggleView }) => {
     <BackWrapper style={{ background: variant }}>
       <TopContainer>
         <BtnWrapper>
-          <ArrowIcon />
-           <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
+          <ArrowIcon /> 
+          <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
         </BtnWrapper>
          <TitleTop>{title}</TitleTop>
             <TextTop>{blurb_1}</TextTop>
