@@ -156,8 +156,9 @@ const BackWrapper = styled.div`
 `
 
 const BtnWrapper = styled.div`
-    display: flex;
-    align-self: flex-start;
+   display: flex;
+   align-self: flex-start;
+  padding-top: 10px;
 `
 
 const ArrowIcon = styled(Arrow)`
@@ -174,7 +175,6 @@ const BinocularsIcon = styled(Binoculars)`
 `
 
 const BackBtn = styled.a`
-  margin-bottom: 15px;
   font-size: 0.8em;
   display: flex;
   text-decoration: none;
@@ -184,6 +184,7 @@ const BackBtn = styled.a`
     color: #444;
   }
 `
+
 const TopContainer = styled.div`
   min-width: inherit;
   min-height: 20vh;
@@ -250,10 +251,11 @@ const Back = ({ en = {}, variant, front, toggleView }) => {
   const { title, blurb_1, blurb_2 } = en
   return (
     <BackWrapper style={{ background: variant }}>
-      <BtnWrapper>
-        <ArrowIcon /> <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
-      </BtnWrapper>
       <TopContainer>
+        <BtnWrapper>
+          <ArrowIcon />
+           <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
+        </BtnWrapper>
          <TitleTop>{title}</TitleTop>
             <TextTop>{blurb_1}</TextTop>
       </TopContainer>
