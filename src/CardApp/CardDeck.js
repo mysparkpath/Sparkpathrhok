@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import styled, { css } from 'styled-components/macro'
 import { darken } from 'polished'
 import { DeckContext } from '../App'
+import CardProgress from './CardProgress'
 import CardButton from './CardButton'
 import UndoButton from './UndoButton'
 import Image from '../components/image'
@@ -64,26 +65,13 @@ const CardStackWrapper = styled.div`
 const DeckHeader = styled.div`
   padding: 2rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
   align-self: center;
   position: relative;
   height: 10rem;
   max-width: 65rem;
   width: 100%;
-`
-
-const CardProgress = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-self: stretch;
-  max-width: 50rem;
-  font-weight: 600;
-  font-size: 2rem;
-  height: 5rem;
-  position: absolute;
-  left: 50%;
-  top: 3.5rem;
-  transform: translateX(-50%);
 `
 
 const CardButtonList = styled.div`
@@ -221,8 +209,8 @@ const CardDeck = () => {
     myTop3,
     setMyTop3,
     showTop3,
-    language,
-    setLanguage,
+    // language,
+    // setLanguage,
   } = useContext(DeckContext)
 
   const { initial: deck, yes } = deckState
@@ -231,16 +219,12 @@ const CardDeck = () => {
     return showTop3 ? 0 : totalCount - deck.length + 1
   }
 
-  const getProgressCount = () => {
-    if (showTop3) return 'Select up to 3'
-    return `${getCurrentIndex()} of ${totalCount}`
-  }
+  const progress = Math.ceil((getCurrentIndex() * 100) / totalCount)
 
   const current = deck && deck.length > 0 ? deck[deck.length - 1] : null
 
   const handleCardButtonClick = (e, { callback }) => {
     e.preventDefault()
-    console.log(deck)
     callback(current)
   }
 
@@ -260,7 +244,6 @@ const CardDeck = () => {
   const getTopCard = i => {
     const currentCard = myTop3[i]
     if (currentCard) {
-      console.log(currentCard.path)
       const path = require(`../${currentCard.image_path}`)
       return (
         <Top3Card bg={currentCard.variant} contrast={currentCard.contrast}>
@@ -278,16 +261,15 @@ const CardDeck = () => {
     }
     return <Top3Card />
   }
-  console.log(myTop3.length)
 
   const showArrowButtons = Boolean(showTop3 && deck.length)
 
   return (
     <CardDeckWrapper>
       <DeckHeader>
-        <CardProgress>{getProgressCount()}</CardProgress>
+        <CardProgress progress={progress} />
         <UndoButton />
-        <Button {...languageButtonProps} onClick={() => setLanguage('en')}>
+        {/* <Button {...languageButtonProps} onClick={() => setLanguage('en')}>
           <Text
             color={language === 'en' ? '#3c0d68' : ''}
             textDecoration={language === 'en' ? 'underline' : 'none'}
@@ -302,18 +284,20 @@ const CardDeck = () => {
           >
             Fr
           </Text>
-        </Button>
+        </Button> */}
       </DeckHeader>
 
       <CardStackWrapper istop3={showTop3}>
-        {deck.map((card, index) => (
-          <Card
-            key={card.key}
-            isTop3={showTop3}
-            rotate={index !== deck.length - 1}
-            card={card}
-          />
-        ))}
+        {deck
+          .filter((_, i) => i > deck.length - 5)
+          .map((card, index) => (
+            <Card
+              key={card.key}
+              isTop3={showTop3}
+              rotate={index !== deck.length - 1}
+              card={card}
+            />
+          ))}
       </CardStackWrapper>
 
       {showArrowButtons && (
