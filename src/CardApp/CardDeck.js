@@ -212,7 +212,7 @@ const CardDeck = () => {
     // language,
     // setLanguage,
   } = useContext(DeckContext)
-
+  console.log('rerender devk')
   const { initial: deck, yes } = deckState
 
   const getCurrentIndex = () => {
@@ -296,6 +296,7 @@ const CardDeck = () => {
               isTop3={showTop3}
               rotate={index !== deck.length - 1}
               card={card}
+              index={index}
             />
           ))}
       </CardStackWrapper>

@@ -90,6 +90,7 @@ const Front = ({
   toggleView,
   front,
   contrast,
+  index,
 }) => {
   const { myTop3, setMyTop3, deckState, setDeckState, language } = useContext(
     DeckContext
@@ -97,8 +98,7 @@ const Front = ({
   const { title } = card[language]
 
   const path = require(`../${imagePath}`)
-  const randomRotation = rotate ? Math.random() * 5 : 0
-
+  const indexRotation = 5 + index * -3
   const handleSelectClick = () => {
     console.log('SELECT!', card)
     if (myTop3.length < 3) {
@@ -113,7 +113,7 @@ const Front = ({
   return (
     <Wrapper
       istop3={isTop3.toString()}
-      rotation={randomRotation}
+      rotation={indexRotation}
       style={{ background: variant }}
     >
       {isTop3 && (
@@ -296,7 +296,7 @@ const Back = ({ card, variant, toggleView, front }) => {
   )
 }
 
-const Card = ({ card, isTop3, rotate }) => {
+const Card = ({ card, isTop3, rotate, index }) => {
   const { image_path, variant, contrast } = card
   const [front, toggleView] = useState(true)
   if (front) {
@@ -310,6 +310,7 @@ const Card = ({ card, isTop3, rotate }) => {
         contrast={contrast}
         front={front}
         toggleView={toggleView}
+        index={index}
       />
     )
   }
