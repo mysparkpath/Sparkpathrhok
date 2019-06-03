@@ -14,6 +14,7 @@ const StyledButton = styled(Box)`
   appearance: none;
   text-align:  center;
   text-decoration:  none;
+  border-style: none;
   
   &:hover {
     cursor: pointer

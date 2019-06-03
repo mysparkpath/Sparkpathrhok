@@ -40,5 +40,8 @@ export const GlobalStyle = createGlobalStyle`
   body {
     font-size: 1.6rem;
     box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
   }
 `

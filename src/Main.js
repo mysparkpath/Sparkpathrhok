@@ -32,6 +32,7 @@ const paraProps = {
   mt: '2.2rem',
   fontSize: '2.2rem',
   fontWeight: '300',
+  lineHeight: 1.5,
 }
 
 const choiceProps = {
