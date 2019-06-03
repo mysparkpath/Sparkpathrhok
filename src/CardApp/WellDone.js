@@ -35,7 +35,7 @@ const WellDone = () => {
       flexDirection="column"
       color="white"
       py="4rem"
-      height="100%"
+      height="100vh"
     >
       <Box
         bg="white"
