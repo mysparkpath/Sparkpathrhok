@@ -6,6 +6,7 @@ import { Router } from '@reach/router'
 import Layout from './Layout'
 import Main from './Main'
 import CardApp from './CardApp'
+import CardSelector from './CardApp/CardSelector'
 import WellDone from './CardApp/WellDone'
 
 export const DeckContext = React.createContext({})
@@ -128,6 +129,7 @@ const App = () => {
         <Router>
           <Main path="/" />
           <CardApp path="/cards" />
+          <CardSelector path="/top3" />
           <WellDone path="/welldone" />
         </Router>
       </Layout>
