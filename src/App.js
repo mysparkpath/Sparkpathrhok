@@ -6,6 +6,7 @@ import { Router } from '@reach/router'
 import Layout from './Layout'
 import Main from './Main'
 import CardApp from './CardApp'
+import CardSelector from './CardApp/CardSelector'
 import WellDone from './CardApp/WellDone'
 import GetStarted from './get-started'
 import Instructions from './instructions'
@@ -106,6 +107,7 @@ const App = () => {
   }
 
   return (
+<<<<<<< HEAD
     <ThemeProvider theme={theme}>
       <LanguageProvider>
         <DeckContext.Provider
@@ -143,6 +145,40 @@ const App = () => {
         </DeckContext.Provider>
       </LanguageProvider>
     </ThemeProvider>
+=======
+    <DeckContext.Provider
+      value={{
+        deckHistory,
+        deckState,
+        setDeckState,
+        goToPreviousDeckState,
+        redoChallenge,
+        reset,
+        rotateDeck,
+        sendToMaybe,
+        sendToNo,
+        sendToYes,
+        setShowTop3,
+        setTotalCount,
+        showTop3,
+        totalCount,
+        myTop3,
+        setMyTop3,
+        language,
+        setLanguage,
+      }}
+    >
+      <Layout>
+        <GlobalStyle />
+        <Router>
+          <Main path="/" />
+          <CardApp path="/cards" />
+          <CardSelector path="/top3" />
+          <WellDone path="/welldone" />
+        </Router>
+      </Layout>
+    </DeckContext.Provider>
+>>>>>>> stripped top 3 stuff out of CardDeck.  created top3 route and CardSelector component
   )
 }
 

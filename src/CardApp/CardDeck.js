@@ -11,7 +11,7 @@ import { Box, Button, Card, Text } from '../components'
 import { ReactComponent as Int } from '../static/icons/interested.svg'
 import { ReactComponent as NotInt } from '../static/icons/not-interested.svg'
 import { ReactComponent as VeryInt } from '../static/icons/very-interested.svg'
-import { navigate } from '@reach/router'
+// import { navigate } from '@reach/router'
 
 const iconStyles = css`
   height: 6rem;
@@ -49,17 +49,6 @@ const CardStackWrapper = styled.div`
   max-width: 30rem;
   max-height: 42rem;
   margin: 2rem 0 3rem 0;
-
-  ${({ istop3 }) => {
-    return !istop3
-      ? ''
-      : `
-    width: calc(100vw - 2rem);
-    height: calc((100vw - 2rem) * 1.4);
-    max-width: 20rem;
-    max-height: 28rem;
-    `
-  }}
 `
 
 const DeckHeader = styled.div`
@@ -180,14 +169,6 @@ const Img = styled(Image)`
   margin-top: 1rem;
   max-width: 6rem;
   max-height: 6rem;
-
-  ${({ istop3 }) => {
-    return istop3 === 'true'
-      ? `
-    max-width: 10rem;
-  max-height: 10rem;`
-      : ''
-  }}
 `
 
 const CardDeck = () => {
@@ -278,13 +259,12 @@ const CardDeck = () => {
         </Button> */}
       </DeckHeader>
 
-      <CardStackWrapper istop3={showTop3}>
+      <CardStackWrapper>
         {deck
           .filter((_, i) => i > deck.length - 5)
           .map((card, index) => (
             <Card
               key={card.key}
-              isTop3={showTop3}
               rotate={index !== deck.length - 1}
               card={card}
               index={index}
@@ -341,7 +321,7 @@ const CardDeck = () => {
           </CardButton>
         </CardButtonList>
       )}
-      {showTop3 && (
+      {/* {showTop3 && (
         <React.Fragment>
           <Top3List>
             {getTopCard(0)}
@@ -363,7 +343,7 @@ const CardDeck = () => {
             </Text>
           </Button>
         </React.Fragment>
-      )}
+      )} */}
     </CardDeckWrapper>
   )
 }

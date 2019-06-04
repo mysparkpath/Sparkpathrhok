@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Button, Box, Text } from '../components'
 import { DeckContext } from '../App'
+import { navigate } from '@reach/router'
 
 const buttonProps = {
   bg: 'white',
@@ -21,7 +22,7 @@ const Congrats = ({ yesGroup }) => {
       redoChallenge()
     } else {
       redoChallenge()
-      setShowTop3(true)
+      navigate('/top3')
     }
     console.log('handle me on success!')
   }

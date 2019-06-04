@@ -33,17 +33,6 @@ const Wrapper = styled.div`
   ${({ rotation }) => {
     return rotation ? `transform: rotate(${rotation}deg);` : ''
   }}
-
-  ${({ istop3 }) => {
-    return istop3 !== 'true'
-      ? ''
-      : `
-    width: calc(100vw - 2rem);
-    height: calc((100vw - 2rem) * 1.4);
-    max-width: 20rem;
-    max-height: 28rem;
-    `
-  }}
 `
 
 const Title = styled.div`
@@ -56,12 +45,7 @@ const Title = styled.div`
 
   ${({ contrast }) => {
     return contrast ? 'color: rgba(0,0,0,0.85);' : 'color: white;'
-  }}
-  /* background: rgba(0, 0, 0, 0.6); */
-
-  ${({ istop3 }) => {
-    return istop3 === 'true' ? `font-size: 1.2rem` : ''
-  }}
+  }} /* background: rgba(0, 0, 0, 0.6); */
 `
 
 const ImageWrapper = styled.div`
@@ -71,14 +55,6 @@ const ImageWrapper = styled.div`
 const Img = styled(Image)`
   max-width: 20rem;
   max-height: 20rem;
-
-  ${({ istop3 }) => {
-    return istop3 === 'true'
-      ? `
-    max-width: 10rem;
-  max-height: 10rem;`
-      : ''
-  }}
 `
 
 const Front = ({
@@ -86,7 +62,6 @@ const Front = ({
   en = {},
   rotate,
   variant,
-  isTop3,
   card,
   toggleView,
   front,
@@ -115,38 +90,21 @@ const Front = ({
   }
 
   return (
-    <Wrapper
-      istop3={isTop3.toString()}
-      rotation={indexRotation}
-      style={{ background: variant }}
-    >
-      {isTop3 && (
-        <ToBackOfCardBtn
-          onClick={e => {
-            toggleView(!front)
-          }}
-        >
-          i
-        </ToBackOfCardBtn>
-      )}
+    <Wrapper rotation={indexRotation} style={{ background: variant }}>
+      <ToBackOfCardBtn
+        onClick={e => {
+          toggleView(!front)
+        }}
+      >
+        i
+      </ToBackOfCardBtn>
+
       <ImageWrapper>
-        <Img istop3={isTop3.toString()} src={path} />
+        <Img src={path} />
       </ImageWrapper>
-      <Title istop3={isTop3.toString()} contrast={contrast}>
+      <Title contrast={contrast}>
         <div style={{ maxWidth: '50%' }}>{title}</div>
       </Title>
-      {isTop3 && (
-        <Button {...buttonProps} onClick={handleSelectClick}>
-          <Text
-            color="#fff"
-            fontSize="1.4rem"
-            fontWeight="600"
-            textTransform="uppercase"
-          >
-            SELECT
-          </Text>
-        </Button>
-      )}
     </Wrapper>
   )
 }
@@ -283,8 +241,8 @@ const Back = ({ card, variant, toggleView, front }) => {
     <BackWrapper style={{ background: variant }}>
       <TopContainer>
         <BtnWrapper>
-          <ArrowIcon />
-           <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
+          <ArrowIcon /> 
+          <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
         </BtnWrapper>
          <TitleTop>{title}</TitleTop>
             <TextTop>{blurb_1}</TextTop>
@@ -300,7 +258,7 @@ const Back = ({ card, variant, toggleView, front }) => {
   )
 }
 
-const Card = ({ card, isTop3, rotate, index }) => {
+const Card = ({ card, rotate, index }) => {
   const { image_path, variant, contrast } = card
   const [front, toggleView] = useState(true)
   if (front) {
@@ -309,7 +267,6 @@ const Card = ({ card, isTop3, rotate, index }) => {
         rotate={rotate}
         imagePath={image_path}
         variant={variant}
-        isTop3={isTop3}
         card={card}
         contrast={contrast}
         front={front}
