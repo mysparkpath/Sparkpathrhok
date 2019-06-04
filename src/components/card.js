@@ -77,7 +77,7 @@ const Front = ({
   const { title } = card[lang]
 
   const path = require(`../${imagePath}`)
-  const indexRotation = 5 + index * -3
+  const indexRotation = 3 + index * -2
   const handleSelectClick = () => {
     console.log('SELECT!', card)
     if (myTop3.length < 3) {
