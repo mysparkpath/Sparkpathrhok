@@ -1,6 +1,10 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { DeckContext } from '../App'
+import Image from '../components/image'
+import { ReactComponent as Heart } from '../static/icons/heart.svg'
+import { rgba } from 'polished'
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -40,6 +44,25 @@ const CardGrid = styled.div`
 const CardWrapper = styled.div`
   width: 13rem;
   margin: 0 2rem;
+  position: relative;
+`
+
+const Img = styled(Image)`
+  position: absolute;
+  max-width: 80%;
+  max-height: 60%;
+  bottom: 26px;
+  left: 0;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+`
+
+const HeartIcon = styled(Heart)`
+  height: 2rem;
+  width: 2rem;
+
+}
 `
 
 const Card = styled.div`
@@ -47,6 +70,42 @@ const Card = styled.div`
   height: 17rem;
   background: ${({ background }) => background}
   border-radius: 2rem;
+  position: relative;
+
+  > input[type='checkbox'] {
+    opacity: 0;
+    position: absolute;
+  }
+
+  > input[type='checkbox']:focus + div {
+    box-shadow: 0 0px 0px 4px rgba(0,0,200,0.4)
+  }
+
+  > input[type='checkbox']:checked + div {
+    justify-content: center;
+    align-items: center;
+    background: ${({ background }) => `${background}99`}
+
+    & > ${HeartIcon} {
+      height: 8rem;
+      width: 8rem;
+    }
+
+    
+  }
+
+`
+
+const CardContent = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding: 1rem;
 `
 
 const CardTitle = styled.div`
@@ -77,12 +136,21 @@ const CardSelector = () => {
     <Wrapper>
       <Heading>Select up to 3 cards</Heading>
       <CardGrid>
-        {cards.map(card => (
-          <CardWrapper key={card.key}>
-            <Card background={card.variant} />
-            <CardTitle>{card.en.title}</CardTitle>
-          </CardWrapper>
-        ))}
+        {cards.map(card => {
+          const path = require(`../${card.image_path}`)
+          return (
+            <CardWrapper key={card.key}>
+              <Card background={card.variant}>
+                <Img src={path} />
+                <input id={card.key} onChange={() => {}} type="checkbox" />
+                <CardContent>
+                  <HeartIcon />
+                </CardContent>
+              </Card>
+              <CardTitle>{card.en.title}</CardTitle>
+            </CardWrapper>
+          )
+        })}
       </CardGrid>
       <Footer>
         <ConfirmButton
