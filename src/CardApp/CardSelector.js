@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { DeckContext } from '../App'
 import Image from '../components/image'
 import { ReactComponent as Heart } from '../static/icons/heart.svg'
-import { rgba } from 'polished'
 
 const Wrapper = styled.div`
   display: flex;
@@ -65,7 +64,8 @@ const HeartIcon = styled(Heart)`
 }
 `
 
-const Card = styled.div`
+const Card = styled.label`
+  display:block;
   width: 13rem;
   height: 17rem;
   background: ${({ background }) => background}
@@ -129,9 +129,15 @@ const CardSelector = () => {
     // myTop3,
     // setMyTop3,
   } = useContext(DeckContext)
+  const [selectedCards, setSelectedCards] = useState([])
 
   const { initial: cards } = deckState
   console.log(cards)
+
+  const handleCardToggle = key => {
+    console.log(key)
+  }
+
   return (
     <Wrapper>
       <Heading>Select up to 3 cards</Heading>
@@ -140,10 +146,14 @@ const CardSelector = () => {
           const path = require(`../${card.image_path}`)
           return (
             <CardWrapper key={card.key}>
-              <Card background={card.variant}>
+              <Card background={card.variant} htmlFor={card.key}>
                 <Img src={path} />
-                <input id={card.key} onChange={() => {}} type="checkbox" />
-                <CardContent>
+                <input
+                  id={card.key}
+                  onChange={() => handleCardToggle(card.key)}
+                  type="checkbox"
+                />
+                <CardContent onClick={() => handleCardToggle(card.key)}>
                   <HeartIcon />
                 </CardContent>
               </Card>
