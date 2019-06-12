@@ -68,46 +68,47 @@ const WellDone = () => {
           color="black"
           px="3rem"
         >
-          {myTop3.map(({ image_path, altText, variant, en, fr, key }) => {
-            const path = require(`../${image_path}`)
+          {myTop3.length > 0 &&
+            myTop3.map(({ image_path, altText, variant, en, fr, key }) => {
+              const path = require(`../${image_path}`)
 
-            const title = lang === 'en' ? en.title : fr.title
+              const title = lang === 'en' ? en.title : fr.title
 
-            return (
-              <Box
-                key={key}
-                mt="2rem"
-                justifyContent="flex-start"
-                alignItems="center"
-              >
+              return (
                 <Box
-                  height="6rem"
-                  width="6rem"
-                  mr="3rem"
-                  bg={variant}
-                  justifyContent="center"
-                  borderRadius="4px"
+                  key={key}
+                  mt="2rem"
+                  justifyContent="flex-start"
                   alignItems="center"
-                  flex="1 0 auto"
                 >
-                  <img
-                    style={{ height: '5rem', width: '5rem' }}
-                    src={path}
-                    alt={altText}
-                  />
-                </Box>
+                  <Box
+                    height="6rem"
+                    width="6rem"
+                    mr="3rem"
+                    bg={variant}
+                    justifyContent="center"
+                    borderRadius="4px"
+                    alignItems="center"
+                    flex="1 0 auto"
+                  >
+                    <img
+                      style={{ height: '5rem', width: '5rem' }}
+                      src={path}
+                      alt={altText}
+                    />
+                  </Box>
 
-                <Text
-                  color="rgb(114, 114, 114)"
-                  textTransform="capitalize"
-                  fontSize="1.8rem"
-                  textAlign="left"
-                >
-                  {title}
-                </Text>
-              </Box>
-            )
-          })}
+                  <Text
+                    color="rgb(114, 114, 114)"
+                    textTransform="capitalize"
+                    fontSize="1.8rem"
+                    textAlign="left"
+                  >
+                    {title}
+                  </Text>
+                </Box>
+              )
+            })}
         </Box>
       </Box>
 
