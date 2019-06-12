@@ -163,7 +163,8 @@ const CardSelector = () => {
     event.preventDefault()
     if (selectedCards.length === 0) return
 
-    setMyTop3(selectedCards)
+    const top3 = cards.filter(c => isSelected(c.key))
+    setMyTop3(top3)
     navigate('/welldone')
   }
 
