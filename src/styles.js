@@ -5,8 +5,8 @@ import reset from 'styled-reset'
 export const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700,800,900');
   
-  ${styledNormalize}
   ${reset}
+  ${styledNormalize}
 
   html {
     font-size: 62.5%;
@@ -35,6 +35,13 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     border: 0;
+  }
+
+  button,
+  [type="button"],
+  [type="reset"],
+  [type="submit"] {
+    background: transparent;
   }
 
   body {

@@ -7,6 +7,11 @@ import Layout from './Layout'
 import Main from './Main'
 import CardApp from './CardApp'
 import WellDone from './CardApp/WellDone'
+import GetStarted from './get-started'
+import Instructions from './instructions'
+import { ThemeProvider } from 'styled-components'
+import { LanguageProvider } from './state'
+import { theme } from './components'
 
 export const DeckContext = React.createContext({})
 
@@ -101,37 +106,43 @@ const App = () => {
   }
 
   return (
-    <DeckContext.Provider
-      value={{
-        deckHistory,
-        deckState,
-        setDeckState,
-        goToPreviousDeckState,
-        redoChallenge,
-        reset,
-        rotateDeck,
-        sendToMaybe,
-        sendToNo,
-        sendToYes,
-        setShowTop3,
-        setTotalCount,
-        showTop3,
-        totalCount,
-        myTop3,
-        setMyTop3,
-        language,
-        setLanguage,
-      }}
-    >
-      <Layout>
-        <GlobalStyle />
-        <Router>
-          <Main path="/" />
-          <CardApp path="/cards" />
-          <WellDone path="/welldone" />
-        </Router>
-      </Layout>
-    </DeckContext.Provider>
+    <ThemeProvider theme={theme}>
+      <LanguageProvider>
+        <DeckContext.Provider
+          value={{
+            deckHistory,
+            deckState,
+            setDeckState,
+            goToPreviousDeckState,
+            redoChallenge,
+            reset,
+            rotateDeck,
+            sendToMaybe,
+            sendToNo,
+            sendToYes,
+            setShowTop3,
+            setTotalCount,
+            showTop3,
+            totalCount,
+            myTop3,
+            setMyTop3,
+            language,
+            setLanguage,
+          }}
+        >
+          <Layout>
+            <GlobalStyle />
+            <Router style={{ height: '100%' }}>
+              <Main path="/" />
+              <GetStarted path="/get-started" />
+              <Instructions path="/instructions" />
+              <CardApp path="/cards" />
+              <WellDone path="/well-done" />
+            </Router>
+          </Layout>
+        </DeckContext.Provider>
+      </LanguageProvider>
+    </ThemeProvider>
   )
 }
 

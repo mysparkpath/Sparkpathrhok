@@ -1,114 +1,34 @@
 import React from 'react'
-import { Link } from '@reach/router'
-import { Box, Text } from './components'
-import { ReactComponent as Int } from './static/icons/interested-outline.svg'
-import { ReactComponent as NotInt } from './static/icons/not-interested-outline.svg'
-import { ReactComponent as VeryInt } from './static/icons/very-interested-outline.svg'
-import { ReactComponent as SparkLogo } from './static/icons/spark-logo-white.svg'
-import styled, { css } from 'styled-components'
-
-const iconStyles = css`
-  height: 4rem;
-  width: 4rem;
-  margin-right: 2rem;
-`
-const IntIcon = styled(Int)`
-  ${iconStyles}
-`
-
-const NotIntIcon = styled(NotInt)`
-  ${iconStyles}
-`
-
-const VeryIntIcon = styled(VeryInt)`
-  ${iconStyles}
-`
-
-const MainLogo = styled(SparkLogo)`
-  width: 75%;
-`
-
-const paraProps = {
-  mt: '2.2rem',
-  fontSize: '2.2rem',
-  fontWeight: '300',
-  lineHeight: 1.5,
-}
-
-const choiceProps = {
-  display: 'flex',
-  mt: '1.5rem',
-  alignitems: 'center',
-  fontSize: '2.6rem',
-  fontWeight: '600',
-}
-
-const StyledLink = styled(Link)`
-  background: white;
-  border-radius: 50px;
-  align-self: center;
-  padding: 2.4rem 4.6rem;
-  margin-top: 4rem;
-  box-shadow: 0px 7px 12px -8px rgba(0, 0, 0, 0.75);
-`
+import { Box, Text, Navbar, Link } from './components'
 
 const Main = () => {
   return (
-    <Box
-      alignItems="center"
-      bg="rgb(113, 69, 154)"
-      flexDirection="column"
-      color="white"
-      py="4rem"
-      minHeight="100vh"
-    >
-      <MainLogo />
-
-      <Box mt="3rem" maxWidth="650px" flexDirection="column" px="3rem">
-        <Text lineHeight="1.2" mb="2rem" fontSize="2.6rem" fontWeight="600">
-          What do you want to do after high school?
+    <Box bg="purple" flexDirection="column" color="white" height="100%">
+      <Navbar bg="purple" />
+      <Box flexDirection="column" px={8}>
+        <Text textAlign="left" fontSize={5} fontWeight="600" lineHeight="1.3">
+          Discover the <br /> challenges <br /> that you want
         </Text>
 
-        <Text {...paraProps}>
-          Use the SparkPath Challenge Cards to discover a new, innovative way to
-          prepare for your future.
-        </Text>
-
-        <Text {...paraProps}>
-          One of the best ways to prepare your future is to choose a challenge
-          that you want to work on.
-        </Text>
-
-        <Text {...paraProps}>
-          To help you make this choice sort the deck into three piles:
-        </Text>
-
-        <Box
-          mt="2rem"
-          flexDirection="column"
-          alignItems="flex-start"
-          m="0 auto"
-        >
-          <Text {...choiceProps}>
-            <VeryIntIcon />
-            Very Interested
-          </Text>
-          <Text {...choiceProps}>
-            <IntIcon />
-            Interested
-          </Text>
-          <Text {...choiceProps}>
-            <NotIntIcon />
-            Not Interested
-          </Text>
+        <Box my={9} mx="auto">
+          Cards here
         </Box>
-      </Box>
 
-      <StyledLink to="/cards">
-        <Text fontSize="2rem" fontWeight="600" textTransform="uppercase">
-          Get started!
-        </Text>
-      </StyledLink>
+        <Link
+          fontSize="1.6rem"
+          fontWeight="600"
+          to="/get-started"
+          variant="pill"
+          bg="white"
+          px={6}
+          py={4}
+          width="26rem"
+          mx="auto"
+          textAlign="center"
+        >
+          Get started
+        </Link>
+      </Box>
     </Box>
   )
 }

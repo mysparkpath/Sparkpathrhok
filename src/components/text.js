@@ -13,6 +13,7 @@ import {
   space,
   textAlign,
   textStyle,
+  width,
   style,
 } from 'styled-system'
 
@@ -42,6 +43,7 @@ const Text = styled.div`
   ${textStyle}
   ${textTransform}
   ${textDecoration}
+  ${width}
 `
 
 Text.defaultProps = {
