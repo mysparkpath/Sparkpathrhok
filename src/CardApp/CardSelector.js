@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
+import { navigate } from '@reach/router'
 import { DeckContext } from '../App'
 import Image from '../components/image'
 import { ReactComponent as Heart } from '../static/icons/heart.svg'
@@ -25,7 +26,9 @@ const ConfirmButton = styled.button`
   border: none;
   color: #fff;
   font-weight: 400;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
 
   &:disabled {
@@ -108,6 +111,12 @@ const CardContent = styled.div`
   padding: 1rem;
 `
 
+const SelectionIndex = styled.div`
+  color: #fff;
+  position: absolute;
+  font-size: 3rem;
+`
+
 const CardTitle = styled.div`
   margin: 1rem 0 2rem;
   font-size: 1.4rem;
@@ -120,6 +129,9 @@ const Footer = styled.div`
   box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.16);
   position: fixed;
   bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const CardSelector = () => {
@@ -127,46 +139,73 @@ const CardSelector = () => {
     deckState,
     // setDeckState,
     // myTop3,
-    // setMyTop3,
+    setMyTop3,
   } = useContext(DeckContext)
   const [selectedCards, setSelectedCards] = useState([])
 
   const { initial: cards } = deckState
-  console.log(cards)
+
+  const isSelected = key => {
+    return selectedCards.includes(key)
+  }
 
   const handleCardToggle = key => {
-    console.log(key)
+    let newSelections = []
+    if (!isSelected(key) && selectedCards.length < 3) {
+      newSelections = [...selectedCards, key]
+    } else {
+      newSelections = selectedCards.filter(c => c !== key)
+    }
+    setSelectedCards(newSelections)
+  }
+
+  const handleConfirmClick = event => {
+    event.preventDefault()
+    if (selectedCards.length === 0) return
+
+    setMyTop3(selectedCards)
+    navigate('/welldone')
   }
 
   return (
     <Wrapper>
       <Heading>Select up to 3 cards</Heading>
       <CardGrid>
-        {cards.map(card => {
-          const path = require(`../${card.image_path}`)
+        {cards.map(({ key, variant, en: { title }, image_path }) => {
+          const path = require(`../${image_path}`)
+          const checked = isSelected(key)
+          let selectionIndex = 0
+          if (checked) {
+            selectionIndex = selectedCards.indexOf(key) + 1
+          }
           return (
-            <CardWrapper key={card.key}>
-              <Card background={card.variant} htmlFor={card.key}>
+            <CardWrapper key={key}>
+              <Card background={variant} htmlFor={key}>
                 <Img src={path} />
                 <input
-                  id={card.key}
-                  onChange={() => handleCardToggle(card.key)}
+                  id={key}
+                  onChange={() => handleCardToggle(key)}
                   type="checkbox"
+                  checked={checked}
                 />
-                <CardContent onClick={() => handleCardToggle(card.key)}>
+                <CardContent>
                   <HeartIcon />
+                  {selectionIndex > 0 && (
+                    <SelectionIndex>{selectionIndex}</SelectionIndex>
+                  )}
                 </CardContent>
               </Card>
-              <CardTitle>{card.en.title}</CardTitle>
+              <CardTitle>{title}</CardTitle>
             </CardWrapper>
           )
         })}
       </CardGrid>
       <Footer>
         <ConfirmButton
+          type="button"
           title="confirm selection"
           id="confirm-selection"
-          type="button"
+          onClick={handleConfirmClick}
         >
           Confirm Selection
         </ConfirmButton>
