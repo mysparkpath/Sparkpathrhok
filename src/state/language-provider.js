@@ -5,9 +5,13 @@ const LanguageContext = React.createContext()
 function LanguageProvider(props) {
   const [lang, setLang] = useState('en')
 
+  const toggleLang = () => {
+    setLang(lang === 'en' ? 'fr' : 'en')
+  }
+
   const value = {
     lang,
-    setLang,
+    toggleLang,
   }
 
   return <LanguageContext.Provider value={value} {...props} />

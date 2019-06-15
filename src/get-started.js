@@ -1,12 +1,13 @@
 import React from 'react'
 import { Box, Text, Navbar, Link } from './components'
+import { Link as ReachLink } from '@reach/router'
 
 const GetStarted = () => {
   return (
     <Box bg="purple" flexDirection="column" color="white" height="100%">
       <Navbar bg="purple" />
 
-      <Box flexDirection="column" px={8}>
+      <Box flexDirection="column" alignItems="center" px={8}>
         <Text fontWeight="300" textAlign="left" lineHeight="1.3" fontSize={2}>
           One of the best ways to prepare your future is to choose a challenge
           that you want to work on.
@@ -24,6 +25,7 @@ const GetStarted = () => {
         </Text>
 
         <Link
+          as={ReachLink}
           fontSize="1.6rem"
           fontWeight="600"
           to="/instructions"
@@ -34,6 +36,7 @@ const GetStarted = () => {
           width="26rem"
           mx="auto"
           textAlign="center"
+          boxShadow={0}
         >
           Next
         </Link>

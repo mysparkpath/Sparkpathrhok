@@ -22,4 +22,5 @@ export const theme = {
       borderRadius: '50px',
     },
   },
+  shadows: [`0px 4px 10px 0px ${colors.midPurple}`],
 }

@@ -1,8 +1,10 @@
 import React from 'react'
 import Box from './box'
-import Text from './text'
+import Link from './link'
 import Button from './button'
+import Text from './text'
 import { ReactComponent as SparkLogo } from '../static/icons/spark-logo-white.svg'
+import { ReactComponent as SparkLogoPurple } from '../static/icons/spark-logo-purple.svg'
 import styled from 'styled-components'
 import { useLanguage } from '../state'
 
@@ -10,10 +12,14 @@ const MainLogo = styled(SparkLogo)`
   width: 15rem;
 `
 
-const Navbar = props => {
-  const { setLang, lang } = useLanguage()
+const PurpleLogo = styled(SparkLogoPurple)`
+  width: 15rem;
+`
 
-  console.log({ lang })
+const Navbar = props => {
+  const { toggleLang, lang } = useLanguage()
+
+  const isEnglish = lang === 'en'
 
   return (
     <Box
@@ -26,9 +32,32 @@ const Navbar = props => {
       mb={6}
       {...props}
     >
-      <MainLogo />
-      <Box>
-        <Text as="span">About</Text> / <Button>EN-FR</Button>
+      {props.light ? <PurpleLogo /> : <MainLogo />}
+      <Box alignItems="center">
+        <Link
+          fontSize={1}
+          href="https://mysparkpath.com/pages/about"
+          newTab
+          mr={3}
+        >
+          About
+        </Link>{' '}
+        /{' '}
+        <Button
+          fontSize={1}
+          lineHeight="1.2"
+          ml={3}
+          onClick={() => toggleLang()}
+          color={props.light ? 'black' : 'white'}
+        >
+          <Text as="span" fontWeight={isEnglish ? '600' : '300'}>
+            EN
+          </Text>
+          -
+          <Text as="span" fontWeight={!isEnglish ? '600' : '300'}>
+            FR
+          </Text>
+        </Button>
       </Box>
     </Box>
   )

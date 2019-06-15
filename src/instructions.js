@@ -1,53 +1,57 @@
 import React from 'react'
 import { Box, Text, Navbar, Link } from './components'
-import { ReactComponent as Int } from './static/icons/interested-outline.svg'
-import { ReactComponent as NotInt } from './static/icons/not-interested-outline.svg'
-import { ReactComponent as VeryInt } from './static/icons/very-interested-outline.svg'
+import { ReactComponent as Int } from './static/icons/interested.svg'
+import { ReactComponent as NotInt } from './static/icons/not-interested.svg'
+import { ReactComponent as VeryInt } from './static/icons/very-interested.svg'
 import styled, { css } from 'styled-components'
+import { Link as ReachLink } from '@reach/router'
+import { darken } from 'polished'
+import { space } from 'styled-system'
 
 const iconStyles = css`
-  height: 4rem;
-  width: 4rem;
-  margin-right: 2rem;
-  background: purple;
+  height: 6rem;
 `
+
 const IntIcon = styled(Int)`
   ${iconStyles}
+
+  ${space}
+
+  .st0 {
+    fill: ${darken(0.15, '#9d70c7')};
+  }
 `
 
 const NotIntIcon = styled(NotInt)`
   ${iconStyles}
+
+  .st0 {
+    fill: #9d70c7;
+  }
 `
 
 const VeryIntIcon = styled(VeryInt)`
   ${iconStyles}
 `
 
-const choiceProps = {
-  display: 'flex',
-  mt: '1.5rem',
-  alignitems: 'center',
-  fontSize: '2.6rem',
-  fontWeight: '600',
-}
-
 const Instructions = () => {
   return (
     <Box flexDirection="column" height="100%">
-      <Navbar />
+      <Navbar light />
 
-      <Box flexDirection="column" px={8}>
-        <Text textAlign="left">
+      <Box flexDirection="column" alignItems="center" px={8}>
+        <Text textAlign="left" fontWeight="300">
           Your first step is to sort 29 challenges into three categories:
         </Text>
 
         <Box justifyContent="center" my={8}>
-          <VeryIntIcon />
-          <IntIcon />
           <NotIntIcon />
+          <IntIcon mx={8} />
+          <VeryIntIcon />
         </Box>
 
         <Link
+          as={ReachLink}
           fontSize="1.6rem"
           fontWeight="600"
           to="/cards"
@@ -58,6 +62,7 @@ const Instructions = () => {
           width="26rem"
           mx="auto"
           textAlign="center"
+          boxShadow={0}
         >
           I'm ready!
         </Link>

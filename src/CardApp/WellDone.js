@@ -3,6 +3,7 @@ import { Box, Text } from '../components'
 import styled from 'styled-components'
 import { confetti } from 'dom-confetti'
 import { DeckContext } from '../App'
+import { useLanguage } from '../state'
 
 const paraProps = {
   mt: '2.2rem',
@@ -20,7 +21,8 @@ const StyledButton = styled.a`
 `
 
 const WellDone = () => {
-  const { myTop3, language } = useContext(DeckContext)
+  const { myTop3 } = useContext(DeckContext)
+  const { lang } = useLanguage
 
   useEffect(() => {
     confetti(document.getElementById('confetti-target'), {
@@ -69,7 +71,7 @@ const WellDone = () => {
           {myTop3.map(({ image_path, altText, variant, en, fr, key }) => {
             const path = require(`../${image_path}`)
 
-            const title = language === 'en' ? en.title : fr.title
+            const title = lang === 'en' ? en.title : fr.title
 
             return (
               <Box

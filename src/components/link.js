@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { variant } from 'styled-system'
+import { variant, boxShadow } from 'styled-system'
 import Text from './text'
-import { Link as ReachLink } from '@reach/router'
 
 const linkStyles = variant({ key: 'links' })
 
 const StyledLink = styled(Text)`
   ${linkStyles}
+  ${boxShadow}
 `
 
 const Link = ({ newTab, ...props }) => {
@@ -21,7 +21,7 @@ const Link = ({ newTab, ...props }) => {
     }
   }
 
-  return <StyledLink as={ReachLink} {...props} {...tabProps} />
+  return <StyledLink {...props} {...tabProps} />
 }
 
 Link.propTypes = {
@@ -31,6 +31,7 @@ Link.propTypes = {
 }
 
 Link.defaultProps = {
+  as: 'a',
   display: 'inline-block',
   m: 0,
   newTab: false,
