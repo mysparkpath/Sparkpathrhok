@@ -115,13 +115,6 @@ const removeButtonProps = {
   alignSelf: 'center',
 }
 
-const languageButtonProps = {
-  border: 'none',
-  background: 'none',
-  mr: '1rem',
-  fontWeight: '600',
-}
-
 const Top3Card = styled.div`
   width: 8rem;
   height: 11.2rem;
@@ -209,8 +202,6 @@ const CardDeck = () => {
     myTop3,
     setMyTop3,
     showTop3,
-    // language,
-    // setLanguage,
   } = useContext(DeckContext)
   console.log('rerender devk')
   const { initial: deck, yes } = deckState

@@ -6,6 +6,7 @@ import {
   borderRadius,
   buttonStyle,
   fontSize,
+  lineHeight,
   letterSpacing,
 } from 'styled-system'
 import Box from './box'
@@ -29,6 +30,7 @@ const StyledButton = styled(Box)`
   ${buttonStyle}
   ${fontSize}
   ${letterSpacing}
+  ${lineHeight}
 `
 
 const Button = ({ type = 'button', onClick, ...rest }) => {
