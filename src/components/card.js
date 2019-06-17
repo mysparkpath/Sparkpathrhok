@@ -6,6 +6,7 @@ import { Button, Text } from '../components'
 import { DeckContext } from '../App'
 import { ReactComponent as Arrow } from '../static/icons/backButton.svg'
 import { ReactComponent as Binoculars } from '../static/icons/BNKL.svg'
+import { useLanguage } from '../state'
 
 const buttonProps = {
   bg: 'rgba(0,0,0,0.5)',
@@ -67,10 +68,13 @@ const Front = ({
   contrast,
   index,
 }) => {
-  const { myTop3, setMyTop3, deckState, setDeckState, language } = useContext(
-    DeckContext
-  )
-  const { title } = card[language]
+  const { myTop3, setMyTop3, deckState, setDeckState } = useContext(DeckContext)
+
+  const { lang } = useLanguage()
+
+  console.log('CARD', { card, lang })
+
+  const { title } = card[lang]
 
   const path = require(`../${imagePath}`)
   const indexRotation = 3 + index * -2
@@ -230,8 +234,8 @@ const TextBottom = styled.p`
 `
 
 const Back = ({ card, variant, toggleView, front }) => {
-  const { language } = useContext(DeckContext)
-  const { title, blurb_1, blurb_2 } = card[language]
+  const { lang } = useLanguage
+  const { title, blurb_1, blurb_2 } = card[lang]
 
   return (
     <BackWrapper style={{ background: variant }}>
