@@ -1,21 +1,10 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import Image from './image'
 import styled from 'styled-components/macro'
 
-import { Button, Text } from '../components'
-import { DeckContext } from '../App'
 import { ReactComponent as Arrow } from '../static/icons/backButton.svg'
 import { ReactComponent as Binoculars } from '../static/icons/BNKL.svg'
 import { useLanguage } from '../state'
-
-const buttonProps = {
-  bg: 'rgba(0,0,0,0.5)',
-  borderRadius: '5rem',
-  alignSelf: 'center',
-  p: '0.6rem 1.5rem',
-  mt: '4rem',
-  border: 'none',
-}
 
 const Wrapper = styled.div`
   display: flex;
@@ -229,8 +218,8 @@ const Back = ({ card, variant, toggleView, front }) => {
     <BackWrapper style={{ background: variant }}>
       <TopContainer>
         <BtnWrapper>
-          <ArrowIcon />
-           <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
+          <ArrowIcon /> 
+          <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
         </BtnWrapper>
          <TitleTop>{title}</TitleTop>
             <TextTop>{blurb_1}</TextTop>

@@ -33,8 +33,6 @@ const Congrats = ({ yesGroup }) => {
     info = `Let's narrow this down a bit further!`
   }
 
-  const { setShowTop3 } = useContext(DeckContext)
-
   return (
     <Box
       alignItems="center"
