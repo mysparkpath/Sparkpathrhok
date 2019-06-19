@@ -6,6 +6,7 @@ import { Router } from '@reach/router'
 import Layout from './Layout'
 import Main from './Main'
 import CardApp from './CardApp'
+import CardSelector from './CardApp/CardSelector'
 import WellDone from './CardApp/WellDone'
 import GetStarted from './get-started'
 import Instructions from './instructions'
@@ -137,7 +138,8 @@ const App = () => {
               <GetStarted path="/get-started" />
               <Instructions path="/instructions" />
               <CardApp path="/cards" />
-              <WellDone path="/well-done" />
+              <CardSelector path="/top3" />
+              <WellDone path="/welldone" />
             </Router>
           </Layout>
         </DeckContext.Provider>
