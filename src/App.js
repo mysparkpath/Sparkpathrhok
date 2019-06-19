@@ -139,7 +139,7 @@ const App = () => {
               <Instructions path="/instructions" />
               <CardApp path="/cards" />
               <CardSelector path="/top3" />
-              <WellDone path="/well-done" />
+              <WellDone path="/welldone" />
             </Router>
           </Layout>
         </DeckContext.Provider>
