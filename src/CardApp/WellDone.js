@@ -23,7 +23,7 @@ const StyledButton = styled.a`
 const WellDone = () => {
   const { myTop3 } = useContext(DeckContext)
   const { lang } = useLanguage
-
+  
   useEffect(() => {
     confetti(document.getElementById('confetti-target'), {
       spread: '100',

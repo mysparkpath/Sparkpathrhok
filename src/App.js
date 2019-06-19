@@ -107,7 +107,6 @@ const App = () => {
   }
 
   return (
-<<<<<<< HEAD
     <ThemeProvider theme={theme}>
       <LanguageProvider>
         <DeckContext.Provider
@@ -139,46 +138,13 @@ const App = () => {
               <GetStarted path="/get-started" />
               <Instructions path="/instructions" />
               <CardApp path="/cards" />
+              <CardSelector path="/top3" />
               <WellDone path="/well-done" />
             </Router>
           </Layout>
         </DeckContext.Provider>
       </LanguageProvider>
     </ThemeProvider>
-=======
-    <DeckContext.Provider
-      value={{
-        deckHistory,
-        deckState,
-        setDeckState,
-        goToPreviousDeckState,
-        redoChallenge,
-        reset,
-        rotateDeck,
-        sendToMaybe,
-        sendToNo,
-        sendToYes,
-        setShowTop3,
-        setTotalCount,
-        showTop3,
-        totalCount,
-        myTop3,
-        setMyTop3,
-        language,
-        setLanguage,
-      }}
-    >
-      <Layout>
-        <GlobalStyle />
-        <Router>
-          <Main path="/" />
-          <CardApp path="/cards" />
-          <CardSelector path="/top3" />
-          <WellDone path="/welldone" />
-        </Router>
-      </Layout>
-    </DeckContext.Provider>
->>>>>>> stripped top 3 stuff out of CardDeck.  created top3 route and CardSelector component
   )
 }
 
