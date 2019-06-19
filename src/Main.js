@@ -5,19 +5,20 @@ import { ReactComponent as CardsSVG } from './static/icons/cards.svg'
 import styled from 'styled-components'
 
 const Cards = styled(CardsSVG)`
-  width: rem;
+  width: 25rem;
+  height: 28rem;
 `
 
 const Main = () => {
   return (
-    <Box bg="purple" flexDirection="column" color="white" height="100%">
+    <Box bg="purple" flexDirection="column" color="white" flex="1" pb="8">
       <Navbar bg="purple" />
-      <Box flexDirection="column" alignItems="center" px={8}>
+      <Box flexDirection="column" alignItems="center">
         <Text textAlign="center" fontSize={5} fontWeight="600" lineHeight="1.3">
-          Discover the <br /> challenges <br /> that you want
+          Discover the <br /> challenges <br /> that you want <br /> to work on.
         </Text>
 
-        <Box my={10} mx="auto">
+        <Box my={6} mx="auto">
           <Cards />
         </Box>
 

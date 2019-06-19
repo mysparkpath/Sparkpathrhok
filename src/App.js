@@ -133,7 +133,7 @@ const App = () => {
         >
           <Layout>
             <GlobalStyle />
-            <Router style={{ height: '100%' }}>
+            <Router style={{ flex: 1, display: 'flex' }}>
               <Main path="/" />
               <GetStarted path="/get-started" />
               <Instructions path="/instructions" />

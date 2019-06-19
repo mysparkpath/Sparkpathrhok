@@ -21,6 +21,8 @@ const Navbar = props => {
 
   const isEnglish = lang === 'en'
 
+  const textColours = props.light ? 'black' : 'white'
+
   return (
     <Box
       alignItems="center"
@@ -39,6 +41,9 @@ const Navbar = props => {
           href="https://mysparkpath.com/pages/about"
           newTab
           mr={3}
+          hoverColor={textColours}
+          color={textColours}
+          visitedColor={textColours}
         >
           About
         </Link>{' '}
@@ -48,7 +53,7 @@ const Navbar = props => {
           lineHeight="1.2"
           ml={3}
           onClick={() => toggleLang()}
-          color={props.light ? 'black' : 'white'}
+          color={textColours}
         >
           <Text as="span" fontWeight={isEnglish ? '600' : '300'}>
             EN

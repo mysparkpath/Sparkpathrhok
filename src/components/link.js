@@ -6,9 +6,33 @@ import Text from './text'
 
 const linkStyles = variant({ key: 'links' })
 
+const visitedStyles = ({ visitedColor = 'black', theme, ...rest }, ...args) => {
+  const { colors } = theme
+
+  const textColor = colors[visitedColor] ? colors[visitedColor] : visitedColor
+
+  return `color: ${textColor};`
+}
+
+const hoverStyles = ({ hoverColor = 'black', theme }) => {
+  const { colors } = theme
+
+  const textColor = colors[hoverColor] ? colors[hoverColor] : hoverColor
+
+  return `color: ${textColor};`
+}
+
 const StyledLink = styled(Text)`
   ${linkStyles}
   ${boxShadow}
+
+  &:visited {
+    ${visitedStyles}
+  }
+
+  &:hover {
+    ${hoverStyles}
+  }
 `
 
 const Link = ({ newTab, ...props }) => {
