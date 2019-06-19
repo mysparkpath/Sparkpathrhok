@@ -4,7 +4,7 @@ import { Link as ReachLink } from '@reach/router'
 
 const GetStarted = () => {
   return (
-    <Box bg="purple" flexDirection="column" color="white" height="100%">
+    <Box bg="purple" flexDirection="column" color="white">
       <Navbar bg="purple" />
 
       <Box flexDirection="column" alignItems="center" px={8}>

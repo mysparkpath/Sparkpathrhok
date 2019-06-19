@@ -4,7 +4,7 @@ import { Box } from './components'
 const Layout = ({ children }) => {
   return (
     <Box
-      height="100vh"
+      minHeight="100vh"
       width="100vw"
       flexDirection="column"
       justifyContent="flex-start"

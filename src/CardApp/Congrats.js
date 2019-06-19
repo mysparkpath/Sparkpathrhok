@@ -42,7 +42,7 @@ const Congrats = ({ yesGroup }) => {
       flexDirection="column"
       color="white"
       px="4rem"
-      height="100vh"
+      minHeight="100vh"
     >
       {!needsRedo && (
         <Text as="h2" fontWeight="600" fontSize="4rem">
