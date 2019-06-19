@@ -24,8 +24,8 @@ const Wrapper = styled.div`
   justify-content: center;
   position: absolute;
   border-radius: 5px;
-  width: calc(100vw - 2rem);
-  height: calc((100vw - 2rem) * 1.4);
+  width: calc(100vw - 4rem);
+  height: calc((100vw - 4rem) * 1.4);
   max-width: 30rem;
   max-height: 42rem;
   border: 1px solid #fff;
@@ -38,8 +38,8 @@ const Wrapper = styled.div`
     return istop3 !== 'true'
       ? ''
       : `
-    width: calc(100vw - 2rem);
-    height: calc((100vw - 2rem) * 1.4);
+    width: calc(100vw - 4rem);
+    height: calc((100vw - 4rem) * 1.4);
     max-width: 20rem;
     max-height: 28rem;
     `
@@ -102,7 +102,8 @@ const Front = ({
   const { title } = card[lang]
 
   const path = require(`../${imagePath}`)
-  const indexRotation = 5 + index * -3
+  console.log(index)
+  const indexRotation = (3 - Math.abs(index)) * 2
   const handleSelectClick = () => {
     console.log('SELECT!', card)
     if (myTop3.length < 3) {
@@ -159,8 +160,8 @@ const BackWrapper = styled.div`
     justify-content: center;
     position: absolute;
     border-radius: 5px;
-    width: calc(100vw - 2rem);
-    height: calc((100vw - 2rem) * 1.4);
+    width: calc(100vw - 4rem);
+    height: calc((100vw - 4rem) * 1.4);
   max-width: 32rem;
   max-height: 62rem;
   margin-top: -10rem;
@@ -283,8 +284,8 @@ const Back = ({ card, variant, toggleView, front }) => {
     <BackWrapper style={{ background: variant }}>
       <TopContainer>
         <BtnWrapper>
-          <ArrowIcon />
-           <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
+          <ArrowIcon /> 
+          <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
         </BtnWrapper>
          <TitleTop>{title}</TitleTop>
             <TextTop>{blurb_1}</TextTop>
