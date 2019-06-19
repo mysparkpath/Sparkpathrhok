@@ -14,7 +14,7 @@ const Main = () => {
       <Navbar bg="purple" />
       <Box flexDirection="column" alignItems="center" px={8}>
         <Text textAlign="center" fontSize={5} fontWeight="600" lineHeight="1.3">
-          Discover the <br /> challenges <br /> that you want
+          Discover the <br /> challenges <br /> that you want <br /> to work on.
         </Text>
 
         <Box my={10} mx="auto">
