@@ -44,8 +44,8 @@ const CardDeckWrapper = styled.div`
 
 const CardStackWrapper = styled.div`
   position: relative;
-  width: calc(100vw - 2rem);
-  height: calc((100vw - 2rem) * 1.4);
+  width: calc(100vw - 4rem);
+  height: calc((100vw - 4rem) * 1.4);
   max-width: 30rem;
   max-height: 42rem;
   margin: 2rem 0 3rem 0;
@@ -54,8 +54,8 @@ const CardStackWrapper = styled.div`
     return !istop3
       ? ''
       : `
-    width: calc(100vw - 2rem);
-    height: calc((100vw - 2rem) * 1.4);
+    width: calc(100vw - 4rem);
+    height: calc((100vw - 4rem) * 1.4);
     max-width: 20rem;
     max-height: 28rem;
     `

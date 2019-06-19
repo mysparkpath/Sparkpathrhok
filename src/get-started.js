@@ -4,11 +4,17 @@ import { Link as ReachLink } from '@reach/router'
 
 const GetStarted = () => {
   return (
-    <Box bg="purple" flexDirection="column" color="white" height="100%">
+    <Box bg="purple" flexDirection="column" color="white" flex="1">
       <Navbar bg="purple" />
 
-      <Box flexDirection="column" alignItems="center" px={8}>
-        <Text fontWeight="300" textAlign="left" lineHeight="1.3" fontSize={2}>
+      <Box flexDirection="column" alignItems="center" mx={6}>
+        <Text
+          fontWeight="300"
+          textAlign="left"
+          lineHeight="1.3"
+          fontSize={2}
+          maxWidth="45rem"
+        >
           One of the best ways to prepare your future is to choose a challenge
           that you want to work on.
         </Text>
@@ -19,6 +25,7 @@ const GetStarted = () => {
           lineHeight="1.3"
           fontSize={2}
           my={9}
+          maxWidth="45rem"
         >
           Through the innovative Challenge Cards, you will select 3 challenges
           that you want to explore.

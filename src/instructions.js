@@ -36,10 +36,10 @@ const VeryIntIcon = styled(VeryInt)`
 
 const Instructions = () => {
   return (
-    <Box flexDirection="column" height="100%">
+    <Box flexDirection="column" flex="1">
       <Navbar light />
 
-      <Box flexDirection="column" alignItems="center" px={8}>
+      <Box flexDirection="column" alignItems="center" mx={6}>
         <Text textAlign="left" fontWeight="300">
           Your first step is to sort 29 challenges into three categories:
         </Text>
