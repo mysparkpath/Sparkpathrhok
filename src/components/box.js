@@ -20,6 +20,7 @@ import {
   order,
   position,
   space,
+  overflow,
   width,
   zIndex,
 } from 'styled-system'
@@ -47,6 +48,7 @@ const Box = styled.div`
   ${position}
   ${order}
   ${space}
+  ${overflow}
   ${width}
   ${zIndex}
 `

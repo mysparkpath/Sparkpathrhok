@@ -6,14 +6,13 @@ const modalRoot = document.getElementById('modal')
 const el = document.createElement('div')
 
 const Modal = ({ children, isOpen }) => {
-  console.log({ children, isOpen })
-
   useEffect(() => {
-    console.log('RAN')
     modalRoot.appendChild(el)
 
     return () => {
-      modalRoot.removeChild(el)
+      if (modalRoot.contains(el)) {
+        modalRoot.removeChild(el)
+      }
     }
   }, [])
 

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Image from './image'
 import styled from 'styled-components/macro'
 import MoreInfo from '../more-info'
-import { ReactComponent as Arrow } from '../static/icons/backButton.svg'
 import { useLanguage } from '../state'
 import Modal from './modal'
 
@@ -47,7 +46,7 @@ const Img = styled(Image)`
 `
 
 const Front = ({
-  imagePath = '',
+  imagePath,
   variant,
   card,
   toggleView,
@@ -61,7 +60,6 @@ const Front = ({
 
   const { title } = card[lang]
 
-  const path = require(`../${imagePath}`)
   const indexRotation = 3 + index * -2
 
   return (
@@ -75,7 +73,7 @@ const Front = ({
       </ToBackOfCardBtn>
 
       <ImageWrapper>
-        <Img src={path} />
+        <Img src={imagePath} />
       </ImageWrapper>
       <Title contrast={contrast}>
         <div style={{ maxWidth: '50%' }}>{title}</div>
@@ -100,16 +98,18 @@ const ToBackOfCardBtn = styled.a`
   background: rgba(0, 0, 0, 0.6);
 `
 
-const Card = ({ card, rotate, index }) => {
+const Card = ({ card, rotate, index, handleLike }) => {
   const { image_path, variant, contrast } = card
   const [isOpenModal, setIsModalOpen] = useState(false)
   const { lang } = useLanguage()
+
+  const path = require(`../${image_path}`)
 
   return (
     <React.Fragment>
       <Front
         rotate={rotate}
-        imagePath={image_path}
+        imagePath={path}
         variant={variant}
         card={card}
         contrast={contrast}
@@ -121,8 +121,10 @@ const Card = ({ card, rotate, index }) => {
         <MoreInfo
           info={card}
           lang={lang}
+          imagePath={path}
           variant={variant}
           closeModal={() => setIsModalOpen(false)}
+          handleLike={handleLike}
         />
       </Modal>
     </React.Fragment>

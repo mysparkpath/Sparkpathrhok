@@ -17,6 +17,7 @@ export const theme = {
   colors,
   breakpoints,
   space,
+  radii: [0, 999],
   links: {
     pill: {
       borderRadius: '50px',
