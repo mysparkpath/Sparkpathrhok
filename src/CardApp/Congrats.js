@@ -42,6 +42,7 @@ const Congrats = ({ yesGroup }) => {
       color="white"
       px="4rem"
       minHeight="100vh"
+      flex="1"
     >
       {!needsRedo && (
         <Text as="h2" fontWeight="600" fontSize="4rem">
