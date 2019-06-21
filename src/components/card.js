@@ -52,7 +52,7 @@ const Front = ({
   toggleView,
   front,
   contrast,
-  index,
+  rotation,
 }) => {
   const { lang } = useLanguage()
 
@@ -60,10 +60,8 @@ const Front = ({
 
   const { title } = card[lang]
 
-  const indexRotation = 3 + index * -2
-
   return (
-    <Wrapper rotation={indexRotation} style={{ background: variant }}>
+    <Wrapper rotation={rotation} style={{ background: variant }}>
       <ToBackOfCardBtn
         onClick={e => {
           toggleView(!front)
@@ -98,7 +96,7 @@ const ToBackOfCardBtn = styled.a`
   background: rgba(0, 0, 0, 0.6);
 `
 
-const Card = ({ card, rotate, index, handleLike }) => {
+const Card = ({ card, rotate, rotation, handleLike }) => {
   const { image_path, variant, contrast } = card
   const [isOpenModal, setIsModalOpen] = useState(false)
   const { lang } = useLanguage()
@@ -115,7 +113,7 @@ const Card = ({ card, rotate, index, handleLike }) => {
         contrast={contrast}
         front
         toggleView={() => setIsModalOpen(!isOpenModal)}
-        index={index}
+        rotation={rotation}
       />
       <Modal isOpen={isOpenModal}>
         <MoreInfo

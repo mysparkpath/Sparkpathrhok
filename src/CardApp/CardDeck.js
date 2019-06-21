@@ -117,7 +117,8 @@ const CardDeck = () => {
   }
 
   const showArrowButtons = Boolean(showTop3 && deck.length)
-
+  const getCardRotation = (index, remaining) =>
+    (index - Math.min(remaining - 1, 3)) * -2
   return (
     <CardDeckWrapper>
       <DeckHeader>
@@ -133,12 +134,13 @@ const CardDeck = () => {
               key={card.key}
               rotate={index !== deck.length - 1}
               card={card}
-              index={index}
+              rotation={getCardRotation(index, deck.length)}
               handleLike={e =>
                 handleCardButtonClick(e, {
                   callback: sendToYes,
                 })
               }
+              remainingCards={deck.length}
             />
           ))}
       </CardStackWrapper>

@@ -2,14 +2,8 @@ import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
 import { DeckContext } from '../App'
-import Image from '../components/image'
+import { Box, Image } from '../components'
 import { ReactComponent as Heart } from '../static/icons/heart.svg'
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
 
 const Heading = styled.h1`
   font-weight: 600;
@@ -39,13 +33,14 @@ const ConfirmButton = styled.button`
 const CardGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 34rem;
+  width: 100vw;
+  max-width: 34rem;
   padding-bottom: 10rem;
+  justify-content: space-around;
 `
 
 const CardWrapper = styled.div`
   width: 13rem;
-  margin: 0 2rem;
   position: relative;
 `
 
@@ -123,7 +118,7 @@ const CardTitle = styled.div`
 
 const Footer = styled.div`
   padding: 2rem;
-  width: 100vw;
+  width: 100%;
   background: #fff;
   box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.16);
   position: fixed;
@@ -168,7 +163,7 @@ const CardSelector = () => {
   }
 
   return (
-    <Wrapper>
+    <Box display="flex" flexDirection="column" alignItems="center" flex="1">
       <Heading>Select up to 3 cards</Heading>
       <CardGrid>
         {cards.map(({ key, variant, en: { title }, image_path }) => {
@@ -206,11 +201,12 @@ const CardSelector = () => {
           title="confirm selection"
           id="confirm-selection"
           onClick={handleConfirmClick}
+          disabled={selectedCards.length === 0}
         >
           Confirm Selection
         </ConfirmButton>
       </Footer>
-    </Wrapper>
+    </Box>
   )
 }
 
