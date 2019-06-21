@@ -15,9 +15,12 @@ import {
   minHeight,
   maxWidth,
   minWidth,
+  top,
+  left,
   order,
   position,
   space,
+  overflow,
   width,
   zIndex,
 } from 'styled-system'
@@ -29,6 +32,8 @@ const Box = styled.div`
   ${borderRadius}
   ${borders}
   ${boxShadow}
+  ${top}
+  ${left}
   ${color}
   ${display}
   ${flex}
@@ -43,6 +48,7 @@ const Box = styled.div`
   ${position}
   ${order}
   ${space}
+  ${overflow}
   ${width}
   ${zIndex}
 `

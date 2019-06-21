@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import Image from './image'
 import styled from 'styled-components/macro'
-
-import { ReactComponent as Arrow } from '../static/icons/backButton.svg'
-import { ReactComponent as Binoculars } from '../static/icons/BNKL.svg'
+import MoreInfo from '../more-info'
 import { useLanguage } from '../state'
+import Modal from './modal'
 
 const Wrapper = styled.div`
   display: flex;
@@ -47,9 +46,7 @@ const Img = styled(Image)`
 `
 
 const Front = ({
-  imagePath = '',
-  en = {},
-  rotate,
+  imagePath,
   variant,
   card,
   toggleView,
@@ -63,7 +60,6 @@ const Front = ({
 
   const { title } = card[lang]
 
-  const path = require(`../${imagePath}`)
   const indexRotation = 3 + index * -2
 
   return (
@@ -77,7 +73,7 @@ const Front = ({
       </ToBackOfCardBtn>
 
       <ImageWrapper>
-        <Img src={path} />
+        <Img src={imagePath} />
       </ImageWrapper>
       <Title contrast={contrast}>
         <div style={{ maxWidth: '50%' }}>{title}</div>
@@ -86,52 +82,6 @@ const Front = ({
   )
 }
 
-const BackWrapper = styled.div`
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  border-radius: 5px;
-  width: calc(100vw - 4rem);
-  height: calc((100vw - 4rem) * 1.4);
-  max-width: 32rem;
-  max-height: 62rem;
-  margin-top: -10rem;
-  margin-left: -6rem;
-  z-index: 999;
-`
-
-const BtnWrapper = styled.div`
-   display: flex;
-   align-self: flex-start;
-  padding-top: 10px;
-`
-
-const ArrowIcon = styled(Arrow)`
-    height: 1.3rem;
-    margin-right: 5px;
-`
-const BinocularsIconContainer = styled.div`
-  transform: translateY(-60%);
-`
-const BinocularsIcon = styled(Binoculars)`
-  display: flex;
-  align-items: center;
-  height: 5rem;
-`
-
-const BackBtn = styled.a`
-  font-size: 0.8em;
-  display: flex;
-  text-decoration: none;
-  color: #fff;
-  &:hover {
-    cursor: pointer;
-    color: #444;
-  }
-`
 const ToBackOfCardBtn = styled.a`
   border-radius: 50%;
   position: absolute;
@@ -148,112 +98,36 @@ const ToBackOfCardBtn = styled.a`
   background: rgba(0, 0, 0, 0.6);
 `
 
-const TopContainer = styled.div`
-  min-width: inherit;
-  min-height: 20vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px 20px;
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 10px 10px 0 0;
-`
+const Card = ({ card, rotate, index, handleLike }) => {
+  const { image_path, variant, contrast } = card
+  const [isOpenModal, setIsModalOpen] = useState(false)
+  const { lang } = useLanguage()
 
-const BottomContainer = styled.div`
-  min-width: inherit;
-  min-height: 20vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px 20px;
-  background: #fff;
-  border-radius: 0 0 10px 10px;
-  overflow-y: visible;
-`
-
-const TitleTop = styled.header`
-  font-size: 1.7rem;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  line-height: 1.6;
-  margin-bottom: 10px;
-`
-
-const TitleBottom = styled.header`
-    font-size: 1.7rem;
-    display: flex;
-    justify-content: center;
-    line-height: 1.6;
-    margin: -20% 0 10px 0;
-    color: #444;
-  overflow-y: scroll;
-`
-
-const TextTop = styled.p`
-    font-size: 1.2rem;
-    display: flex;
-    justify-content: center;
-    text-transform: none;
-    line-height: 1.25;
-    text-align: center;
-    color: #fff;
-`
-
-const TextBottom = styled.p`
-    font-size: 1.2rem;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    text-transform: none;
-    line-height: 1.25;
-    color: rgba(0, 0, 0, 0.75);
-`
-
-const Back = ({ card, variant, toggleView, front }) => {
-  const { lang } = useLanguage
-  const { title, blurb_1, blurb_2 } = card[lang]
+  const path = require(`../${image_path}`)
 
   return (
-    <BackWrapper style={{ background: variant }}>
-      <TopContainer>
-        <BtnWrapper>
-          <ArrowIcon /> 
-          <BackBtn onClick={e => toggleView(!front)}>Back</BackBtn>
-        </BtnWrapper>
-         <TitleTop>{title}</TitleTop>
-            <TextTop>{blurb_1}</TextTop>
-      </TopContainer>
-      <BottomContainer>
-        <BinocularsIconContainer>
-          <BinocularsIcon />
-        </BinocularsIconContainer>
-          <TitleBottom>Opportunities</TitleBottom>
-        <TextBottom>{blurb_2}</TextBottom>
-      </BottomContainer>
-    </BackWrapper>
-  )
-}
-
-const Card = ({ card, rotate, index }) => {
-  const { image_path, variant, contrast } = card
-  const [front, toggleView] = useState(true)
-  if (front) {
-    return (
+    <React.Fragment>
       <Front
         rotate={rotate}
-        imagePath={image_path}
+        imagePath={path}
         variant={variant}
         card={card}
         contrast={contrast}
-        front={front}
-        toggleView={toggleView}
+        front
+        toggleView={() => setIsModalOpen(!isOpenModal)}
         index={index}
       />
-    )
-  }
-  return (
-    <Back card={card} variant={variant} front={front} toggleView={toggleView} />
+      <Modal isOpen={isOpenModal}>
+        <MoreInfo
+          info={card}
+          lang={lang}
+          imagePath={path}
+          variant={variant}
+          closeModal={() => setIsModalOpen(false)}
+          handleLike={handleLike}
+        />
+      </Modal>
+    </React.Fragment>
   )
 }
 

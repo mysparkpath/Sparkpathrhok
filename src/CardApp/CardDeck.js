@@ -108,7 +108,7 @@ const CardDeck = () => {
   const current = deck && deck.length > 0 ? deck[deck.length - 1] : null
 
   const handleCardButtonClick = (e, { callback }) => {
-    e.preventDefault()
+    e && e.preventDefault()
     callback(current)
   }
 
@@ -134,6 +134,11 @@ const CardDeck = () => {
               rotate={index !== deck.length - 1}
               card={card}
               index={index}
+              handleLike={e =>
+                handleCardButtonClick(e, {
+                  callback: sendToYes,
+                })
+              }
             />
           ))}
       </CardStackWrapper>

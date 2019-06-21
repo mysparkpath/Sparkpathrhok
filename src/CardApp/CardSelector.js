@@ -63,7 +63,6 @@ const Img = styled(Image)`
 const HeartIcon = styled(Heart)`
   height: 2rem;
   width: 2rem;
-
 }
 `
 
