@@ -23,7 +23,7 @@ const StyledButton = styled.a`
 const WellDone = () => {
   const { myTop3 } = useContext(DeckContext)
   const { lang } = useLanguage
-  
+
   useEffect(() => {
     confetti(document.getElementById('confetti-target'), {
       spread: '100',
@@ -38,6 +38,7 @@ const WellDone = () => {
       color="white"
       py="4rem"
       minHeight="100vh"
+      flex="1"
     >
       <Box
         bg="white"
