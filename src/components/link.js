@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { variant, boxShadow } from 'styled-system'
+import { variant, shadow, typography, space } from 'styled-system'
 import Text from './text'
 
 const linkStyles = variant({ key: 'links' })
@@ -24,7 +24,9 @@ const hoverStyles = ({ hoverColor = 'black', theme }) => {
 
 const StyledLink = styled(Text)`
   ${linkStyles}
-  ${boxShadow}
+  ${shadow}
+  ${typography}
+  ${space}
 
   &:visited {
     ${visitedStyles}
@@ -57,7 +59,6 @@ Link.propTypes = {
 Link.defaultProps = {
   as: 'a',
   display: 'inline-block',
-  m: 0,
   newTab: false,
 }
 

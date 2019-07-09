@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components/macro'
-import { DeckContext } from '../App'
 
+import { useDeck } from '../state'
 import { ReactComponent as Undo } from '../static/icons/undo.svg'
 
 const UndoIcon = styled(Undo)`
@@ -21,13 +21,13 @@ const ButtonWrapper = styled.button`
 `
 
 const UndoButton = () => {
-  const { goToPreviousDeckState, deckHistory } = useContext(DeckContext)
+  const { history, undo } = useDeck()
 
-  if (!deckHistory) return null
+  if (!history) return null
 
   const handleUndoClick = e => {
     e.preventDefault()
-    goToPreviousDeckState()
+    undo()
   }
   return (
     <ButtonWrapper id="Undo" onClick={handleUndoClick} type="button">

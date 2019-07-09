@@ -1,15 +1,15 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components/macro'
 import { darken } from 'polished'
-import { DeckContext } from '../App'
 import CardProgress from './CardProgress'
 import CardButton from './CardButton'
 import UndoButton from './UndoButton'
 import Congrats from './Congrats'
-import { Box, Button, Card, Text } from '../components'
+import { Card } from '../components'
 import { ReactComponent as Int } from '../static/icons/interested.svg'
 import { ReactComponent as NotInt } from '../static/icons/not-interested.svg'
 import { ReactComponent as VeryInt } from '../static/icons/very-interested.svg'
+import { useDeck } from '../state'
 
 const iconStyles = css`
   height: 6rem;
@@ -67,56 +67,30 @@ const CardButtonList = styled.div`
   }
 `
 
-const arrowProps = {
-  p: '15px',
-  bg: 'rgb(0,0,0,0.6)',
-  borderRadius: '50%',
-  width: '50px',
-  height: '50px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: 'white',
-  fontSize: '2rem',
-}
-
-const ArrowContainer = styled(Box)`
-  transform: translateY(-190px);
-  width: 30rem;
-  justify-content: space-between;
-`
-
 const CardDeck = () => {
-  const {
-    deckState,
-    sendToNo,
-    sendToMaybe,
-    sendToYes,
-    totalCount,
-    rotateDeck,
-    showTop3,
-  } = useContext(DeckContext)
-  console.log('rerender devk')
-  const { initial: deck, yes } = deckState
+  const { deck, totalCount, sendToYes, sendToMaybe, sendToNo } = useDeck()
+  const { initial: currentDeck, yes } = deck
 
   const getCurrentIndex = () => {
-    return showTop3 ? 0 : totalCount - deck.length + 1
+    return totalCount - currentDeck.length + 1
   }
 
   const progress = Math.ceil((getCurrentIndex() * 100) / totalCount)
 
-  const current = deck && deck.length > 0 ? deck[deck.length - 1] : null
+  const current =
+    currentDeck && currentDeck.length > 0
+      ? currentDeck[currentDeck.length - 1]
+      : null
 
   const handleCardButtonClick = (e, { callback }) => {
     e && e.preventDefault()
     callback(current)
   }
 
-  if (!current && !showTop3) {
+  if (!current) {
     return <Congrats yesGroup={yes} />
   }
 
-  const showArrowButtons = Boolean(showTop3 && deck.length)
   const getCardRotation = (index, remaining) =>
     (index - Math.min(remaining - 1, 3)) * -2
   return (
@@ -127,73 +101,59 @@ const CardDeck = () => {
       </DeckHeader>
 
       <CardStackWrapper>
-        {deck
-          .filter((_, i) => i > deck.length - 5)
+        {currentDeck
+          .filter((_, i) => i > currentDeck.length - 5)
           .map((card, index) => (
             <Card
               key={card.key}
-              rotate={index !== deck.length - 1}
+              rotate={index !== currentDeck.length - 1}
               card={card}
-              rotation={getCardRotation(index, deck.length)}
+              rotation={getCardRotation(index, currentDeck.length)}
               handleLike={e =>
                 handleCardButtonClick(e, {
                   callback: sendToYes,
                 })
               }
-              remainingCards={deck.length}
+              remainingCards={currentDeck.length}
             />
           ))}
       </CardStackWrapper>
 
-      {showArrowButtons && (
-        <ArrowContainer>
-          <Button mr="3rem" {...arrowProps} onClick={() => rotateDeck('left')}>
-            <Text lineHeight="1" as="span" fontWeight="800">{`<`}</Text>
-          </Button>
-
-          <Button ml="3rem" {...arrowProps} onClick={() => rotateDeck('right')}>
-            <Text lineHeight="1" as="span" fontWeight="800">{`>`}</Text>
-          </Button>
-        </ArrowContainer>
-      )}
-
-      {!showTop3 && (
-        <CardButtonList>
-          <CardButton
-            onClick={e =>
-              handleCardButtonClick(e, {
-                callback: sendToNo,
-              })
-            }
-            id="no-card"
-            title="No"
-          >
-            <NotIntIcon />
-          </CardButton>
-          <CardButton
-            onClick={e =>
-              handleCardButtonClick(e, {
-                callback: sendToMaybe,
-              })
-            }
-            id="maybe-card"
-            title="Maybe"
-          >
-            <IntIcon />
-          </CardButton>
-          <CardButton
-            onClick={e =>
-              handleCardButtonClick(e, {
-                callback: sendToYes,
-              })
-            }
-            id="yes-card"
-            title="Yes"
-          >
-            <VeryIntIcon />
-          </CardButton>
-        </CardButtonList>
-      )}
+      <CardButtonList>
+        <CardButton
+          onClick={e =>
+            handleCardButtonClick(e, {
+              callback: sendToNo,
+            })
+          }
+          id="no-card"
+          title="No"
+        >
+          <NotIntIcon />
+        </CardButton>
+        <CardButton
+          onClick={e =>
+            handleCardButtonClick(e, {
+              callback: sendToMaybe,
+            })
+          }
+          id="maybe-card"
+          title="Maybe"
+        >
+          <IntIcon />
+        </CardButton>
+        <CardButton
+          onClick={e =>
+            handleCardButtonClick(e, {
+              callback: sendToYes,
+            })
+          }
+          id="yes-card"
+          title="Yes"
+        >
+          <VeryIntIcon />
+        </CardButton>
+      </CardButtonList>
     </CardDeckWrapper>
   )
 }
