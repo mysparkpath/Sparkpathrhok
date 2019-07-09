@@ -7,6 +7,7 @@ import { ReactComponent as SparkLogo } from '../static/icons/spark-logo-white.sv
 import { ReactComponent as SparkLogoPurple } from '../static/icons/spark-logo-purple.svg'
 import styled from 'styled-components'
 import { useLanguage } from '../state'
+import strings from '../strings'
 
 const MainLogo = styled(SparkLogo)`
   width: 15rem;
@@ -45,7 +46,7 @@ const Navbar = props => {
           color={textColours}
           visitedColor={textColours}
         >
-          About
+          {strings.about[lang]}
         </Link>{' '}
         /{' '}
         <Button

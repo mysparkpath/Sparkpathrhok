@@ -3,6 +3,8 @@ import { Box, Text, Navbar, Link } from './components'
 import { Link as ReachLink } from '@reach/router'
 import { ReactComponent as CardsSVG } from './static/icons/cards.svg'
 import styled from 'styled-components'
+import strings from './strings'
+import { useLanguage } from './state'
 
 const Cards = styled(CardsSVG)`
   width: 25rem;
@@ -10,12 +12,19 @@ const Cards = styled(CardsSVG)`
 `
 
 const Main = () => {
+  const { lang } = useLanguage()
   return (
     <Box bg="purple" flexDirection="column" color="white" flex="1" pb="8">
       <Navbar bg="purple" />
       <Box flexDirection="column" alignItems="center">
-        <Text textAlign="center" fontSize={5} fontWeight="600" lineHeight="1.3">
-          Discover the <br /> challenges <br /> that you want <br /> to work on.
+        <Text
+          textAlign="center"
+          fontSize={5}
+          fontWeight="600"
+          lineHeight="1.3"
+          maxWidth="25rem"
+        >
+          {strings.discover[lang]}
         </Text>
 
         <Box my={6} mx="auto">
@@ -36,7 +45,7 @@ const Main = () => {
           textAlign="center"
           boxShadow={0}
         >
-          Get started
+          {strings.getStarted[lang]}
         </Link>
       </Box>
     </Box>

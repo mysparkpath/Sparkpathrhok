@@ -4,6 +4,8 @@ import { navigate } from '@reach/router'
 import { DeckContext } from '../App'
 import { Box, Image } from '../components'
 import { ReactComponent as Heart } from '../static/icons/heart.svg'
+import strings from '../strings'
+import { useLanguage } from '../state'
 
 const Heading = styled.h1`
   font-weight: 600;
@@ -136,6 +138,7 @@ const CardSelector = () => {
     setMyTop3,
   } = useContext(DeckContext)
   const [selectedCards, setSelectedCards] = useState([])
+  const { lang } = useLanguage()
 
   const { initial: cards } = deckState
 
@@ -166,7 +169,7 @@ const CardSelector = () => {
     <Box display="flex" flexDirection="column" alignItems="center" flex="1">
       <Heading>Select up to 3 cards</Heading>
       <CardGrid>
-        {cards.map(({ key, variant, en: { title }, image_path }) => {
+        {cards.map(({ key, variant, [lang]: { title }, image_path }) => {
           const path = require(`../${image_path}`)
           const checked = isSelected(key)
           let selectionIndex = 0
@@ -203,7 +206,7 @@ const CardSelector = () => {
           onClick={handleConfirmClick}
           disabled={selectedCards.length === 0}
         >
-          Confirm Selection
+          {strings.confirm[lang]}
         </ConfirmButton>
       </Footer>
     </Box>
