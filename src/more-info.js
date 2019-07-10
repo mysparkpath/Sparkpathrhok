@@ -58,7 +58,7 @@ const MoreInfo = ({ info, lang, closeModal, imagePath, handleLike }) => {
           <Image width="20rem" height="20rem" src={imagePath} alt={alt} />
         </Box>
 
-        <Text lineHeight="1.2" textAlign="left">
+        <Text lineHeight="1.5" textAlign="left">
           {blurb_1}
         </Text>
 
@@ -75,9 +75,10 @@ const MoreInfo = ({ info, lang, closeModal, imagePath, handleLike }) => {
                 as="li"
                 width={[1 / 2, 1 / 3]}
                 key={idx}
+                lineHeight="1.5"
                 style={{
-                  'list-style-type': 'disc',
-                  'list-style-position': 'inside',
+                  listStyleType: 'disc',
+                  listStylePosition: 'inside',
                 }}
               >
                 {career}
@@ -86,7 +87,7 @@ const MoreInfo = ({ info, lang, closeModal, imagePath, handleLike }) => {
           </Box>
         </Box>
 
-        <Text lineHeight="1.2" textAlign="left">
+        <Text lineHeight="1.5" textAlign="left">
           {blurb_2}
         </Text>
       </Box>

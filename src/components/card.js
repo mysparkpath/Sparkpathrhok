@@ -96,7 +96,7 @@ const ToBackOfCardBtn = styled.a`
   background: rgba(0, 0, 0, 0.6);
 `
 
-const Card = ({ card, rotate, rotation, handleLike }) => {
+const Card = ({ card, rotate, rotation }) => {
   const { image_path, variant, contrast } = card
   const [isOpenModal, setIsModalOpen] = useState(false)
   const { lang } = useLanguage()
@@ -122,7 +122,6 @@ const Card = ({ card, rotate, rotation, handleLike }) => {
           imagePath={path}
           variant={variant}
           closeModal={() => setIsModalOpen(false)}
-          handleLike={handleLike}
         />
       </Modal>
     </React.Fragment>
