@@ -7,6 +7,8 @@ import styled, { css } from 'styled-components'
 import { Link as ReachLink } from '@reach/router'
 import { darken } from 'polished'
 import { space } from 'styled-system'
+import strings from './strings'
+import { useLanguage } from './state'
 
 const iconStyles = css`
   height: 6rem;
@@ -35,13 +37,14 @@ const VeryIntIcon = styled(VeryInt)`
 `
 
 const Instructions = () => {
+  const { lang } = useLanguage()
   return (
     <Box flexDirection="column" flex="1">
       <Navbar light />
 
       <Box flexDirection="column" alignItems="center" mx={6}>
         <Text textAlign="left" fontWeight="300">
-          Your first step is to sort 29 challenges into three categories:
+          {strings.firstStep[lang]}
         </Text>
 
         <Box justifyContent="center" my={8}>
@@ -64,7 +67,7 @@ const Instructions = () => {
           textAlign="center"
           boxShadow={0}
         >
-          I'm ready!
+          {strings.ready[lang]}
         </Link>
       </Box>
     </Box>

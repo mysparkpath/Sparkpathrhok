@@ -2,7 +2,9 @@ import React, { useEffect } from 'react'
 import { Box, Text } from '../components'
 import styled from 'styled-components'
 import { confetti } from 'dom-confetti'
+
 import { useLanguage, useTop3 } from '../state'
+import strings from '../strings'
 
 const paraProps = {
   mt: '2.2rem',
@@ -20,9 +22,10 @@ const StyledButton = styled.a`
 `
 
 const WellDone = () => {
+
   const { top3 } = useTop3()
   const { lang } = useLanguage
-
+  
   useEffect(() => {
     confetti(document.getElementById('confetti-target'), {
       spread: '100',
@@ -55,7 +58,7 @@ const WellDone = () => {
           fontSize="2.6rem"
           fontWeight="600"
         >
-          Yay! You made it!{' '}
+          {strings.congrats[lang]}{' '}
           <span role="img" aria-label="celebrate emoji">
             🎉
           </span>
@@ -112,14 +115,18 @@ const WellDone = () => {
         </Box>
       </Box>
 
-      <Box py="5rem" flexDirection="column" px="5rem">
-        <Text {...paraProps}>
-          The next step is to find out what education program can help you work
-          on these important challenges.
+      <Box py="5rem" flexDirection="column" px="5rem" alignItems="center">
+        <Text
+          {...paraProps}
+          lineHeight="1.5"
+          textAlign="center"
+          maxWidth="40rem"
+        >
+          {strings.nextStep[lang]}
         </Text>
 
         <Text mt="4rem" fontSize="2rem" fontWeight="600">
-          Enroll in SparkPath to get started.
+          {strings.enroll[lang]}
         </Text>
 
         <StyledButton href="https://mysparkpath.com/">
@@ -129,7 +136,7 @@ const WellDone = () => {
             textTransform="uppercase"
             id="confetti-target"
           >
-            Let's Do It!
+            {strings.doIt[lang]}
           </Text>
         </StyledButton>
 
@@ -141,7 +148,7 @@ const WellDone = () => {
           fontSize="1.5rem"
           textDecoration="underline"
         >
-          Give your feedback
+          {strings.feedback[lang]}
         </Text>
       </Box>
     </Box>

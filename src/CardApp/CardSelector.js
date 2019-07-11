@@ -4,6 +4,11 @@ import { navigate } from '@reach/router'
 import { Box, Image } from '../components'
 import { ReactComponent as Heart } from '../static/icons/heart.svg'
 import { useTop3 } from '../state'
+import strings from '../strings'
+import { useLanguage } from '../state'
+import MoreInfo from '../more-info'
+import Modal from '../components/modal'
+
 
 const Heading = styled.h1`
   font-weight: 600;
@@ -58,6 +63,10 @@ const Img = styled(Image)`
 const HeartIcon = styled(Heart)`
   height: 2rem;
   width: 2rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 `
 
@@ -103,6 +112,7 @@ const CardContent = styled.div`
   justify-content: flex-start;
   align-items: flex-end;
   padding: 1rem;
+
 `
 
 const SelectionIndex = styled.div`
@@ -128,9 +138,34 @@ const Footer = styled.div`
   align-items: center;
 `
 
+const ToBackOfCardBtn = styled.a`
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 2rem;
+  height: 2rem;
+  font-size: 0.9em;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 30px;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+`
+
 const CardSelector = () => {
   const { setTop3, selector: cards } = useTop3()
   const [selectedCards, setSelectedCards] = useState([])
+  const { lang } = useLanguage()
+  const [selectedCard, setSelectedCard] = useState(false)
 
   const isSelected = key => {
     return selectedCards.includes(key)
@@ -155,11 +190,21 @@ const CardSelector = () => {
     navigate('/welldone')
   }
 
+  let imgPath
+
+  if (selectedCard) {
+    imgPath = require(`../${selectedCard.image_path}`)
+  }
+
   return (
     <Box display="flex" flexDirection="column" alignItems="center" flex="1">
       <Heading>Select up to 3 cards</Heading>
       <CardGrid>
-        {cards.map(({ key, variant, en: { title }, image_path }) => {
+        {cards.map(card => {
+          const { image_path, variant, key } = card
+
+          const { title } = card[lang]
+
           const path = require(`../${image_path}`)
           const checked = isSelected(key)
           let selectionIndex = 0
@@ -175,6 +220,13 @@ const CardSelector = () => {
                   onChange={() => handleCardToggle(key)}
                   type="checkbox"
                   checked={checked}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                    height: '2rem',
+                    width: '2rem',
+                  }}
                 />
                 <CardContent>
                   <HeartIcon />
@@ -182,12 +234,29 @@ const CardSelector = () => {
                     <SelectionIndex>{selectionIndex}</SelectionIndex>
                   )}
                 </CardContent>
+                <ToBackOfCardBtn
+                  onClick={e => {
+                    e.preventDefault()
+                    setSelectedCard(card)
+                  }}
+                >
+                  i
+                </ToBackOfCardBtn>
               </Card>
               <CardTitle>{title}</CardTitle>
             </CardWrapper>
           )
         })}
       </CardGrid>
+      <Modal isOpen={selectedCard}>
+        <MoreInfo
+          info={selectedCard}
+          lang={lang}
+          imagePath={imgPath}
+          variant={selectedCard && selectedCard.variant}
+          closeModal={() => setSelectedCard(null)}
+        />
+      </Modal>
       <Footer>
         <ConfirmButton
           type="button"
@@ -196,7 +265,7 @@ const CardSelector = () => {
           onClick={handleConfirmClick}
           disabled={selectedCards.length === 0}
         >
-          Confirm Selection
+          {strings.confirm[lang]}
         </ConfirmButton>
       </Footer>
     </Box>

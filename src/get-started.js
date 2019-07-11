@@ -1,8 +1,11 @@
 import React from 'react'
 import { Box, Text, Navbar, Link } from './components'
 import { Link as ReachLink } from '@reach/router'
+import strings from './strings'
+import { useLanguage } from './state'
 
 const GetStarted = () => {
+  const { lang } = useLanguage()
   return (
     <Box bg="purple" flexDirection="column" color="white" flex="1">
       <Navbar bg="purple" />
@@ -11,24 +14,22 @@ const GetStarted = () => {
         <Text
           fontWeight="300"
           textAlign="left"
-          lineHeight="1.3"
+          lineHeight="1.5"
           fontSize={2}
           maxWidth="45rem"
         >
-          One of the best ways to prepare your future is to choose a challenge
-          that you want to work on.
+          {strings.prepare[lang]}
         </Text>
 
         <Text
           fontWeight="300"
           textAlign="left"
-          lineHeight="1.3"
+          lineHeight="1.5"
           fontSize={2}
           my={9}
           maxWidth="45rem"
         >
-          Through the innovative Challenge Cards, you will select 3 challenges
-          that you want to explore.
+          {strings.innovativeFuture[lang]}
         </Text>
 
         <Link
@@ -45,7 +46,7 @@ const GetStarted = () => {
           text-align="center"
           box-shadow={0}
         >
-          Next
+          {strings.next[lang]}
         </Link>
       </Box>
     </Box>

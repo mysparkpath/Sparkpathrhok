@@ -2,6 +2,8 @@ import React from 'react'
 import { Button, Box, Text } from '../components'
 import { useDeck, useTop3 } from '../state'
 import { navigate } from '@reach/router'
+import strings from '../strings'
+import { useLanguage } from '../state'
 
 const buttonProps = {
   bg: 'white',
@@ -15,6 +17,7 @@ const buttonProps = {
 const Congrats = ({ yesGroup }) => {
   const { redoChallenge, deck } = useDeck()
   const { setSelector } = useTop3()
+  const { lang } = useLanguage()
 
   const needsRedo = yesGroup.length > 10
 
@@ -44,10 +47,10 @@ const Congrats = ({ yesGroup }) => {
     console.log('handle me on success!')
   }
 
-  let info = `Now let’s narrow down to find out the ones that interest you most.`
+  let info = strings.narrowDown[lang]
 
   if (needsRedo) {
-    info = `Let's narrow this down a bit further!`
+    info = strings.narrowDownMore[lang]
   }
 
   return (
@@ -63,7 +66,7 @@ const Congrats = ({ yesGroup }) => {
     >
       {!needsRedo && (
         <Text as="h2" fontWeight="600" fontSize="4rem">
-          Nice job!{' '}
+          {strings.niceJob[lang]}{' '}
           <span role="img" aria-label="star emoji">
             ⭐️
           </span>
@@ -80,7 +83,7 @@ const Congrats = ({ yesGroup }) => {
           fontWeight="600"
           textTransform="uppercase"
         >
-          Let's do it!
+          {strings.doItExtreme[lang]}
         </Text>
       </Button>
     </Box>
