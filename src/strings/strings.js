@@ -52,6 +52,10 @@ export default {
     fr: 'On y va!',
     en: `Let's do it!`,
   },
+  createAccount: {
+    fr: 'Créer un compte!',
+    en: 'Create an account!',
+  },
   doItExtreme: {
     fr: 'ON Y VAS!',
     en: `LET'S DO IT!`,

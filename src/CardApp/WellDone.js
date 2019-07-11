@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react'
 import { Box, Text } from '../components'
 import styled from 'styled-components'
+import { theme } from '../components/theme'
 import { confetti } from 'dom-confetti'
 import { DeckContext } from '../App'
 import { useLanguage } from '../state'
@@ -12,19 +13,20 @@ const paraProps = {
   fontWeight: '300',
 }
 
-const StyledButton = styled.a`
+const StyledButton = styled.button`
   background: white;
   border-radius: 50px;
   align-self: center;
   padding: 2.4rem 4.6rem;
   margin-top: 4rem;
   box-shadow: 0px 7px 12px -8px rgba(0, 0, 0, 0.75);
+  color: ${theme.colors.purple};
 `
 
 const WellDone = () => {
   const { myTop3 } = useContext(DeckContext)
   const { lang } = useLanguage()
-
+  console.log(myTop3)
   useEffect(() => {
     confetti(document.getElementById('confetti-target'), {
       spread: '100',
@@ -128,14 +130,14 @@ const WellDone = () => {
           {strings.enroll[lang]}
         </Text>
 
-        <StyledButton href="https://mysparkpath.com/">
+        <StyledButton href="" onClick={() => console.log('hellow orld')}>
           <Text
             fontSize="2rem"
             fontWeight="600"
             textTransform="uppercase"
             id="confetti-target"
           >
-            {strings.doIt[lang]}
+            {strings.createAccount[lang]}
           </Text>
         </StyledButton>
 
