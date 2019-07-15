@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from 'react'
-import { Box, Text } from '../components'
+import { Box, Text, Link } from '../components'
+import { Link as ReachLink } from '@reach/router'
 import styled from 'styled-components'
 import { theme } from '../components/theme'
 import { confetti } from 'dom-confetti'
@@ -131,14 +132,16 @@ const WellDone = () => {
         </Text>
 
         <StyledButton href="" onClick={() => console.log('hellow orld')}>
-          <Text
+          <Link
+            as={ReachLink}
             fontSize="2rem"
             fontWeight="600"
+            to="/login"
             textTransform="uppercase"
             id="confetti-target"
           >
             {strings.createAccount[lang]}
-          </Text>
+          </Link>
         </StyledButton>
 
         <Text
