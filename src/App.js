@@ -10,6 +10,7 @@ import CardSelector from './CardApp/CardSelector'
 import WellDone from './CardApp/WellDone'
 import GetStarted from './get-started'
 import Instructions from './instructions'
+import Login from './Login/Login'
 import { ThemeProvider } from 'styled-components'
 import { LanguageProvider } from './state'
 import { theme } from './components'
@@ -140,6 +141,7 @@ const App = () => {
               <CardApp path="/cards" />
               <CardSelector path="/top3" />
               <WellDone path="/welldone" />
+              <Login path="/login" />
             </Router>
           </Layout>
         </DeckContext.Provider>
