@@ -43,8 +43,8 @@ const GetStarted = () => {
           py={4}
           width="26rem"
           mx="auto"
-          textAlign="center"
-          boxShadow={0}
+          text-align="center"
+          box-shadow={0}
         >
           {strings.next[lang]}
         </Link>

@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Button, Box, Text } from '../components'
-import { DeckContext } from '../App'
+import { useDeck, useTop3 } from '../state'
 import { navigate } from '@reach/router'
 import strings from '../strings'
 import { useLanguage } from '../state'
@@ -15,16 +15,33 @@ const buttonProps = {
 }
 
 const Congrats = ({ yesGroup }) => {
-  const { redoChallenge } = useContext(DeckContext)
+  const { redoChallenge, deck } = useDeck()
+  const { setSelector } = useTop3()
   const { lang } = useLanguage()
 
   const needsRedo = yesGroup.length > 10
+
+  const processDeck = () => {
+    const { yes, no, maybe } = deck
+
+    if (yes.length > 0) {
+      setSelector(yes)
+      return
+    }
+
+    if (maybe.length > 0) {
+      setSelector(maybe)
+      return
+    }
+
+    setSelector(no)
+  }
 
   let handleClick = () => {
     if (needsRedo) {
       redoChallenge()
     } else {
-      redoChallenge()
+      processDeck()
       navigate('/top3')
     }
     console.log('handle me on success!')

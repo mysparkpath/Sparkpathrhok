@@ -36,9 +36,7 @@ const Title = styled.div`
   }} /* background: rgba(0, 0, 0, 0.6); */
 `
 
-const ImageWrapper = styled.div`
-  /* padding: 100px 50px 0 50px; */
-`
+const ImageWrapper = styled.div``
 
 const Img = styled(Image)`
   max-width: 20rem;
@@ -55,9 +53,6 @@ const Front = ({
   rotation,
 }) => {
   const { lang } = useLanguage()
-
-  console.log('CARD', { card, lang })
-
   const { title } = card[lang]
 
   return (

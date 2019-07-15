@@ -1,9 +1,9 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect } from 'react'
 import { Box, Text } from '../components'
 import styled from 'styled-components'
 import { confetti } from 'dom-confetti'
-import { DeckContext } from '../App'
-import { useLanguage } from '../state'
+
+import { useLanguage, useTop3 } from '../state'
 import strings from '../strings'
 
 const paraProps = {
@@ -22,9 +22,10 @@ const StyledButton = styled.a`
 `
 
 const WellDone = () => {
-  const { myTop3 } = useContext(DeckContext)
-  const { lang } = useLanguage()
 
+  const { top3 } = useTop3()
+  const { lang } = useLanguage
+  
   useEffect(() => {
     confetti(document.getElementById('confetti-target'), {
       spread: '100',
@@ -70,8 +71,8 @@ const WellDone = () => {
           color="black"
           px="3rem"
         >
-          {myTop3.length > 0 &&
-            myTop3.map(({ image_path, altText, variant, en, fr, key }) => {
+          {top3.length > 0 &&
+            top3.map(({ image_path, altText, variant, en, fr, key }) => {
               const path = require(`../${image_path}`)
 
               const title = lang === 'en' ? en.title : fr.title
