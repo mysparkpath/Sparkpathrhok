@@ -11,6 +11,7 @@ https://mysparkpath.netlify.com/
 - Clone this repo
 - cd into the repo folder and `npm install` or `yarn install`
 - `npm run start` or `yarn start`
+- add a config.js file to src/Login with the firebase credentials
 
 ## Google docs
 
