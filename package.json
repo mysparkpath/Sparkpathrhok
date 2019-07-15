@@ -5,6 +5,7 @@
   "dependencies": {
     "@reach/router": "^1.2.1",
     "dom-confetti": "^0.1.0",
+    "firebase": "^6.3.0",
     "lodash": "^4.17.14",
     "polished": "^3.2.0",
     "react": "^16.8.6",
