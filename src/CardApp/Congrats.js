@@ -44,7 +44,6 @@ const Congrats = ({ yesGroup }) => {
       processDeck()
       navigate('/top3')
     }
-    console.log('handle me on success!')
   }
 
   let info = strings.narrowDown[lang]

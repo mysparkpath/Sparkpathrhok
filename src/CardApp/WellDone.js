@@ -22,10 +22,9 @@ const StyledButton = styled.a`
 `
 
 const WellDone = () => {
-
   const { top3 } = useTop3()
-  const { lang } = useLanguage
-  
+  const { lang } = useLanguage()
+
   useEffect(() => {
     confetti(document.getElementById('confetti-target'), {
       spread: '100',
