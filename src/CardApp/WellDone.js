@@ -131,7 +131,7 @@ const WellDone = () => {
           {strings.enroll[lang]}
         </Text>
 
-        <StyledButton href="" onClick={() => console.log('hellow orld')}>
+        <StyledButton>
           <Link
             as={ReachLink}
             fontSize="2rem"
