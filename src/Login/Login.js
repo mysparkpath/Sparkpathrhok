@@ -71,12 +71,13 @@ const handleSave = async ({ uid: userId }, myTop3) => {
     rej('Failed to add to database')
   })
 }
+
 const renderCards = (myTop3, lang) => {
   return (
     myTop3.length > 0 &&
     myTop3.map(({ image_path, altText, variant, en, fr, key }) => {
       const path = require(`../${image_path}`)
-
+      console.log(lang)
       const title = lang === 'en' ? en.title : fr.title
 
       return (
@@ -105,7 +106,7 @@ const renderCards = (myTop3, lang) => {
 
           <Text
             color="rgb(255, 255, 255)"
-            textTransform="capitalize"
+            // textTransform="capitalize"
             fontSize="1.8rem"
             textAlign="left"
           >
@@ -167,7 +168,9 @@ const Login = () => {
             color="black"
             px="3rem"
           >
-            {user.myTop3 ? renderCards(user.myTop3, lang) : renderCards(myTop3)}
+            {user.myTop3
+              ? renderCards(user.myTop3, lang)
+              : renderCards(myTop3, lang)}
           </Box>
         </Box>
         {myTop3.length > 0 && (
