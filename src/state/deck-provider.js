@@ -4,7 +4,7 @@ import initialDeck from '../static/spark_paths'
 const DeckContext = React.createContext()
 
 export const initialDeckState = {
-  initial: initialDeck.paths.sort(() => -1),
+  initial: initialDeck.paths, // initialDeck.paths.sort(() => -1),
   no: [],
   maybe: [],
   yes: [],
@@ -14,7 +14,7 @@ export const initialDeckState = {
 function DeckProvider(props) {
   const [history, setHistory] = useState()
   const [deck, setDeck] = useState(initialDeckState)
-  const [totalCount, setTotalCount] = useState(initialDeckState.length)
+  const [totalCount, setTotalCount] = useState(initialDeckState.totalCount)
 
   const undo = () => {
     if (history) {
