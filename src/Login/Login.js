@@ -7,21 +7,47 @@ import Firebase from 'firebase'
 import { firebaseConfig } from './config'
 import { DeckContext } from '../App'
 import { useLanguage, useTop3 } from '../state'
+import { Google } from 'styled-icons/boxicons-logos/Google'
 import strings from '../strings'
+
+const Icon = ({ iconName, onClick }) => {
+  const StyledIcon = styled(Google)`
+    color: white;
+    opacity: 0.5;
+    border: solid 0.1rem;
+    border-radius: 1rem;
+    width: 5rem;
+    height: 5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+  `
+  return <StyledIcon onClick={onClick} />
+}
 
 Firebase.initializeApp(firebaseConfig)
 const database = Firebase.database()
 
+// Add border-radius: 50px;
+// box-shadow: 0px 7px 12px -8px rgba(0, 0, 0, 0.75);back
 const StyledButton = styled.button`
-  background: white;
-  border-radius: 50px;
+  background: ${props => props.backgroundColor || 'white'};
+  border-radius: 10px;
   align-self: center;
-  padding: 2.4rem 4.6rem;
+  padding: 1rem 4rem;
   margin-top: 4rem;
-  box-shadow: 0px 7px 12px -8px rgba(0, 0, 0, 0.75);
-  color: ${theme.colors.black};
+  width: 70%;
+  color: ${props => props.inputColor || theme.colors.black};
 `
-
+const Input = styled.input`
+  padding: 0.5em;
+  margin: 0.5em;
+  color: ${props => props.inputColor || 'palevioletred'};
+  background: white;
+  width: 80%;
+  border: none;
+  border-radius: 3px;
+`
 const signIn = setUser => {
   const provider = new Firebase.auth.GoogleAuthProvider()
   // TODO: Add en/fr language choice
@@ -123,9 +149,80 @@ const Login = () => {
   const { top3: myTop3 } = useTop3()
   const { lang } = useLanguage()
   useEffect(() => {
-    signIn(setUser)
+    // signIn(setUser)
   }, [])
   // TODO: Refactor the return values into functions
+  return (
+    <Box bg="purple" flexDirection="column" color="white" flex="1">
+      <Navbar bg="purple" />
+      <Box flexDirection="column" alignItems="center" mx={6}>
+        {
+          <Text
+            textAlign="center"
+            fontSize={5}
+            fontWeight="600"
+            lineHeight="1.3"
+            maxWidth="50rem"
+          >
+            {/* TODO: Add this text to the strings file */}
+            Login with
+          </Text>
+        }
+        <Box py="2rem" flexDirection="row" px="2rem" alignItems="center">
+          <Icon width="100%" height="100%" />
+          <Icon onClick={() => signIn(setUser)} />
+          <Icon width="100%" height="100%" />
+        </Box>
+        <Text
+          textAlign="center"
+          fontSize={5}
+          fontWeight="600"
+          lineHeight="1.3"
+          maxWidth="50rem"
+        >
+          {/* TODO: Add this text to the strings file */}
+          Or
+        </Text>
+        <Box py="5rem" flexDirection="column" px="5rem" alignItems="center">
+          <form>
+            <label>
+              <Input type="text" placeholder="Username or Email" />
+            </label>
+            <label>
+              <Input type="text" placeholder="Password" />
+            </label>
+            <Text
+              textAlign="left"
+              fontSize={2}
+              fontWeight="60"
+              lineHeight="1.3"
+              maxWidth="50rem"
+              px="4rem"
+            >
+              Forget your password?
+            </Text>
+            <StyledButton
+              type="submit"
+              value="Submit"
+              inputColor={theme.colors.purple}
+            >
+              <Text
+                textAlign="center"
+                fontSize={5}
+                fontWeight="60"
+                lineHeight="1.3"
+                maxWidth="50rem"
+                px="4rem"
+              >
+                Login
+              </Text>
+            </StyledButton>
+          </form>
+        </Box>
+      </Box>
+    </Box>
+  )
+
   if (user) {
     if (user.saved !== true) callDatabase(user, setUser)
   }
