@@ -86,4 +86,19 @@ export default {
     fr: 'Partage un commentaire',
     en: 'Give your feedback',
   },
+  welcome: {
+    // TODO: Fix this translation
+    fr: 'Bienvenue à les cartes numériques',
+    en: 'Welcome to the digital challenge cards',
+  },
+  savedCards: {
+    // TODO: Fix this translation
+    fr: 'Votre cartes sont:',
+    en: 'Your saved challenge cards are:',
+  },
+  yourCards: {
+    // TODO: Fix this translation
+    fr: 'Votre cartes sont:',
+    en: 'Your challenge cards are:',
+  },
 }
