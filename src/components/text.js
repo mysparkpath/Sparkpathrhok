@@ -4,15 +4,9 @@ import {
   borders,
   display,
   alignItems,
-  fontFamily,
-  fontSize,
-  fontWeight,
-  letterSpacing,
   maxWidth,
-  lineHeight,
   space,
-  textAlign,
-  textStyle,
+  typography,
   width,
   style,
 } from 'styled-system'
@@ -32,23 +26,12 @@ const Text = styled.div`
   ${borders}
   ${alignItems}
   ${display}
-  ${fontFamily}
-  ${fontSize}
-  ${fontWeight}
+  ${typography}
   ${maxWidth}
-  ${letterSpacing}
-  ${lineHeight}
   ${space}
-  ${textAlign}
-  ${textStyle}
   ${textTransform}
   ${textDecoration}
   ${width}
 `
-
-Text.defaultProps = {
-  m: 0,
-  p: 0,
-}
 
 export default Text

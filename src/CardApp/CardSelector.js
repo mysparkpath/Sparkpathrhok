@@ -1,13 +1,14 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
-import { DeckContext } from '../App'
 import { Box, Image } from '../components'
 import { ReactComponent as Heart } from '../static/icons/heart.svg'
+import { useTop3 } from '../state'
 import strings from '../strings'
 import { useLanguage } from '../state'
 import MoreInfo from '../more-info'
 import Modal from '../components/modal'
+
 
 const Heading = styled.h1`
   font-weight: 600;
@@ -161,17 +162,10 @@ const ToBackOfCardBtn = styled.a`
 `
 
 const CardSelector = () => {
-  const {
-    deckState,
-    // setDeckState,
-    // myTop3,
-    setMyTop3,
-  } = useContext(DeckContext)
+  const { setTop3, selector: cards } = useTop3()
   const [selectedCards, setSelectedCards] = useState([])
   const { lang } = useLanguage()
   const [selectedCard, setSelectedCard] = useState(false)
-
-  const { initial: cards } = deckState
 
   const isSelected = key => {
     return selectedCards.includes(key)
@@ -192,7 +186,7 @@ const CardSelector = () => {
     if (selectedCards.length === 0) return
 
     const top3 = cards.filter(c => isSelected(c.key))
-    setMyTop3(top3)
+    setTop3(top3)
     navigate('/welldone')
   }
 

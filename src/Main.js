@@ -37,13 +37,13 @@ const Main = () => {
           fontWeight="600"
           to="/get-started"
           variant="pill"
+          width="26rem"
+          mx="auto"
+          text-align="center"
+          box-shadow={0}
           bg="white"
           px={6}
           py={4}
-          width="26rem"
-          mx="auto"
-          textAlign="center"
-          boxShadow={0}
         >
           {strings.getStarted[lang]}
         </Link>

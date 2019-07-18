@@ -6,7 +6,7 @@ import { theme } from '../components/theme'
 import Firebase from 'firebase'
 import { firebaseConfig } from './config'
 import { DeckContext } from '../App'
-import { useLanguage } from '../state'
+import { useLanguage, useTop3 } from '../state'
 import strings from '../strings'
 
 Firebase.initializeApp(firebaseConfig)
@@ -120,7 +120,7 @@ const renderCards = (myTop3, lang) => {
 
 const Login = () => {
   const [user, setUser] = useState()
-  const { myTop3 } = useContext(DeckContext)
+  const { top3: myTop3 } = useTop3()
   const { lang } = useLanguage()
   useEffect(() => {
     signIn(setUser)
@@ -143,8 +143,7 @@ const Login = () => {
               lineHeight="1.3"
               maxWidth="50rem"
             >
-              {/* TODO: Add this text to the strings file */}
-              Welcome to the Digital Challenge Cards {user.displayName}!
+              {`${strings.welcome[lang]} ${user.displayName}`}!
             </Text>
           }
 
@@ -157,7 +156,7 @@ const Login = () => {
             style={{ 'padding-top': '5rem' }}
           >
             {user.myTop3
-              ? 'Your saved challenge cards are:'
+              ? strings.savedCards[lang]
               : myTop3.length > 0 && 'Your challenge cards are:'}
           </Text>
 

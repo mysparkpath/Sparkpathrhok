@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
-import { DeckContext } from '../App'
+import React from 'react'
+import { useDeck } from '../state'
+
 const ResetButton = () => {
-  const { reset } = useContext(DeckContext)
+  const { reset } = useDeck()
   const handleResetClick = e => {
     e.preventDefault()
     reset()
