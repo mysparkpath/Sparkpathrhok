@@ -4,7 +4,7 @@ import initialDeck from '../static/spark_paths'
 const DeckContext = React.createContext()
 
 export const initialDeckState = {
-  initial: initialDeck.paths, // initialDeck.paths.sort(() => -1),
+  initial: initialDeck.paths,
   no: [],
   maybe: [],
   yes: [],
