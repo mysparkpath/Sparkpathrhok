@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Box, Text, Navbar, Link } from '../components'
-import { Router } from '@reach/router'
+import React from 'react'
+
 import styled from 'styled-components'
 import { theme } from '../components/theme'
 import Firebase from 'firebase'
 import { firebaseConfig } from './config'
 import Form from './form'
-import { DeckContext } from '../App'
-import { useLanguage, useTop3, useUser } from '../state'
+
+import { useLanguage, useUser } from '../state'
 
 import strings from '../strings'
 
@@ -26,20 +25,22 @@ const StyledButton = styled.button`
   color: ${props => props.inputColor || theme.colors.black};
 `
 
-const signIn = (setUser, signInOption, navigate) => {
-  const provider =
-    signInOption === 'google'
-      ? new Firebase.auth.GoogleAuthProvider()
-      : new Firebase.auth.FacebookAuthProvider()
-  // TODO: Add en/fr language choice
-  // Firebase.auth().languag eCode =
+const signIn = (setUser, signInOption, navigate, lang) => {
+  const authCreators = {
+    google: new Firebase.auth.GoogleAuthProvider(),
+    facebook: new Firebase.auth.FacebookAuthProvider(),
+    twitter: new Firebase.auth.TwitterAuthProvider(),
+  }
+
+  const provider = authCreators[signInOption]
+  Firebase.auth().languageCode =
+    signInOption === 'facebook' && lang === 'fr' ? 'fr_FR' : lang
 
   // Authenticate user
   // TODO: Change to async/await functionality
   Firebase.auth()
     .signInWithPopup(provider)
     .then(result => {
-      // Google Access Token that lets you access Google API
       const user = result.user
       callDatabase(user, setUser)
       console.log(user)
@@ -66,15 +67,13 @@ const callDatabase = async ({ email, displayName, uid: userId }, setUser) => {
 }
 
 const Login = ({ navigate }) => {
-  const { top3: myTop3 } = useTop3()
   const { lang } = useLanguage()
-  const { user, setUser } = useUser()
+  const { setUser } = useUser()
 
-  // TODO: Refactor the return values into functions
   return (
     <Form
       path="/login"
-      signIn={signInOption => signIn(setUser, signInOption, navigate)}
+      signIn={signInOption => signIn(setUser, signInOption, navigate, lang)}
     />
   )
 }

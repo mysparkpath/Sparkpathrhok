@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Text, Navbar, Link } from '../components'
 import { Google } from 'styled-icons/boxicons-logos/Google'
 import { Facebook } from 'styled-icons/boxicons-logos/Facebook'
+import { Twitter } from 'styled-icons/boxicons-logos/Twitter'
 import styled from 'styled-components'
 import { theme } from '../components/theme'
 
@@ -32,6 +33,20 @@ const FacebookIcon = ({ onClick }) => {
     cursor: pointer;
   `
   return <StyledIcon onClick={() => onClick('facebook')} />
+}
+const TwitterIcon = ({ onClick }) => {
+  const StyledIcon = styled(Twitter)`
+    color: white;
+    opacity: 0.5;
+    border: solid 0.1rem;
+    border-radius: 1rem;
+    width: 5rem;
+    height: 5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+  `
+  return <StyledIcon onClick={() => onClick('twitter')} />
 }
 const Input = styled.input`
   padding: 0.5em;
@@ -71,7 +86,7 @@ const Form = ({ signIn }) => {
         <Box py="2rem" flexDirection="row" px="2rem" alignItems="center">
           <FacebookIcon onClick={signIn} width="100%" height="100%" />
           <GoogleIcon onClick={signIn} />
-          <GoogleIcon width="100%" height="100%" />
+          <TwitterIcon onClick={signIn} width="100%" height="100%" />
         </Box>
         <Text
           textAlign="center"
