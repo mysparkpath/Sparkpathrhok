@@ -19,6 +19,7 @@ const PurpleLogo = styled(SparkLogoPurple)`
 `
 
 const Navbar = props => {
+  console.log(props.location)
   const { toggleLang, lang } = useLanguage()
 
   const isEnglish = lang === 'en'
@@ -58,6 +59,7 @@ const Navbar = props => {
           hoverColor={textColours}
           color={textColours}
           visitedColor={textColours}
+          fontWeight={window.location.pathname === '/login' ? 600 : 300}
           style={{ 'margin-left': '0.8rem' }}
         >
           {strings.login[lang]}
