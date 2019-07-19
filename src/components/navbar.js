@@ -5,6 +5,7 @@ import Button from './button'
 import Text from './text'
 import { ReactComponent as SparkLogo } from '../static/icons/spark-logo-white.svg'
 import { ReactComponent as SparkLogoPurple } from '../static/icons/spark-logo-purple.svg'
+import { Link as ReachLink } from '@reach/router'
 import styled from 'styled-components'
 import { useLanguage } from '../state'
 import strings from '../strings'
@@ -47,6 +48,19 @@ const Navbar = props => {
           visitedColor={textColours}
         >
           {strings.about[lang]}
+        </Link>{' '}
+        /{' '}
+        <Link
+          as={ReachLink}
+          fontSize={1}
+          to="/login"
+          mr={3}
+          hoverColor={textColours}
+          color={textColours}
+          visitedColor={textColours}
+          style={{ 'margin-left': '0.8rem' }}
+        >
+          {strings.login[lang]}
         </Link>{' '}
         /{' '}
         <Button
