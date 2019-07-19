@@ -19,7 +19,6 @@ const PurpleLogo = styled(SparkLogoPurple)`
 `
 
 const Navbar = props => {
-  console.log(props.location)
   const { toggleLang, lang } = useLanguage()
 
   const isEnglish = lang === 'en'
