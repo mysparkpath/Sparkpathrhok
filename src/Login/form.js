@@ -1,10 +1,12 @@
 import React from 'react'
-import { Box, Text, Navbar, Link } from '../components'
+import { Box, Text, Navbar } from '../components'
 import { Google } from 'styled-icons/boxicons-logos/Google'
 import { Facebook } from 'styled-icons/boxicons-logos/Facebook'
 import { Twitter } from 'styled-icons/boxicons-logos/Twitter'
 import styled from 'styled-components'
 import { theme } from '../components/theme'
+import strings from '../strings'
+import { useLanguage } from '../state'
 
 const GoogleIcon = ({ onClick }) => {
   const StyledIcon = styled(Google)`
@@ -67,6 +69,7 @@ const StyledButton = styled.button`
   color: ${props => props.inputColor || theme.colors.black};
 `
 const Form = ({ signIn }) => {
+  const { lang } = useLanguage()
   return (
     <Box bg="purple" flexDirection="column" color="white" flex="1">
       <Navbar bg="purple" />
@@ -80,7 +83,7 @@ const Form = ({ signIn }) => {
             maxWidth="50rem"
           >
             {/* TODO: Add this text to the strings file */}
-            Login with
+            {strings.loginWith[lang]}
           </Text>
         }
         <Box py="2rem" flexDirection="row" px="2rem" alignItems="center">
@@ -96,15 +99,15 @@ const Form = ({ signIn }) => {
           maxWidth="50rem"
         >
           {/* TODO: Add this text to the strings file */}
-          Or
+          {strings.or[lang]}
         </Text>
         <Box py="5rem" flexDirection="column" px="5rem" alignItems="center">
           <form>
             <label>
-              <Input type="text" placeholder="Username or Email" />
+              <Input type="text" placeholder={strings.usernameField[lang]} />
             </label>
             <label>
-              <Input type="text" placeholder="Password" />
+              <Input type="text" placeholder={strings.passwordField[lang]} />
             </label>
             <Text
               textAlign="left"
@@ -114,7 +117,7 @@ const Form = ({ signIn }) => {
               maxWidth="50rem"
               px="4rem"
             >
-              Forget your password?
+              {strings.forgotPassword[lang]}
             </Text>
             <StyledButton
               type="submit"
@@ -129,7 +132,7 @@ const Form = ({ signIn }) => {
                 maxWidth="50rem"
                 px="4rem"
               >
-                Login
+                {strings.login[lang]}
               </Text>
             </StyledButton>
           </form>

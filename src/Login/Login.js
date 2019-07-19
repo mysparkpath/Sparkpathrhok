@@ -8,8 +8,6 @@ import Form from './form'
 
 import { useLanguage, useUser } from '../state'
 
-import strings from '../strings'
-
 Firebase.initializeApp(firebaseConfig)
 const database = Firebase.database()
 

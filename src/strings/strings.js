@@ -101,4 +101,28 @@ export default {
     fr: 'Votre cartes sont:',
     en: 'Your challenge cards are:',
   },
+  loginWith: {
+    fr: 'Connectez-vous avec',
+    en: 'Login with',
+  },
+  or: {
+    fr: 'Ou',
+    en: 'Or',
+  },
+  usernameField: {
+    fr: "Nom d'utilisateur ou adresse courriel",
+    en: 'Username or Email',
+  },
+  passwordField: {
+    fr: 'Mot de passe',
+    en: 'Password',
+  },
+  forgotPassword: {
+    fr: 'Mot de passe oublié?',
+    en: 'Forgot password?',
+  },
+  login: {
+    fr: 'Se connecter',
+    en: 'Login',
+  },
 }
