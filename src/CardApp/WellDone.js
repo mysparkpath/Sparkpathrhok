@@ -136,7 +136,7 @@ const WellDone = () => {
             as={ReachLink}
             fontSize="2rem"
             fontWeight="600"
-            to="/login"
+            to="/register"
             textTransform="uppercase"
             id="confetti-target"
           >

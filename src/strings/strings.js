@@ -125,4 +125,28 @@ export default {
     fr: 'Se connecter',
     en: 'Login',
   },
+  registerWith: {
+    fr: 'Inscrivez-vous avec',
+    en: 'Register with',
+  },
+  nameField: {
+    fr: 'Nom',
+    en: 'Name',
+  },
+  emailField: {
+    fr: 'Adresse courriel',
+    en: 'Email',
+  },
+  confirmPasswordField: {
+    fr: 'Confirmez le mot de passe',
+    en: 'Confirm Password',
+  },
+  licenseCode: {
+    fr: 'Code de licence',
+    en: 'License Code',
+  },
+  register: {
+    fr: 'Registre',
+    en: 'Register',
+  },
 }

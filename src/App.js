@@ -10,6 +10,7 @@ import WellDone from './CardApp/WellDone'
 import GetStarted from './get-started'
 import Instructions from './instructions'
 import Login from './Login/Login'
+import Register from './Register/Register'
 import Home from './Home/Home'
 import { ThemeProvider } from 'styled-components'
 import {
@@ -39,6 +40,7 @@ const App = () => {
 
                   <WellDone path="/welldone" />
                   <Login path="/login" />
+                  <Register path="/register" />
                   <Home path="/home" />
                 </Router>
               </Layout>
