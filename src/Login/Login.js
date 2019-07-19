@@ -26,8 +26,11 @@ const StyledButton = styled.button`
   color: ${props => props.inputColor || theme.colors.black};
 `
 
-const signIn = (setUser, navigate) => {
-  const provider = new Firebase.auth.GoogleAuthProvider()
+const signIn = (setUser, signInOption, navigate) => {
+  const provider =
+    signInOption === 'google'
+      ? new Firebase.auth.GoogleAuthProvider()
+      : new Firebase.auth.FacebookAuthProvider()
   // TODO: Add en/fr language choice
   // Firebase.auth().languag eCode =
 
@@ -70,7 +73,12 @@ const Login = ({ navigate }) => {
   const { user, setUser } = useUser()
 
   // TODO: Refactor the return values into functions
-  return <Form path="/login" signIn={() => signIn(setUser, navigate)} />
+  return (
+    <Form
+      path="/login"
+      signIn={signInOption => signIn(setUser, signInOption, navigate)}
+    />
+  )
 }
 
 export default Login
