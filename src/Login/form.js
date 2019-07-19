@@ -55,7 +55,7 @@ const Input = styled.input`
   margin: 0.5em;
   color: ${props => props.inputColor || 'palevioletred'};
   background: white;
-  width: 80%;
+  width: 40rem;
   border: none;
   border-radius: 3px;
 `
@@ -65,7 +65,6 @@ const StyledButton = styled.button`
   align-self: center;
   padding: 1rem 4rem;
   margin-top: 4rem;
-  width: 70%;
   color: ${props => props.inputColor || theme.colors.black};
 `
 const Form = ({ signIn }) => {
@@ -101,7 +100,13 @@ const Form = ({ signIn }) => {
           {/* TODO: Add this text to the strings file */}
           {strings.or[lang]}
         </Text>
-        <Box py="5rem" flexDirection="column" px="5rem" alignItems="center">
+        <Box
+          py="5rem"
+          flexDirection="column"
+          px="5rem"
+          alignItems="center"
+          style={{ 'padding-top': '2rem', display: 'block' }}
+        >
           <form>
             <label>
               <Input type="text" placeholder={strings.usernameField[lang]} />
@@ -116,6 +121,7 @@ const Form = ({ signIn }) => {
               lineHeight="1.3"
               maxWidth="50rem"
               px="4rem"
+              style={{ 'text-align': 'center', 'padding-left': '10rem' }}
             >
               {strings.forgotPassword[lang]}
             </Text>
