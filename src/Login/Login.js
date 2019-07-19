@@ -55,16 +55,14 @@ const callDatabase = async ({ email, displayName, uid: userId }, setUser) => {
   if (!user)
     console.log(
       await new Promise((res, rej) => {
-        database.ref('users/' + userId).set({
-          displayName: displayName,
-          email: email,
-          uid: userId,
-        })
+        const newUser = { displayName: displayName, email: email, uid: userId }
+        database.ref('users/' + userId).set(newUser)
+        setUser({ ...newUser, saved: true })
         res('Successfully added to database')
         rej('Failed to add to database')
       })
     )
-  else return setUser({ ...user, saved: true })
+  else setUser({ ...user, saved: true })
 }
 
 const Login = ({ navigate }) => {
