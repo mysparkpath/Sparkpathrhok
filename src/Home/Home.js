@@ -79,7 +79,7 @@ const Home = () => {
   const { top3: myTop3 } = useTop3()
   const { lang } = useLanguage()
   const { user } = useUser()
-  console.log(user)
+
   return (
     <Box bg="purple" flexDirection="column" color="white" flex="1">
       <Navbar bg="purple" />
