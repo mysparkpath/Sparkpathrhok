@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, Text, Navbar } from '../components'
 import { Google } from 'styled-icons/boxicons-logos/Google'
 import { Facebook } from 'styled-icons/boxicons-logos/Facebook'
@@ -53,7 +53,7 @@ const TwitterIcon = ({ onClick }) => {
 const Input = styled.input`
   padding: 0.5em;
   margin: 0.5em;
-  color: ${props => props.inputColor || 'palevioletred'};
+  color: ${props => props.inputColor || 'black'};
   background: white;
   width: 40rem;
   border: none;
@@ -67,8 +67,25 @@ const StyledButton = styled.button`
   margin-top: 4rem;
   color: ${props => props.inputColor || theme.colors.black};
 `
+
+const handleChange = ({ target }, field, formContents, setForm) => {
+  formContents[field] = target.value
+  setForm({ ...formContents })
+}
+const handleSubmit = (event, form, register) => {
+  event.preventDefault()
+  if (form.email.length < 1) return window.alert('Please enter an email')
+  if (form.password.length < 1) return window.alert('Please enter a passport')
+  console.log('submit')
+  register(form)
+}
+
 const Form = ({ signIn }) => {
   const { lang } = useLanguage()
+  const [formContents, setForm] = useState({
+    email: '',
+    password: '',
+  })
   return (
     <Box bg="purple" flexDirection="column" color="white" flex="1">
       <Navbar bg="purple" />
@@ -107,12 +124,26 @@ const Form = ({ signIn }) => {
           alignItems="center"
           style={{ 'padding-top': '2rem', display: 'block' }}
         >
-          <form>
+          <form onSubmit={event => handleSubmit(event, formContents, register)}>
             <label>
-              <Input type="text" placeholder={strings.usernameField[lang]} />
+              <Input
+                type="text"
+                value={formContents.email}
+                placeholder={strings.emailField[lang]}
+                onChange={event =>
+                  handleChange(event, 'email', formContents, setForm)
+                }
+              />
             </label>
             <label>
-              <Input type="text" placeholder={strings.passwordField[lang]} />
+              <Input
+                type="text"
+                value={formContents.password}
+                placeholder={strings.passwordField[lang]}
+                onChange={event =>
+                  handleChange(event, 'password', formContents, setForm)
+                }
+              />
             </label>
             <Text
               textAlign="left"
