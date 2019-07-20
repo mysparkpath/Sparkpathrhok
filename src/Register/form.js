@@ -82,7 +82,7 @@ const handleSubmit = (event, form, register) => {
     return window.alert('Your password do not match')
   if (form.password.length < 6)
     return window.alert('Your password must be at least 6 characters')
-  console.log('submit')
+
   register(form)
 }
 

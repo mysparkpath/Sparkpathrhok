@@ -45,7 +45,7 @@ const signIn = (setUser, signInOption, navigate, lang) => {
     })
     .catch(err => console.error(err))
 }
-const register = (setUser, form, navigate, lang) => {
+const register = (setUser, form, navigate) => {
   Firebase.auth()
     .createUserWithEmailAndPassword(form.email, form.password)
     .then(result => {
