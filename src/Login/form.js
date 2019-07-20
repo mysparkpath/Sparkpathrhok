@@ -72,15 +72,15 @@ const handleChange = ({ target }, field, formContents, setForm) => {
   formContents[field] = target.value
   setForm({ ...formContents })
 }
-const handleSubmit = (event, form, register) => {
+const handleSubmit = (event, form, loginWithEmail) => {
   event.preventDefault()
   if (form.email.length < 1) return window.alert('Please enter an email')
-  if (form.password.length < 1) return window.alert('Please enter a passport')
+  if (form.password.length < 1) return window.alert('Please enter a password')
   console.log('submit')
-  register(form)
+  loginWithEmail(form)
 }
 
-const Form = ({ signIn }) => {
+const Form = ({ signIn, loginWithEmail }) => {
   const { lang } = useLanguage()
   const [formContents, setForm] = useState({
     email: '',
@@ -124,7 +124,11 @@ const Form = ({ signIn }) => {
           alignItems="center"
           style={{ 'padding-top': '2rem', display: 'block' }}
         >
-          <form onSubmit={event => handleSubmit(event, formContents, register)}>
+          <form
+            onSubmit={event =>
+              handleSubmit(event, formContents, loginWithEmail)
+            }
+          >
             <label>
               <Input
                 type="text"
@@ -137,7 +141,7 @@ const Form = ({ signIn }) => {
             </label>
             <label>
               <Input
-                type="text"
+                type="password"
                 value={formContents.password}
                 placeholder={strings.passwordField[lang]}
                 onChange={event =>

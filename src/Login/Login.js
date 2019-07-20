@@ -46,6 +46,21 @@ const signIn = (setUser, signInOption, navigate, lang) => {
     })
     .catch(err => console.error(err))
 }
+const loginWithEmail = (setUser, form, navigate) => {
+  Firebase.auth()
+    .signInWithEmailAndPassword(form.email, form.password)
+    .then(result => {
+      const user = { ...result.user, displayName: form.name }
+      callDatabase(user, setUser)
+      navigate('/home')
+    })
+    .catch(err => {
+      // Handle Errors here.
+      window.alert(err.message)
+      console.error(err.code, err.message)
+      // ...
+    })
+}
 
 const callDatabase = async ({ email, displayName, uid: userId }, setUser) => {
   const user = await new Promise((res, rej) => {
@@ -72,6 +87,7 @@ const Login = ({ navigate }) => {
     <Form
       path="/login"
       signIn={signInOption => signIn(setUser, signInOption, navigate, lang)}
+      loginWithEmail={form => loginWithEmail(setUser, form, navigate, lang)}
     />
   )
 }
