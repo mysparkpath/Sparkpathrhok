@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, Text, Navbar } from '../components'
 import { Google } from 'styled-icons/boxicons-logos/Google'
 import { Facebook } from 'styled-icons/boxicons-logos/Facebook'
@@ -68,8 +68,33 @@ const StyledButton = styled.button`
   padding: 1rem 4rem;
   color: ${props => props.inputColor || theme.colors.black};
 `
-const Form = ({ signIn }) => {
+const handleChange = ({ target }, field, formContents, setForm) => {
+  formContents[field] = target.value
+  setForm({ ...formContents })
+}
+
+const handleSubmit = (event, form, register) => {
+  event.preventDefault()
+  if (form.name.length < 1) return window.alert('Please enter a name')
+  if (form.licenseCode.length < 1)
+    return window.alert('Please enter a license code')
+  if (form.password != form.confirmPassword)
+    return window.alert('Your password do not match')
+  if (form.password.length < 6)
+    return window.alert('Your password must be at least 6 characters')
+  console.log('submit')
+  register(form)
+}
+
+const Form = ({ signIn, register }) => {
   const { lang } = useLanguage()
+  const [formContents, setForm] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    licenseCode: '',
+  })
   return (
     <Box bg="purple" flexDirection="column" color="white" flex="1">
       <Navbar bg="purple" />
@@ -107,27 +132,56 @@ const Form = ({ signIn }) => {
           alignItems="center"
           style={{ 'padding-top': '2rem', display: 'block' }}
         >
-          <form>
+          <form onSubmit={event => handleSubmit(event, formContents, register)}>
             <label>
-              <Input type="text" placeholder={strings.nameField[lang]} />
+              <Input
+                type="text"
+                value={formContents.name}
+                placeholder={strings.nameField[lang]}
+                onChange={event =>
+                  handleChange(event, 'name', formContents, setForm)
+                }
+              />
             </label>
             <label>
-              <Input type="text" placeholder={strings.emailField[lang]} />
+              <Input
+                type="text"
+                value={formContents.email}
+                placeholder={strings.emailField[lang]}
+                onChange={event =>
+                  handleChange(event, 'email', formContents, setForm)
+                }
+              />
             </label>
             <label>
               <Input
                 type="password"
+                value={formContents.password}
                 placeholder={strings.passwordField[lang]}
+                onChange={event =>
+                  handleChange(event, 'password', formContents, setForm)
+                }
               />
             </label>
             <label>
               <Input
                 type="password"
+                value={formContents.confirmPassword}
                 placeholder={strings.confirmPasswordField[lang]}
+                onChange={event =>
+                  handleChange(event, 'confirmPassword', formContents, setForm)
+                }
               />
             </label>
             <label>
-              <Input type="text" placeholder={strings.licenseCode[lang]} />
+              <Input
+                type="text"
+                value={formContents.licenseCode}
+                placeholder={strings.licenseCode[lang]}
+                onChange={event =>
+                  handleChange(event, 'licenseCode', formContents, setForm)
+                }
+              />
             </label>
             <StyledButton
               type="submit"

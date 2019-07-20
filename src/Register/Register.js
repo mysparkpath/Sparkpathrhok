@@ -45,8 +45,24 @@ const signIn = (setUser, signInOption, navigate, lang) => {
     })
     .catch(err => console.error(err))
 }
+const register = (setUser, form, navigate, lang) => {
+  Firebase.auth()
+    .createUserWithEmailAndPassword(form.email, form.password)
+    .then(result => {
+      const user = { ...result.user, displayName: form.name }
+      callDatabase(user, setUser)
+      navigate('/home')
+    })
+    .catch(err => {
+      // Handle Errors here.
+      window.alert(err.message)
+      console.error(err.code, err.message)
+      // ...
+    })
+}
 
 const callDatabase = async ({ email, displayName, uid: userId }, setUser) => {
+  console.log(displayName)
   const user = await new Promise((res, rej) => {
     database.ref('users/' + userId).on('value', snapshot => res(snapshot.val()))
   })
@@ -63,7 +79,7 @@ const callDatabase = async ({ email, displayName, uid: userId }, setUser) => {
   else setUser({ ...user, saved: true })
 }
 
-const Login = ({ navigate }) => {
+const Register = ({ navigate }) => {
   const { lang } = useLanguage()
   const { setUser } = useUser()
 
@@ -71,8 +87,9 @@ const Login = ({ navigate }) => {
     <Form
       path="/register"
       signIn={signInOption => signIn(setUser, signInOption, navigate, lang)}
+      register={form => register(setUser, form, navigate, lang)}
     />
   )
 }
 
-export default Login
+export default Register
