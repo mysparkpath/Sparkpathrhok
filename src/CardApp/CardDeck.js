@@ -71,11 +71,9 @@ const CardDeck = () => {
   const { deck, totalCount, sendToYes, sendToMaybe, sendToNo } = useDeck()
   const { initial: currentDeck, yes } = deck
 
-  const getCurrentIndex = () => {
-    return totalCount - currentDeck.length + 1
-  }
+  const currentIndex = totalCount - currentDeck.length + 1
 
-  const progress = Math.ceil((getCurrentIndex() * 100) / totalCount)
+  const progress = Math.ceil((currentIndex * 100) / totalCount)
 
   const current =
     currentDeck && currentDeck.length > 0
