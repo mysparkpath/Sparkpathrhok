@@ -53,9 +53,11 @@ const TwitterIcon = ({ onClick }) => {
 const Input = styled.input`
   padding: 0.5em;
   margin: 0.5em;
+  margin-bottom: 2rem;
   color: ${props => props.inputColor || 'black'};
   background: white;
   width: 40rem;
+  display: block;
   border: none;
   border-radius: 3px;
 `
