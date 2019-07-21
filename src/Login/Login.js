@@ -41,7 +41,6 @@ const signIn = (setUser, signInOption, navigate, lang) => {
     .then(result => {
       const user = result.user
       callDatabase(user, setUser)
-      console.log(user)
       navigate('/home')
     })
     .catch(err => console.error(err))
@@ -49,9 +48,23 @@ const signIn = (setUser, signInOption, navigate, lang) => {
 const loginWithEmail = (setUser, form, navigate) => {
   Firebase.auth()
     .signInWithEmailAndPassword(form.email, form.password)
-    .then(result => {
-      const user = { ...result.user, displayName: form.name }
-      callDatabase(user, setUser)
+    .then(async result => {
+      const user = { ...result.user }
+      const allData = await new Promise((res, rej) => {
+        database.ref().on('value', snapshot => res(snapshot.val()))
+      })
+      let storedUser = null
+      for (const school in allData) {
+        if (allData[school].admin.hasOwnProperty(user.uid)) {
+          storedUser = allData[school].admin[user.uid]
+          break
+        } else if (allData[school].users.hasOwnProperty(user.uid)) {
+          storedUser = allData[school].users[user.uid]
+          break
+        }
+      }
+      console.log(storedUser)
+      callDatabase(storedUser, setUser)
       navigate('/home')
     })
     .catch(err => {
@@ -62,15 +75,29 @@ const loginWithEmail = (setUser, form, navigate) => {
     })
 }
 
-const callDatabase = async ({ email, displayName, uid: userId }, setUser) => {
+const callDatabase = async (
+  { email, displayName, uid: userId, school, admin, licenseCode: code },
+  setUser
+) => {
   const user = await new Promise((res, rej) => {
-    database.ref('users/' + userId).on('value', snapshot => res(snapshot.val()))
+    database
+      .ref(`${code}/` + (admin ? `admin/${userId}` : `users/${userId}`))
+      .on('value', snapshot => res(snapshot.val()))
   })
+  console.log(user)
   if (!user)
     console.log(
       await new Promise((res, rej) => {
-        const newUser = { displayName: displayName, email: email, uid: userId }
-        database.ref('users/' + userId).set(newUser)
+        //TODO: Abstract this code so that we don't need the admin property
+        const newUser = {
+          displayName: displayName,
+          email: email,
+          uid: userId,
+          admin: admin ? admin : false,
+        }
+        database
+          .ref(`${code}/` + (admin ? `admin/${userId}` : `users/${userId}`))
+          .set(newUser)
         setUser({ ...newUser, saved: true })
         res('Successfully added to database')
         rej('Failed to add to database')
