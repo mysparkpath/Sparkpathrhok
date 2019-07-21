@@ -169,4 +169,8 @@ export default {
     fr: "Votre code de licence d'école est",
     en: 'Your school license code is',
   },
+  studentInfo: {
+    fr: 'Télécharger les résultats des étudiants',
+    en: 'Download student results',
+  },
 }
