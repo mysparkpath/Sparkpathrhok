@@ -74,7 +74,39 @@ const handleSave = async ({ uid: userId, licenseCode }, myTop3) => {
     rej('Failed to add to database')
   })
 }
+const handleDownload = async ({ licenseCode }, lang) => {
+  // Retrieve student information
+  const students = await new Promise((res, rej) => {
+    database
+      .ref(`${licenseCode}/users`)
+      .on('value', snapshot => res(snapshot.val()))
+  })
 
+  // Filter names and top 3 challenge cards
+  let studentCards = []
+  for (const id in students) {
+    if (id === 'set') continue
+    const { displayName, email, myTop3 } = students[id]
+    const topChallenges = myTop3 ? myTop3.map(card => card[lang].title) : []
+    studentCards.push([displayName, email, ...topChallenges])
+  }
+
+  // Prepare CSV
+  let resultsCsv = 'data:text/csv;charset=utf-8,'
+  resultsCsv += 'Name,email,Challenge 1,Challenge 2, Challenge 3\r\n'
+  studentCards.forEach(studentInfo => {
+    resultsCsv += studentInfo.join(',') + '\r\n'
+  })
+
+  // Download CSV
+  var downloadLink = document.createElement('a')
+  downloadLink.href = resultsCsv
+  downloadLink.download = 'results.csv'
+
+  document.body.appendChild(downloadLink)
+  downloadLink.click()
+  document.body.removeChild(downloadLink)
+}
 const renderUserScreen = (lang, user, myTop3) => {
   return (
     <React.Fragment>
@@ -98,7 +130,7 @@ const renderUserScreen = (lang, user, myTop3) => {
           maxWidth="50rem"
           style={{ 'padding-top': '5rem' }}
         >
-          {user.myTop3
+          {user.myTop3 && user.myTop3.length > 0
             ? strings.savedCards[lang]
             : myTop3.length > 0 && 'Your challenge cards are:'}
         </Text>
@@ -148,6 +180,11 @@ const renderAdminScreen = (lang, user) => {
       >
         {`${strings.licenseCode[lang]} ${user.licenseCode}`}!
       </Text>
+      <Box py="5rem" flexDirection="column" px="5rem" alignItems="center">
+        <StyledButton onClick={() => handleDownload(user, lang)}>
+          {strings.studentInfo[lang]}
+        </StyledButton>
+      </Box>
     </Box>
   )
 }
