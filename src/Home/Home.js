@@ -93,7 +93,7 @@ const handleDownload = async ({ licenseCode }, lang) => {
 
   // Prepare CSV
   let resultsCsv = 'data:text/csv;charset=utf-8,'
-  resultsCsv += 'Name,email,Challenge 1,Challenge 2, Challenge 3\r\n'
+  resultsCsv += 'Name,Email,Challenge 1,Challenge 2, Challenge 3\r\n'
   studentCards.forEach(studentInfo => {
     resultsCsv += studentInfo.join(',') + '\r\n'
   })
