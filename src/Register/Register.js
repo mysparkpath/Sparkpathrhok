@@ -55,7 +55,6 @@ const register = (setUser, form, navigate) => {
       }
       const successfulCall = await callDatabase(user, setUser)
       if (!successfulCall) throw { code: null, message: 'Invalid license code' }
-      console.log(successfulCall)
       navigate('/home')
     })
     .catch(err => {
@@ -89,7 +88,6 @@ const callDatabase = async (
         email: email,
         uid: userId,
         licenseCode,
-        myTop3: [],
       }
       database
         .ref(
