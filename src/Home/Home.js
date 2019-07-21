@@ -63,10 +63,10 @@ const renderCards = (myTop3, lang) => {
   )
 }
 
-const handleSave = async ({ uid: userId }, myTop3) => {
+const handleSave = async ({ uid: userId, licenseCode }, myTop3) => {
   console.log(userId)
   await new Promise((res, rej) => {
-    database.ref('users/' + userId).update({
+    database.ref(`${licenseCode}/users/${userId}`).update({
       myTop3: myTop3,
     })
     console.log('Successfully added to database')
@@ -75,14 +75,9 @@ const handleSave = async ({ uid: userId }, myTop3) => {
   })
 }
 
-const Home = () => {
-  const { top3: myTop3 } = useTop3()
-  const { lang } = useLanguage()
-  const { user } = useUser()
-
+const renderUserScreen = (lang, user, myTop3) => {
   return (
-    <Box bg="purple" flexDirection="column" color="white" flex="1">
-      <Navbar bg="purple" />
+    <React.Fragment>
       <Box flexDirection="column" alignItems="center" mx={6}>
         {
           <Text
@@ -95,7 +90,6 @@ const Home = () => {
             {`${strings.welcome[lang]} ${user.displayName}`}!
           </Text>
         }
-
         <Text
           textAlign="center"
           fontSize={5}
@@ -116,11 +110,12 @@ const Home = () => {
           color="black"
           px="3rem"
         >
-          {user.myTop3
+          {user.myTop3 && user.myTop3.length > 0
             ? renderCards(user.myTop3, lang)
             : renderCards(myTop3, lang)}
         </Box>
       </Box>
+
       {myTop3.length > 0 && (
         <Box py="5rem" flexDirection="column" px="5rem" alignItems="center">
           <StyledButton onClick={() => handleSave(user, myTop3)}>
@@ -128,6 +123,46 @@ const Home = () => {
           </StyledButton>
         </Box>
       )}
+    </React.Fragment>
+  )
+}
+
+const renderAdminScreen = (lang, user) => {
+  return (
+    <Box flexDirection="column" alignItems="center" mx={6}>
+      <Text
+        textAlign="center"
+        fontSize={5}
+        fontWeight="600"
+        lineHeight="1.3"
+        maxWidth="50rem"
+      >
+        {`${strings.welcome[lang]} ${user.displayName}`}!
+      </Text>
+      <Text
+        textAlign="center"
+        fontSize={5}
+        fontWeight="600"
+        lineHeight="1.3"
+        maxWidth="50rem"
+      >
+        {`${strings.licenseCode[lang]} ${user.licenseCode}`}!
+      </Text>
+    </Box>
+  )
+}
+const Home = () => {
+  const { top3: myTop3 } = useTop3()
+  const { lang } = useLanguage()
+  const { user } = useUser()
+
+  console.log(user)
+  return (
+    <Box bg="purple" flexDirection="column" color="white" flex="1">
+      <Navbar bg="purple" />
+      {user.admin
+        ? renderAdminScreen(lang, user)
+        : renderUserScreen(lang, user, myTop3)}
     </Box>
   )
 }
