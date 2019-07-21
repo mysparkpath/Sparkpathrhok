@@ -3,7 +3,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { theme } from '../components/theme'
 import Firebase from 'firebase'
-import { firebaseConfig } from './config'
 import Form from './form'
 
 import { useLanguage, useUser } from '../state'
@@ -40,7 +39,7 @@ const signIn = (setUser, signInOption, navigate, lang) => {
     .then(result => {
       const user = result.user
       callDatabase(user, setUser)
-      console.log(user)
+
       navigate('/home')
     })
     .catch(err => console.error(err))
@@ -48,9 +47,15 @@ const signIn = (setUser, signInOption, navigate, lang) => {
 const register = (setUser, form, navigate) => {
   Firebase.auth()
     .createUserWithEmailAndPassword(form.email, form.password)
-    .then(result => {
-      const user = { ...result.user, displayName: form.name }
-      callDatabase(user, setUser)
+    .then(async result => {
+      const user = {
+        ...result.user,
+        displayName: form.name,
+        licenseCode: form.licenseCode,
+      }
+      const successfulCall = await callDatabase(user, setUser)
+      if (!successfulCall) throw { code: null, message: 'Invalid license code' }
+      console.log(successfulCall)
       navigate('/home')
     })
     .catch(err => {
@@ -61,22 +66,41 @@ const register = (setUser, form, navigate) => {
     })
 }
 
-const callDatabase = async ({ email, displayName, uid: userId }, setUser) => {
-  console.log(displayName)
+const callDatabase = async (
+  { email, displayName, uid: userId, admin, licenseCode },
+  setUser
+) => {
   const user = await new Promise((res, rej) => {
-    database.ref('users/' + userId).on('value', snapshot => res(snapshot.val()))
+    database
+      .ref(`${licenseCode}` + (admin ? `admin/${userId}` : `users/${userId}`))
+      .on('value', snapshot => res(snapshot.val()))
   })
-  if (!user)
-    console.log(
-      await new Promise((res, rej) => {
-        const newUser = { displayName: displayName, email: email, uid: userId }
-        database.ref('users/' + userId).set(newUser)
-        setUser({ ...newUser, saved: true })
-        res('Successfully added to database')
-        rej('Failed to add to database')
-      })
-    )
-  else setUser({ ...user, saved: true })
+  if (!user) {
+    // TODO: Add logic to determine the number of license codes remaining
+    const exists = await new Promise((res, rej) => {
+      database
+        .ref(`${licenseCode}`)
+        .on('value', snapshot => res(snapshot.exists()))
+    })
+    if (!exists) return false
+    return await new Promise((res, rej) => {
+      const newUser = {
+        displayName: displayName,
+        email: email,
+        uid: userId,
+        licenseCode,
+        myTop3: [],
+      }
+      database
+        .ref(
+          `${licenseCode}/` + (admin ? `admin/${userId}` : `users/${userId}`)
+        )
+        .set(newUser)
+      setUser({ ...newUser, saved: true })
+      res(true)
+      rej('Failed to add to database')
+    })
+  } else setUser({ ...user, saved: true })
 }
 
 const Register = ({ navigate }) => {
