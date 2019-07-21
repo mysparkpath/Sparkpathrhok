@@ -58,10 +58,26 @@ const Navbar = props => {
           hoverColor={textColours}
           color={textColours}
           visitedColor={textColours}
-          fontWeight={window.location.pathname === '/login' ? 600 : 300}
+          fontWeight={window.location.pathname === '/login' ? 600 : null}
           style={{ 'margin-left': '0.8rem' }}
         >
           {strings.login[lang]}
+        </Link>{' '}
+        /{' '}
+        <Link
+          as={ReachLink}
+          fontSize={1}
+          to="/school-register"
+          mr={3}
+          hoverColor={textColours}
+          color={textColours}
+          visitedColor={textColours}
+          fontWeight={
+            window.location.pathname === '/school-register' ? 600 : null
+          }
+          style={{ 'margin-left': '0.8rem' }}
+        >
+          {strings.schoolRegister[lang]}
         </Link>{' '}
         /{' '}
         <Button
