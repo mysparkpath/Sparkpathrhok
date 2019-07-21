@@ -149,4 +149,24 @@ export default {
     fr: 'Registre',
     en: 'Register',
   },
+  schoolRegister: {
+    fr: 'Inscrire une école',
+    en: 'Register a school',
+  },
+  schoolField: {
+    fr: 'École',
+    en: 'School',
+  },
+  purchase: {
+    fr: 'Acheter les codes de licence',
+    en: 'Purchase license codes',
+  },
+  numberOfCodesField: {
+    fr: 'Nombre de codes',
+    en: 'Number of codes',
+  },
+  licenseCode: {
+    fr: "Votre code de licence d'école est",
+    en: 'Your school license code is',
+  },
 }
