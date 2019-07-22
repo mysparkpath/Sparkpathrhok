@@ -3,8 +3,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { theme } from '../components/theme'
 import Firebase from 'firebase'
-import Form from './form'
-
+import Form from '../components/form'
+import strings from '../strings'
 import { useLanguage, useUser } from '../state'
 
 const database = Firebase.database()
@@ -108,8 +108,12 @@ const Register = ({ navigate }) => {
   return (
     <Form
       path="/register"
+      enableIcons={true}
       signIn={signInOption => signIn(setUser, signInOption, navigate, lang)}
-      register={form => register(setUser, form, navigate, lang)}
+      title={strings.registerWith[lang]}
+      labels={['name', 'email', 'password', 'confirmPassword', 'licenseCode']}
+      raiseSubmit={form => register(setUser, form, navigate, lang)}
+      buttonLabel={strings.register[lang]}
     />
   )
 }

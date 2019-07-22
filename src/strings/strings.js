@@ -141,7 +141,7 @@ export default {
     fr: 'Confirmez le mot de passe',
     en: 'Confirm Password',
   },
-  licenseCode: {
+  licenseCodeField: {
     fr: 'Code de licence',
     en: 'License Code',
   },

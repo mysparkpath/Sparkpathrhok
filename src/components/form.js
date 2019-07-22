@@ -74,20 +74,28 @@ const handleChange = ({ target }, field, formContents, setForm) => {
   formContents[field] = target.value
   setForm({ ...formContents })
 }
-const handleSubmit = (event, form, loginWithEmail) => {
+const handleSubmit = (event, form, raiseSubmit) => {
   event.preventDefault()
-  if (form.email.length < 1) return window.alert('Please enter an email')
-  if (form.password.length < 1) return window.alert('Please enter a password')
+  for (const field in form) {
+    if (form[field].length < 1) return window.alert(`Please enter a ${field}`)
+  }
   console.log('submit')
-  loginWithEmail(form)
+  raiseSubmit(form)
 }
 
-const Form = ({ signIn, loginWithEmail }) => {
+const Form = ({
+  title,
+  signIn,
+  raiseSubmit,
+  labels,
+  forgotPassword,
+  buttonLabel,
+  enableIcons,
+}) => {
   const { lang } = useLanguage()
-  const [formContents, setForm] = useState({
-    email: '',
-    password: '',
-  })
+  let fields = {}
+  labels.forEach(label => (fields[label] = ''))
+  const [formContents, setForm] = useState(fields)
   return (
     <Box bg="purple" flexDirection="column" color="white" flex="1">
       <Navbar bg="purple" />
@@ -100,25 +108,27 @@ const Form = ({ signIn, loginWithEmail }) => {
             lineHeight="1.3"
             maxWidth="50rem"
           >
-            {/* TODO: Add this text to the strings file */}
-            {strings.loginWith[lang]}
+            {title}
           </Text>
         }
-        <Box py="2rem" flexDirection="row" px="2rem" alignItems="center">
-          <FacebookIcon onClick={signIn} width="100%" height="100%" />
-          <GoogleIcon onClick={signIn} />
-          <TwitterIcon onClick={signIn} width="100%" height="100%" />
-        </Box>
-        <Text
-          textAlign="center"
-          fontSize={5}
-          fontWeight="600"
-          lineHeight="1.3"
-          maxWidth="50rem"
-        >
-          {/* TODO: Add this text to the strings file */}
-          {strings.or[lang]}
-        </Text>
+        {enableIcons && (
+          <React.Fragment>
+            <Box py="2rem" flexDirection="row" px="2rem" alignItems="center">
+              <FacebookIcon onClick={signIn} width="100%" height="100%" />
+              <GoogleIcon onClick={signIn} />
+              <TwitterIcon onClick={signIn} width="100%" height="100%" />
+            </Box>
+            <Text
+              textAlign="center"
+              fontSize={5}
+              fontWeight="600"
+              lineHeight="1.3"
+              maxWidth="50rem"
+            >
+              {strings.or[lang]}
+            </Text>
+          </React.Fragment>
+        )}
         <Box
           py="5rem"
           flexDirection="column"
@@ -127,41 +137,31 @@ const Form = ({ signIn, loginWithEmail }) => {
           style={{ 'padding-top': '2rem', display: 'block' }}
         >
           <form
-            onSubmit={event =>
-              handleSubmit(event, formContents, loginWithEmail)
-            }
+            onSubmit={event => handleSubmit(event, formContents, raiseSubmit)}
           >
-            <label>
+            {labels.map(label => (
               <Input
-                type="text"
-                value={formContents.email}
-                placeholder={strings.emailField[lang]}
-                onChange={event =>
-                  handleChange(event, 'email', formContents, setForm)
+                type={
+                  label.toLowerCase().includes('password') ? 'password' : 'text'
                 }
+                value={formContents[label]}
+                placeholder={strings[`${label}Field`][lang]}
+                onChange={e => handleChange(e, label, formContents, setForm)}
               />
-            </label>
-            <label>
-              <Input
-                type="password"
-                value={formContents.password}
-                placeholder={strings.passwordField[lang]}
-                onChange={event =>
-                  handleChange(event, 'password', formContents, setForm)
-                }
-              />
-            </label>
-            <Text
-              textAlign="left"
-              fontSize={2}
-              fontWeight="60"
-              lineHeight="1.3"
-              maxWidth="50rem"
-              px="4rem"
-              style={{ 'text-align': 'center', 'padding-left': '10rem' }}
-            >
-              {strings.forgotPassword[lang]}
-            </Text>
+            ))}
+            {forgotPassword && (
+              <Text
+                textAlign="left"
+                fontSize={2}
+                fontWeight="60"
+                lineHeight="1.3"
+                maxWidth="50rem"
+                px="4rem"
+                style={{ 'text-align': 'center', 'padding-left': '10rem' }}
+              >
+                {strings.forgotPassword[lang]}
+              </Text>
+            )}
             <StyledButton
               type="submit"
               value="Submit"
@@ -175,7 +175,7 @@ const Form = ({ signIn, loginWithEmail }) => {
                 maxWidth="50rem"
                 px="4rem"
               >
-                {strings.login[lang]}
+                {buttonLabel}
               </Text>
             </StyledButton>
           </form>

@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import { theme } from '../components/theme'
 import Firebase from 'firebase'
 import { firebaseConfig } from './config'
-import Form from './form'
-
+import Form from '../components/form'
+import strings from '../strings'
 import { useLanguage, useUser } from '../state'
 
 const database = Firebase.database()
@@ -21,35 +21,16 @@ const StyledButton = styled.button`
   width: 70%;
   color: ${props => props.inputColor || theme.colors.black};
 `
-
-const signIn = (setUser, signInOption, navigate, lang) => {
-  const authCreators = {
-    google: new Firebase.auth.GoogleAuthProvider(),
-    facebook: new Firebase.auth.FacebookAuthProvider(),
-    twitter: new Firebase.auth.TwitterAuthProvider(),
-  }
-
-  const provider = authCreators[signInOption]
-  Firebase.auth().languageCode =
-    signInOption === 'facebook' && lang === 'fr' ? 'fr_FR' : lang
-
-  // Authenticate user
-  // TODO: Change to async/await functionality
-  Firebase.auth()
-    .signInWithPopup(provider)
-    .then(result => {
-      const user = result.user
-      callDatabase(user, setUser)
-      console.log(user)
-      navigate('/home')
-    })
-    .catch(err => console.error(err))
-}
-const register = (setUser, form, navigate) => {
+const registerSchool = (setUser, form, navigate) => {
   Firebase.auth()
     .createUserWithEmailAndPassword(form.email, form.password)
     .then(result => {
-      // console.log(result.user)
+      let code = form.school
+        .split(' ')
+        .map(word => word.charAt(0))
+        .join('')
+      form.code = code
+
       const user = {
         ...result.user,
         displayName: form.name,
@@ -101,11 +82,26 @@ const callDatabase = async (
   else setUser({ ...user, saved: true })
 }
 
-const Register = ({ navigate }) => {
+const SchoolRegister = ({ navigate }) => {
   const { lang } = useLanguage()
   const { setUser } = useUser()
 
-  return <Form register={form => register(setUser, form, navigate, lang)} />
+  return (
+    <Form
+      enableIcons={false}
+      title={strings.schoolRegister[lang]}
+      labels={[
+        'name',
+        'school',
+        'numberOfCodes',
+        'email',
+        'password',
+        'confirmPassword',
+      ]}
+      raiseSubmit={form => registerSchool(setUser, form, navigate, lang)}
+      buttonLabel={strings.register[lang]}
+    />
+  )
 }
 
-export default Register
+export default SchoolRegister

@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import { theme } from '../components/theme'
 import Firebase from 'firebase'
 import { firebaseConfig } from './config'
-import Form from './form'
+import Form from '../components/form'
+import strings from '../strings'
 
 import { useLanguage, useUser } from '../state'
 
@@ -114,7 +115,12 @@ const Login = ({ navigate }) => {
     <Form
       path="/login"
       signIn={signInOption => signIn(setUser, signInOption, navigate, lang)}
-      loginWithEmail={form => loginWithEmail(setUser, form, navigate, lang)}
+      enableIcons={true}
+      title={strings.loginWith[lang]}
+      labels={['email', 'password']}
+      forgotPassword={true}
+      raiseSubmit={form => loginWithEmail(setUser, form, navigate, lang)}
+      buttonLabel={strings.login[lang]}
     />
   )
 }
