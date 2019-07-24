@@ -53,7 +53,7 @@ const TwitterIcon = ({ onClick }) => {
 const Input = styled.input`
   padding: 0.5em;
   margin: 0.5em;
-  margin-bottom: 2rem;
+  margin-left: 5rem;
   color: ${props => props.inputColor || 'black'};
   background: white;
   width: 40rem;
@@ -66,7 +66,7 @@ const StyledButton = styled.button`
   border-radius: 10px;
   align-self: center;
   padding: 1rem 4rem;
-  margin-top: 4rem;
+  margin-top: 2rem;
   color: ${props => props.inputColor || theme.colors.black};
 `
 
@@ -98,56 +98,53 @@ const Form = ({
   const [formContents, setForm] = useState(fields)
   return (
     <Box bg="purple" flexDirection="column" color="white" flex="1">
-      <Navbar bg="purple" />
-      <Box flexDirection="column" alignItems="center" mx={6}>
+      <Box flexDirection="column" alignItems="left">
         {
           <Text
-            textAlign="center"
+            textAlign="left"
             fontSize={5}
             fontWeight="600"
             lineHeight="1.3"
             maxWidth="50rem"
+            paddingLeft="0"
           >
             {title}
           </Text>
         }
-        {enableIcons && (
-          <React.Fragment>
-            <Box py="2rem" flexDirection="row" px="2rem" alignItems="center">
-              <FacebookIcon onClick={signIn} width="100%" height="100%" />
-              <GoogleIcon onClick={signIn} />
-              <TwitterIcon onClick={signIn} width="100%" height="100%" />
-            </Box>
-            <Text
-              textAlign="center"
-              fontSize={5}
-              fontWeight="600"
-              lineHeight="1.3"
-              maxWidth="50rem"
-            >
-              {strings.or[lang]}
-            </Text>
-          </React.Fragment>
-        )}
         <Box
           py="5rem"
           flexDirection="column"
-          px="5rem"
           alignItems="center"
-          style={{ 'padding-top': '2rem', display: 'block' }}
+          style={{
+            'padding-top': '2rem',
+            'padding-bottom': '2rem',
+            display: 'block',
+          }}
         >
           <form
             onSubmit={event => handleSubmit(event, formContents, raiseSubmit)}
           >
             {labels.map(label => (
-              <Input
-                type={
-                  label.toLowerCase().includes('password') ? 'password' : 'text'
-                }
-                value={formContents[label]}
-                placeholder={strings[`${label}Field`][lang]}
-                onChange={e => handleChange(e, label, formContents, setForm)}
-              />
+              <>
+                <Text
+                  textAlign="left"
+                  fontSize={3}
+                  fontWeight="200"
+                  lineHeight="1.3"
+                  width="80%"
+                >
+                  {strings[`${label}Field`][lang]}
+                </Text>
+                <Input
+                  type={
+                    label.toLowerCase().includes('password')
+                      ? 'password'
+                      : 'text'
+                  }
+                  value={formContents[label]}
+                  onChange={e => handleChange(e, label, formContents, setForm)}
+                />
+              </>
             ))}
             {forgotPassword && (
               <Text
@@ -169,7 +166,7 @@ const Form = ({
             >
               <Text
                 textAlign="center"
-                fontSize={5}
+                fontSize={3}
                 fontWeight="60"
                 lineHeight="1.3"
                 maxWidth="50rem"
@@ -180,6 +177,35 @@ const Form = ({
             </StyledButton>
           </form>
         </Box>
+        {enableIcons && (
+          <React.Fragment>
+            <Text
+              textAlign="left"
+              fontSize={3}
+              fontWeight="600"
+              lineHeight="1.3"
+              maxWidth="50rem"
+            >
+              {'Or, use another account:'}
+            </Text>
+            <Box
+              py="2rem"
+              flexDirection="row"
+              px="2rem"
+              alignItems="center"
+              margin="auto"
+            >
+              <FacebookIcon
+                onClick={signIn}
+                width="100%"
+                height="100%"
+                margin="auto"
+              />
+              <GoogleIcon onClick={signIn} />
+              <TwitterIcon onClick={signIn} width="100%" height="100%" />
+            </Box>
+          </React.Fragment>
+        )}
       </Box>
     </Box>
   )

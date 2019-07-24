@@ -129,9 +129,13 @@ export default {
     fr: 'Inscrivez-vous avec',
     en: 'Register with',
   },
-  nameField: {
-    fr: 'Nom',
-    en: 'Name',
+  firstNameField: {
+    fr: 'Prénom',
+    en: 'First Name',
+  },
+  lastNameField: {
+    fr: 'Nom de famille',
+    en: 'Last Name',
   },
   emailField: {
     fr: 'Adresse courriel',
