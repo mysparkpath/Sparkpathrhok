@@ -28,7 +28,8 @@ const registerSchool = (setUser, form, navigate) => {
         .split(' ')
         .map(word => word.charAt(0))
         .join('')
-      form.code = code
+      form.code =
+        code + (1000 + Math.floor(Math.random() * Math.floor(8999)) + '')
 
       const user = {
         ...result.user,
