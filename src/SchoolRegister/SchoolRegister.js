@@ -102,7 +102,6 @@ const SchoolRegister = ({ navigate }) => {
               fontWeight="200"
               lineHeight="1.3"
               width="80%"
-              height="100vh"
             >
               Join hundreds of schools who are using the Challenge mindset to
               flip the career development model.
