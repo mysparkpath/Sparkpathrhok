@@ -146,7 +146,7 @@ const renderUserScreen = (lang, user, myTop3) => {
             lineHeight="1.3"
             maxWidth="50rem"
           >
-            {`${strings.welcome[lang]} ${user.displayName}`}!
+            {`${strings.welcome[lang]} ${user.firstName}`}!
           </Text>
         }
         <Text

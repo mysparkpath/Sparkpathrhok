@@ -50,7 +50,8 @@ const register = (setUser, form, navigate) => {
     .then(async result => {
       const user = {
         ...result.user,
-        displayName: form.name,
+        firstName: form.firstName,
+        lastName: form.lastName,
         licenseCode: form.licenseCode,
       }
       const successfulCall = await callDatabase(user, setUser)
@@ -66,7 +67,7 @@ const register = (setUser, form, navigate) => {
 }
 
 const callDatabase = async (
-  { email, displayName, uid: userId, admin, licenseCode },
+  { email, firstName, lastName, uid: userId, admin, licenseCode },
   setUser
 ) => {
   const user = await new Promise((res, rej) => {
@@ -84,7 +85,8 @@ const callDatabase = async (
     if (!exists) return false
     return await new Promise((res, rej) => {
       const newUser = {
-        displayName: displayName,
+        firstName: firstName,
+        lastName: lastName,
         email: email,
         uid: userId,
         licenseCode,

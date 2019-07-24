@@ -73,7 +73,7 @@ const loginWithEmail = (setUser, form, navigate) => {
 }
 
 const callDatabase = async (
-  { email, displayName, uid: userId, school, admin, licenseCode: code },
+  { email, firstName, lastName, uid: userId, school, admin, licenseCode: code },
   setUser
 ) => {
   const user = await new Promise((res, rej) => {
@@ -87,7 +87,8 @@ const callDatabase = async (
       await new Promise((res, rej) => {
         //TODO: Abstract this code so that we don't need the admin property
         const newUser = {
-          displayName: displayName,
+          firstName: firstName,
+          lastName: lastName,
           email: email,
           uid: userId,
           admin: admin ? admin : false,

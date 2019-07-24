@@ -32,7 +32,8 @@ const registerSchool = (setUser, form, navigate) => {
 
       const user = {
         ...result.user,
-        displayName: form.name,
+        firstName: form.firstName,
+        lastName: form.lastName,
         admin: true,
         school: form.school,
         code: form.code,
@@ -50,7 +51,7 @@ const registerSchool = (setUser, form, navigate) => {
 }
 
 const callDatabase = async (
-  { email, displayName, uid: userId, school, admin, code },
+  { email, firstName, lastName, uid: userId, school, admin, code },
   setUser
 ) => {
   const user = await new Promise((res, rej) => {
@@ -62,7 +63,8 @@ const callDatabase = async (
     console.log(
       await new Promise((res, rej) => {
         const newUser = {
-          displayName: displayName,
+          firstName: firstName,
+          lastName: lastName,
           email: email,
           uid: userId,
           school: school,
