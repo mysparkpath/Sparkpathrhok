@@ -37,7 +37,15 @@ const Navbar = props => {
       mb={6}
       {...props}
     >
-      {props.light ? <PurpleLogo /> : <MainLogo />}
+      {props.light ? (
+        <Link as={ReachLink} to="/">
+          <PurpleLogo />
+        </Link>
+      ) : (
+        <Link as={ReachLink} to="/">
+          <MainLogo />
+        </Link>
+      )}
       <Box alignItems="center" marginRight="5rem">
         <Link
           fontSize={1}
