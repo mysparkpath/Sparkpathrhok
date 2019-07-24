@@ -56,7 +56,7 @@ const register = (setUser, form, navigate) => {
       }
       const successfulCall = await callDatabase(user, setUser)
       if (!successfulCall) throw { code: null, message: 'Invalid license code' }
-      navigate('/home')
+      navigate('/get-started')
     })
     .catch(err => {
       // Handle Errors here.

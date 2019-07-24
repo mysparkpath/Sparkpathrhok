@@ -74,13 +74,17 @@ export default {
   },
   nextStep: {
     fr:
-      'La prochaine étape est de découvrir les programmes d’études qui vont te permettre de travailler sur ces défis importants.',
+      'La prochaine étape est de savoir plus sur chaque défi et les différents chemins à votre disposition.',
     en:
-      'The next step is to find out what education program can help you work on these important challenges.',
+      'The next step is to learn more about each challenge and the different paths available to you.',
   },
   enroll: {
-    fr: 'Inscris-toi à Étincelle pour débuter.',
-    en: 'Enroll in SparkPath to get started.',
+    fr: 'Téléchargez votre rapport pour commencer.',
+    en: 'Download your report to get started.',
+  },
+  getReport: {
+    fr: 'Obtenez mon rapport.',
+    en: 'Get my report.',
   },
   feedback: {
     fr: 'Partage un commentaire',

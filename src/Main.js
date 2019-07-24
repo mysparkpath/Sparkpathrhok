@@ -35,7 +35,7 @@ const Main = () => {
           as={ReachLink}
           fontSize="1.6rem"
           fontWeight="600"
-          to="/get-started"
+          to="/register"
           variant="pill"
           width="26rem"
           mx="auto"

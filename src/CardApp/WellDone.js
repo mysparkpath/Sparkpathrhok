@@ -136,11 +136,11 @@ const WellDone = () => {
             as={ReachLink}
             fontSize="2rem"
             fontWeight="600"
-            to="/register"
+            to="/home"
             textTransform="uppercase"
             id="confetti-target"
           >
-            {strings.createAccount[lang]}
+            {strings.getReport[lang]}
           </Link>
         </StyledButton>
 
