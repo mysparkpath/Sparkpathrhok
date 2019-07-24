@@ -113,9 +113,9 @@ const handleResults = async ({ licenseCode }, lang) => {
   let studentCards = []
   for (const id in students) {
     if (id === 'set') continue
-    const { displayName, email, myTop3 } = students[id]
+    const { firstName, email, myTop3 } = students[id]
     const topChallenges = myTop3 ? myTop3.map(card => card[lang].title) : []
-    studentCards.push([displayName, email, ...topChallenges])
+    studentCards.push([firstName, email, ...topChallenges])
   }
 
   // Prepare CSV
@@ -196,7 +196,7 @@ const renderAdminScreen = (lang, user) => {
         lineHeight="1.3"
         maxWidth="50rem"
       >
-        {`${strings.welcome[lang]} ${user.displayName}`}!
+        {`${strings.welcome[lang]} ${user.firstName}`}!
       </Text>
       <Text
         textAlign="center"
