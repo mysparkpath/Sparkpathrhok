@@ -206,7 +206,7 @@ const renderAdminScreen = (lang, user) => {
         maxWidth="50rem"
         paddingTop="2rem"
       >
-        {`${strings.licenseCode[lang]} ${user.licenseCode}`}!
+        {`${strings.licenseCode[lang]} ${user.licenseCode}`}
       </Text>
       <Box
         py="2rem"
