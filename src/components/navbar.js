@@ -30,6 +30,7 @@ const Navbar = props => {
       alignItems="center"
       justifyContent="space-between"
       height="5rem"
+      marginLeft="5rem"
       bg="white"
       px={4}
       py={8}
@@ -37,7 +38,7 @@ const Navbar = props => {
       {...props}
     >
       {props.light ? <PurpleLogo /> : <MainLogo />}
-      <Box alignItems="center">
+      <Box alignItems="center" marginRight="5rem">
         <Link
           fontSize={1}
           href="https://mysparkpath.com/pages/about"
