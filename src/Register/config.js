@@ -1,9 +1,8 @@
 export const firebaseConfig = {
-  apiKey: 'AIzaSyBFk7B90ocJVsDBFDJeGE7Vdmfm_VpIOMw',
-  authDomain: 'sparkpathchallengecards.firebaseapp.com',
-  databaseURL: 'https://sparkpathchallengecards.firebaseio.com',
-  projectId: 'sparkpathchallengecards',
-  storageBucket: '',
-  messagingSenderId: '520838571740',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: '1:520838571740:web:b36690d36b0bee73',
 }
