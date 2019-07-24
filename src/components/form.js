@@ -153,8 +153,7 @@ const Form = ({
                 fontWeight="60"
                 lineHeight="1.3"
                 maxWidth="50rem"
-                px="4rem"
-                style={{ 'text-align': 'center', 'padding-left': '10rem' }}
+                style={{ 'text-align': 'left' }}
               >
                 {strings.forgotPassword[lang]}
               </Text>

@@ -1,29 +1,25 @@
 import React from 'react'
-
+import { Box, Text, Navbar } from '../components'
 import styled from 'styled-components'
 import { theme } from '../components/theme'
 import Firebase from 'firebase'
 import { firebaseConfig } from './config'
 import Form from '../components/form'
 import strings from '../strings'
+import img from '../images/challengeCards.png'
 
 import { useLanguage, useUser } from '../state'
 
 Firebase.initializeApp(firebaseConfig)
 const database = Firebase.database()
 
-// Add border-radius: 50px;
-// box-shadow: 0px 7px 12px -8px rgba(0, 0, 0, 0.75);back
-const StyledButton = styled.button`
-  background: ${props => props.backgroundColor || 'white'};
-  border-radius: 10px;
-  align-self: center;
-  padding: 1rem 4rem;
-  margin-top: 4rem;
-  width: 70%;
-  color: ${props => props.inputColor || theme.colors.black};
+const LeftImage = styled.div`
+  background-image: url(${img});
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 80%;
+  height: 50rem;
 `
-
 const signIn = (setUser, signInOption, navigate, lang) => {
   const authCreators = {
     google: new Firebase.auth.GoogleAuthProvider(),
@@ -112,16 +108,42 @@ const Login = ({ navigate }) => {
   const { setUser } = useUser()
 
   return (
-    <Form
-      path="/login"
-      signIn={signInOption => signIn(setUser, signInOption, navigate, lang)}
-      enableIcons={true}
-      title={strings.loginWith[lang]}
-      labels={['email', 'password']}
-      forgotPassword={true}
-      raiseSubmit={form => loginWithEmail(setUser, form, navigate, lang)}
-      buttonLabel={strings.login[lang]}
-    />
+    <React.Fragment>
+      <Box bg="purple" flexDirection="column" color="white" flex="1">
+        <Navbar bg="purple" />
+        <Box flexDirection="row">
+          <Box width="60%" flexDirection="column" alignItems="center">
+            <Text
+              textAlign="left"
+              fontSize={5}
+              fontWeight="200"
+              lineHeight="1.3"
+              width="80%"
+            >
+              Thank you for being one of thousands of students who are using the
+              Challenge mindset to build their career.{' '}
+            </Text>
+            <LeftImage />
+          </Box>
+          <Box width="40%" px="5rem">
+            <Form
+              path="/login"
+              signIn={signInOption =>
+                signIn(setUser, signInOption, navigate, lang)
+              }
+              enableIcons={true}
+              title={strings.loginWith[lang]}
+              labels={['email', 'password']}
+              forgotPassword={true}
+              raiseSubmit={form =>
+                loginWithEmail(setUser, form, navigate, lang)
+              }
+              buttonLabel={strings.login[lang]}
+            />
+          </Box>
+        </Box>
+      </Box>
+    </React.Fragment>
   )
 }
 
