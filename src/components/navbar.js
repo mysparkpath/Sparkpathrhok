@@ -78,7 +78,7 @@ const Navbar = props => {
           }
           style={{ 'margin-left': '0.8rem' }}
         >
-          {strings.schoolRegister[lang]}
+          {strings.schoolField[lang]}
         </Link>{' '}
         /{' '}
         <Button

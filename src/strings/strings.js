@@ -129,6 +129,14 @@ export default {
     fr: 'Inscrivez-vous avec',
     en: 'Register with',
   },
+  nameField: {
+    fr: 'Nom',
+    en: 'Name',
+  },
+  phoneField: {
+    fr: 'Numéro de téléphone',
+    en: 'Phone number',
+  },
   firstNameField: {
     fr: 'Prénom',
     en: 'First Name',
