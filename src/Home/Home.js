@@ -5,8 +5,35 @@ import strings from '../strings'
 import styled from 'styled-components'
 import { theme } from '../components/theme'
 import Firebase from 'firebase'
+import challengeImg from '../images/card.png'
+import resultsImg from '../images/results.png'
+import helpImg from '../images/help.png'
 
 const database = Firebase.database()
+
+const ChallengeIcon = styled.div`
+  background-image: url(${challengeImg});
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 25rem;
+  height: 25rem;
+`
+const ResultsIcon = styled.div`
+  background-image: url(${resultsImg});
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  width: 25rem;
+  height: 25rem;
+`
+const HelpIcon = styled.div`
+  background-image: url(${helpImg});
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 25rem;
+  height: 25rem;
+`
 
 const StyledButton = styled.button`
   background: ${props => props.backgroundColor || 'white'};
@@ -74,7 +101,7 @@ const handleSave = async ({ uid: userId, licenseCode }, myTop3) => {
     rej('Failed to add to database')
   })
 }
-const handleDownload = async ({ licenseCode }, lang) => {
+const handleResults = async ({ licenseCode }, lang) => {
   // Retrieve student information
   const students = await new Promise((res, rej) => {
     database
@@ -173,17 +200,85 @@ const renderAdminScreen = (lang, user) => {
       </Text>
       <Text
         textAlign="center"
-        fontSize={5}
-        fontWeight="600"
+        fontSize={3}
+        fontWeight="400"
         lineHeight="1.3"
         maxWidth="50rem"
+        paddingTop="2rem"
       >
         {`${strings.licenseCode[lang]} ${user.licenseCode}`}!
       </Text>
-      <Box py="5rem" flexDirection="column" px="5rem" alignItems="center">
-        <StyledButton onClick={() => handleDownload(user, lang)}>
-          {strings.studentInfo[lang]}
-        </StyledButton>
+      <Box
+        py="2rem"
+        flexDirection="row"
+        px="2rem"
+        alignItems="center"
+        margin="auto"
+      >
+        <Box flexDirection="column" alignItems="center">
+          <Link
+            href="https://mysparkpath.com/collections/all"
+            hoverColor="white"
+            color="white"
+            visitedColor="white"
+          >
+            <ChallengeIcon
+              onClick={null}
+              width="100%"
+              height="100%"
+              margin="auto"
+            />
+            <Text
+              textAlign="center"
+              fontSize={3}
+              fontWeight="600"
+              lineHeight="1.3"
+              maxWidth="50rem"
+              paddingTop="2rem"
+            >
+              Get Challenge Cards
+            </Text>
+          </Link>
+        </Box>
+        <Box flexDirection="column" alignItems="center">
+          <ResultsIcon
+            marginLeft="10rem"
+            marginRight="10rem"
+            onClick={() => {
+              handleResults(user, lang)
+            }}
+          />
+          <Text
+            textAlign="center"
+            fontSize={3}
+            fontWeight="600"
+            lineHeight="1.3"
+            maxWidth="50rem"
+            paddingTop="2rem"
+          >
+            View Results
+          </Text>
+        </Box>
+        <Box flexDirection="column" alignItems="center">
+          <Link
+            href="mailto:jp@mysparkpath.com?Subject=Help%20with%20challenge%20cards"
+            hoverColor="white"
+            color="white"
+            visitedColor="white"
+          >
+            <HelpIcon onClick={null} width="100%" height="100%" />
+            <Text
+              textAlign="center"
+              fontSize={3}
+              fontWeight="600"
+              lineHeight="1.3"
+              maxWidth="50rem"
+              paddingTop="2rem"
+            >
+              Get Help
+            </Text>
+          </Link>
+        </Box>
       </Box>
     </Box>
   )
